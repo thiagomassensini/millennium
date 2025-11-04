@@ -1,0 +1,25 @@
+{
+  "constants": {
+    "gamma_euler": 0.5772156649015329,
+    "pi": 3.141592653589793
+  },
+  "gap_statistics": {
+    "mean_empirical": 1.4066944502545156,
+    "mean_asymptotic": 1.4098827435085433,
+    "std_empirical": 0.6565900001309596
+  },
+  "theta_predictions": {
+    "baseline": 1.0,
+    "hypothesis_1_1_over_gap": 0.7108864329556915,
+    "hypothesis_2_gamma_times_2pi_over_gap": 2.578209492563941,
+    "hypothesis_4_gamma_over_log_gap": 0.6572307416819326,
+    "direct_gamma": 0.5772156649015329
+  },
+  "accuracies": {
+    "baseline": 93.787181538179,
+    "hypothesis_1": 93.60418768008813,
+    "hypothesis_2": 92.39279094276945,
+    "hypothesis_4": 94.05551277766378,
+    "direct_gamma": 91.5538774313507
+  }
+}

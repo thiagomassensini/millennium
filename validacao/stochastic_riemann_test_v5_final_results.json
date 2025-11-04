@@ -1,0 +1,47 @@
+{
+  "best_config": {
+    "name": "Config 1: v2 melhor (baseline)",
+    "snr_coef": 0.1,
+    "theta": 2.0,
+    "sigma_ou": 0.3282950000654798,
+    "n_steps": 1000,
+    "n_trials": 100,
+    "discretization": "log2",
+    "metric": "chi2"
+  },
+  "best_accuracy": 92.86213277514335,
+  "all_configs": [
+    {
+      "name": "Config 1: v2 melhor (baseline)",
+      "discretization": "log2",
+      "metric": "chi2",
+      "accuracy_post50": 92.86213277514335,
+      "std_post50": 1.144951207500602,
+      "metric_post50": 0.7137867224856653
+    },
+    {
+      "name": "Config 2: Quantile bins + chi2",
+      "discretization": "quantile",
+      "metric": "chi2",
+      "accuracy_post50": 0.5852953212081831,
+      "std_post50": 3.1704060990321996,
+      "metric_post50": 20.201197932730764
+    },
+    {
+      "name": "Config 3: Log2 + KL divergence",
+      "discretization": "log2",
+      "metric": "kl",
+      "accuracy_post50": 2.4612476012921416,
+      "std_post50": 6.732646245907822,
+      "metric_post50": 4.130707966726493
+    },
+    {
+      "name": "Config 4: Natural bins + chi2",
+      "discretization": "natural",
+      "metric": "chi2",
+      "accuracy_post50": 0.0,
+      "std_post50": 0.0,
+      "metric_post50": 28.354470771270087
+    }
+  ]
+}

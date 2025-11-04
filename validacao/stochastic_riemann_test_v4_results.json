@@ -1,0 +1,42 @@
+{
+  "best_config": {
+    "name": "Config 1: Mais trials (200) + v2 melhor params",
+    "snr_coef": 0.1,
+    "theta": 2.0,
+    "sigma_ou": 0.3282950000654798,
+    "n_steps": 1000,
+    "n_trials": 200,
+    "chi2_scaling": 10.0
+  },
+  "best_accuracy": 92.70267350378158,
+  "all_configs": [
+    {
+      "name": "Config 1: Mais trials (200) + v2 melhor params",
+      "accuracy_post50": 92.70267350378158,
+      "std_post50": 1.4002708643804989,
+      "chi2_final": 0.9170550395049325,
+      "chi2_post50": 0.729732649621841
+    },
+    {
+      "name": "Config 2: Muito mais trials (300)",
+      "accuracy_post50": 92.53240231747543,
+      "std_post50": 1.2947161460614396,
+      "chi2_final": 0.6687589296309827,
+      "chi2_post50": 0.7467597682524573
+    },
+    {
+      "name": "Config 3: Chi2 scaling ajustado (\u00f78)",
+      "accuracy_post50": 90.8344309657543,
+      "std_post50": 1.7277166962359727,
+      "chi2_final": 0.863959112566102,
+      "chi2_post50": 0.733245522739658
+    },
+    {
+      "name": "Config 4: Chi2 scaling suave (\u00f76)",
+      "accuracy_post50": 87.48402100971381,
+      "std_post50": 1.8825946758636158,
+      "chi2_final": 0.9241546848739494,
+      "chi2_post50": 0.7509587394171718
+    }
+  ]
+}

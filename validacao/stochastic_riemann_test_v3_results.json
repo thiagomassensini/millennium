@@ -1,0 +1,42 @@
+{
+  "best_config": {
+    "name": "Config 1: SNR=0.12 + \u03b8=2.2 (sugerido)",
+    "snr_coef": 0.12,
+    "theta": 2.2,
+    "sigma_ou": 0.3282950000654798,
+    "n_steps": 1000
+  },
+  "best_accuracy": 92.54056205449349,
+  "all_configs": [
+    {
+      "name": "Config 1: SNR=0.12 + \u03b8=2.2 (sugerido)",
+      "accuracy_post50": 92.54056205449349,
+      "std_post50": 1.196292993516245,
+      "chi2_final": 0.8493468025955234
+    },
+    {
+      "name": "Config 2: SNR=0.15 + \u03b8=2.5",
+      "accuracy_post50": 92.35358789076331,
+      "std_post50": 1.0726157915204926,
+      "chi2_final": 0.8374820865983692
+    },
+    {
+      "name": "Config 3: SNR=0.18 + \u03b8=2.8",
+      "accuracy_post50": 91.95715659549505,
+      "std_post50": 1.0852380765651046,
+      "chi2_final": 0.7896650246620386
+    },
+    {
+      "name": "Config 4: SNR=0.20 + \u03b8=3.0 + \u03c3_OU m\u00ednimo",
+      "accuracy_post50": 92.30139026409562,
+      "std_post50": 1.0005129257792444,
+      "chi2_final": 0.7212506430763611
+    },
+    {
+      "name": "Config 5: SNR=0.25 + \u03b8=3.5 (agressivo)",
+      "accuracy_post50": 92.26124756335969,
+      "std_post50": 0.6571986863365146,
+      "chi2_final": 0.7621971641943733
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "configurations": [
+    {
+      "name": "Ordem 1 (OU baseline)",
+      "order": 1,
+      "phi": [
+        1.0
+      ],
+      "accuracy_mean": 83.04516481917824,
+      "accuracy_std": 9.607520932011061,
+      "chi2_best": 2.244512792656861
+    },
+    {
+      "name": "Ordem 1 (\u03b3 otimizado)",
+      "order": 1,
+      "phi": [
+        0.6572307416819326
+      ],
+      "accuracy_mean": 92.30230535369904,
+      "accuracy_std": 0.09408267004873228,
+      "chi2_best": 0.7918193628188711
+    },
+    {
+      "name": "Ordem 2 (AR2 sim\u00e9trico)",
+      "order": 2,
+      "phi": [
+        0.8,
+        0.2
+      ],
+      "accuracy_mean": 89.30805763146324,
+      "accuracy_std": 5.051500390968183,
+      "chi2_best": 2.043549740789276
+    },
+    {
+      "name": "Ordem 2 (AR2 com \u03b3)",
+      "order": 2,
+      "phi": [
+        0.5772156649015329,
+        0.42278433509846713
+      ],
+      "accuracy_mean": 87.07186095249367,
+      "accuracy_std": 5.048841096251517,
+      "chi2_best": 3.6056962978687337
+    },
+    {
+      "name": "Ordem 3 (AR3 balanceado)",
+      "order": 3,
+      "phi": [
+        0.6,
+        0.3,
+        0.1
+      ],
+      "accuracy_mean": 91.27332137613514,
+      "accuracy_std": 4.986424044858806,
+      "chi2_best": 1.3095350098019296
+    },
+    {
+      "name": "Ordem 3 (AR3 com \u03b3)",
+      "order": 3,
+      "phi": [
+        0.5772156649015329,
+        0.3,
+        0.1
+      ],
+      "accuracy_mean": 92.04021401539248,
+      "accuracy_std": 0.45288688311191033,
+      "chi2_best": 0.811026077689167
+    },
+    {
+      "name": "Ordem 3 (AR3 decaimento exponencial)",
+      "order": 3,
+      "phi": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "accuracy_mean": 92.23147010840728,
+      "accuracy_std": 0.18904044941066261,
+      "chi2_best": 0.782349286747899
+    },
+    {
+      "name": "Ordem 3 (OTIMIZADO)",
+      "order": 3,
+      "phi": [
+        -0.8123513314119392,
+        0.2930709312544182,
+        0.09850854255663102
+      ],
+      "accuracy_mean": 97.13767189450223,
+      "accuracy_std": 0.12698371600578484,
+      "chi2_best": 0.30148046962744457
+    }
+  ],
+  "best": {
+    "name": "Ordem 3 (OTIMIZADO)",
+    "order": 3,
+    "phi": [
+      -0.8123513314119392,
+      0.2930709312544182,
+      0.09850854255663102
+    ],
+    "accuracy": 97.13767189450223
+  }
+}

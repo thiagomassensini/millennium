@@ -1,0 +1,36 @@
+{
+  "best_config": {
+    "name": "Config 2: SNR \u00d7 2 + \u03b8 \u00d7 2",
+    "snr_coef": 0.1,
+    "theta": 2.0,
+    "sigma_ou": 0.3282950000654798,
+    "n_steps": 1000
+  },
+  "best_accuracy": 92.7005611382355,
+  "all_configs": [
+    {
+      "name": "Config 1: SNR \u00d7 2",
+      "accuracy_post50": 90.859171714651,
+      "std_post50": 3.459124978134745,
+      "chi2_final": 0.7202559893294616
+    },
+    {
+      "name": "Config 2: SNR \u00d7 2 + \u03b8 \u00d7 2",
+      "accuracy_post50": 92.7005611382355,
+      "std_post50": 1.4839274599022045,
+      "chi2_final": 0.6422417440455358
+    },
+    {
+      "name": "Config 3: SNR \u00d7 2 + mais steps",
+      "accuracy_post50": 91.85843830757018,
+      "std_post50": 1.8530145356270082,
+      "chi2_final": 0.845881264165889
+    },
+    {
+      "name": "Config 4: SNR \u00d7 3 + \u03c3_OU reduzido",
+      "accuracy_post50": 92.4818171518467,
+      "std_post50": 1.4059474939224454,
+      "chi2_final": 0.8591386539988077
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "configurations": [
+    {
+      "name": "Config 1: Gaussiano puro (baseline esperado ~92%)",
+      "quantize": false,
+      "accuracy_post500": 92.36932310951208,
+      "std_post500": 2.0910783363672882,
+      "chi2_post500": 0.7630676890487922
+    },
+    {
+      "name": "Config 2: Quantiza\u00e7\u00e3o XOR total",
+      "quantize": true,
+      "accuracy_post500": 90.77465096097858,
+      "std_post500": 12.453855172737349,
+      "chi2_post500": 0.9225349039021433
+    }
+  ],
+  "best": {
+    "name": "Config 1: Gaussiano puro (baseline esperado ~92%)",
+    "accuracy": 92.36932310951208
+  }
+}

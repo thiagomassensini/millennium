@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "name": "Config 1: Sem quantiza\u00e7\u00e3o (baseline)",
+      "accuracy_post100": 88.22558239498154,
+      "std_post100": 5.861937328154007,
+      "chi2_post100": 1.1774417605018452
+    },
+    {
+      "name": "Config 2: Quantiza\u00e7\u00e3o XOR total",
+      "accuracy_post100": 91.5973238851264,
+      "std_post100": 7.636929433715261,
+      "chi2_post100": 0.8402676114873608
+    },
+    {
+      "name": "Config 3: Quantiza\u00e7\u00e3o XOR parcial (70%)",
+      "accuracy_post100": 82.80134914072664,
+      "std_post100": 8.090251635584446,
+      "chi2_post100": 1.719865085927335
+    }
+  ],
+  "best": {
+    "name": "Config 2: Quantiza\u00e7\u00e3o XOR total",
+    "accuracy": 91.5973238851264
+  }
+}

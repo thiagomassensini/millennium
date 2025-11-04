@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "name": "Config 1: Gaussiano (baseline - 92%)",
+      "noise_type": "gaussian",
+      "accuracy_post100": 88.04583925959459,
+      "std_post100": 5.866184002922297,
+      "chi2_post100": 1.1954160740405397
+    },
+    {
+      "name": "Config 2: XOR puro (sem Gaussiano)",
+      "noise_type": "xor",
+      "accuracy_post100": 88.03416870908706,
+      "std_post100": 5.840837220676972,
+      "chi2_post100": 1.1965831290912954
+    },
+    {
+      "name": "Config 3: XOR + Gaussiano (h\u00edbrido)",
+      "noise_type": "hybrid",
+      "accuracy_post100": 90.67367107002397,
+      "std_post100": 3.71496213076442,
+      "chi2_post100": 0.9326328929976051
+    }
+  ],
+  "best": {
+    "name": "Config 3: XOR + Gaussiano (h\u00edbrido)",
+    "accuracy": 90.67367107002397
+  }
+}

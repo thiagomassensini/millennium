@@ -190,6 +190,7 @@ codigo/binario/monitor*.sh
 
 # Archive folder (old/unused files)
 arquivo/
+claude/
 
 # Temporary files
 *.tmp
