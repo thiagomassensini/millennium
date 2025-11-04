@@ -24,105 +24,156 @@ This repository contains a comprehensive computational and theoretical framework
 ## Repository Structure
 
 ```
-relacionalidadegeral/
+millennium/
 │
-├── papers/                          # LaTeX papers (7 files)
-│   ├── bsd_twin_primes.tex          # BSD Conjecture via binary carry chains
-│   ├── bsd_twin_primes.pdf          # (235 KB, 445 lines)
+├── papers/                          # Published papers (PDFs only in repo)
+│   ├── bsd_twin_primes.pdf          # BSD Conjecture (235 KB)
+│   ├── riemann_xor_repulsion.pdf    # Riemann Hypothesis (224 KB)
+│   ├── p_vs_np_xor.pdf              # P vs NP boundary (272 KB)
+│   ├── yang_mills_xor.pdf           # Yang-Mills mass gap (276 KB)
+│   ├── navier_stokes_xor.pdf        # Navier-Stokes regularity (268 KB)
+│   ├── hodge_xor.pdf                # Hodge Conjecture (263 KB)
+│   ├── xor_millennium_framework.pdf # Master framework (292 KB)
 │   │
-│   ├── riemann_xor_repulsion.tex    # Riemann Hypothesis and binary repulsion
-│   ├── riemann_xor_repulsion.pdf    # (224 KB, 383 lines)
-│   │
-│   ├── p_vs_np_xor.tex              # P vs NP via XOR complexity boundary
-│   ├── p_vs_np_xor.pdf              # (272 KB, 490 lines)
-│   │
-│   ├── yang_mills_xor.tex           # Yang-Mills mass gap as binary spectrum
-│   ├── yang_mills_xor.pdf           # (276 KB, 541 lines)
-│   │
-│   ├── navier_stokes_xor.tex        # Navier-Stokes regularity via k-bounds
-│   ├── navier_stokes_xor.pdf        # (268 KB, 593 lines)
-│   │
-│   ├── hodge_xor.tex                # Hodge Conjecture and algebraic cycles
-│   ├── hodge_xor.pdf                # (263 KB, 541 lines)
-│   │
-│   ├── xor_millennium_framework.tex # Master framework unifying all problems
-│   ├── xor_millennium_framework.pdf # (292 KB, 671 lines)
-│   │
-│   ├── REVISION_CHECKLIST.md        # Systematic revision guide
-│   └── Makefile                     # Automated PDF compilation
+│   └── figures/                     # Paper figures
+│       ├── bsd_analysis.png
+│       ├── riemann_fourier_spectrum.png
+│       ├── riemann_pair_correlation.png
+│       ├── p_vs_np_sat_histogram.png
+│       ├── yang_mills_mass_gap.png
+│       ├── harmonicos_primos.png
+│       └── analise_periodicidade_fcosmos.png
 │
-├── codigo/                          # Analysis and testing code
-│   ├── riemann_zeros_calculator.py  # Riemann zeta zeros computation
-│   ├── riemann_deep_analysis.py     # Binary repulsion analysis (1000 zeros)
-│   ├── riemann_zeros_analysis.json  # Statistical results
-│   ├── riemann_fourier_spectrum.png # Fourier analysis visualization
-│   ├── riemann_pair_correlation.png # Zero spacing correlation
+├── codigo/                          # Analysis and mining code
+│   ├── # Twin prime mining system
+│   ├── twin_prime_miner_v5_ultra_mpmc.cpp  # MPMC parallel miner
+│   ├── twin_prime_miner_csv.cpp     # CSV output version
+│   ├── deploy_ultra.sh              # Automated deployment
+│   ├── monitor.sh                   # Real-time mining monitor
+│   ├── start_mining.sh              # Mining startup script
 │   │
-│   ├── p_vs_np_xor_test.py          # SAT solver with XOR guidance
-│   ├── p_vs_np_xor_analysis.json    # Complexity boundary results
+│   ├── # Validation and processing
+│   ├── ultra_validator.cpp          # Fast validator (mmap + OpenMP)
+│   ├── csv_validator.cpp            # CSV format validator
+│   ├── massive_validation.cpp       # Large-scale validation
+│   ├── validate_p_mod_k_squared.py  # BSD modular arithmetic
+│   ├── validate_massive.py          # Python wrapper
+│   ├── visual_proof.py              # Visual XOR demonstrations
 │   │
-│   ├── yang_mills_xor_test.py       # Mass gap spectrum analysis
-│   ├── yang_mills_xor_analysis.json # Discrete k-level validation
+│   ├── # Riemann Hypothesis analysis
+│   ├── riemann_zeros_calculator.py  # Zero computation
+│   ├── riemann_deep_analysis.py     # Binary repulsion analysis
+│   ├── test_stochastic_riemann*.py  # Stochastic process tests (8 versions)
+│   ├── test_gap_*.py                # Gap analysis (normalized, of_gaps)
+│   ├── test_markov_*.py             # Markov chain tests (4 versions)
+│   ├── test_theta_gamma_connection.py
+│   ├── analyze_convergence_pattern.py
 │   │
-│   ├── navier_stokes_xor_test.py    # Turbulence regularity analysis
+│   ├── # P vs NP testing
+│   ├── p_vs_np_xor_test.py          # SAT solver with XOR
+│   ├── generate_sat_histogram.py    # Distribution analysis
+│   │
+│   ├── # Yang-Mills analysis
+│   ├── yang_mills_xor_test.py       # Mass gap spectrum
+│   ├── generate_mass_gap_figure.py  # Visualization
+│   │
+│   ├── # Navier-Stokes analysis
+│   ├── navier_stokes_xor_test.py    # Turbulence analysis
+│   ├── test_ou_pure_generation.py   # Ornstein-Uhlenbeck process
+│   ├── test_stochastic_xor_*.py     # Stochastic XOR tests (3 versions)
+│   ├── test_stochastic_t5000.py     # Long convergence test
+│   │
+│   ├── # Hodge Conjecture analysis
+│   ├── hodge_xor_test.py            # Algebraic cycles
+│   │
+│   ├── # BSD Conjecture testing
+│   ├── bsd_massive_test.py          # Large-scale BSD tests
+│   ├── bsd_rank_verification.py     # Rank computation
+│   ├── bsd_proof_attempt.py         # Proof strategies
+│   ├── bsd_proof_strategy.py        # Theoretical framework
+│   ├── bsd_theoretical_workspace.py # Workspace for proofs
+│   ├── bsd_test_powers_of_2.py      # k=2^n specific tests
+│   ├── bsd_test_small_primes.py     # Small prime validation
+│   ├── bsd_correct_test.py          # Correctness verification
+│   ├── bsd_direct_test.py           # Direct computation
+│   ├── bsd_rank_verification.py     # Rank formula validation
+│   ├── bsd_exact_ranks.gp           # PARI/GP computations
+│   ├── bsd_sage_test.sage           # SageMath analysis
+│   │
+│   ├── # Large-scale analysis
+│   ├── analise_1B_60GB.py           # Billion-scale tools
+│   ├── analise_1B_sliding.py        # Sliding window analysis
+│   ├── analise_ultra_1B*.py         # Ultra-scale parallel (2 versions)
+│   ├── analise_definitiva_1B.py     # Final billion analysis
+│   ├── analise_streaming_1B.py      # Streaming processing
+│   ├── analise_completa_alpha_em.py # Alpha_EM analysis
+│   ├── analise_log_fcosmos.py       # Logarithmic analysis
+│   ├── analise_multiescala.py       # Multi-scale analysis
+│   │
+│   ├── # Supporting tools
+│   ├── prime_applications.py        # Prime-based applications
+│   ├── run_theoretical_investigation.py
+│   ├── generate_sage_commands.py    # SageMath automation
+│   ├── update_papers_with_validation.py
+│   ├── import_csv_to_mysql.sh       # Database import
+│   ├── import_final.sh              # Final import script
+│   ├── fast_import.sh               # Fast CSV import
+│   ├── run_validation*.sh           # Validation runners (2 versions)
+│   └── VALIDACAO_RAPIDA.PY          # Quick validation
+│
+├── validacao/                       # Validation results and reports
+│   ├── # Result files (JSON)
+│   ├── riemann_extended_analysis.json
+│   ├── riemann_zeros_analysis.json
+│   ├── p_vs_np_xor_analysis.json
+│   ├── p_vs_np_sat_full_results.txt
+│   ├── yang_mills_xor_analysis.json
 │   ├── navier_stokes_xor_analysis.json
+│   ├── hodge_xor_analysis.json
+│   ├── bsd_families_comparison.json
+│   ├── bsd_massive_test_results.json
+│   ├── bsd_powers_of_2_test.json
+│   ├── bsd_test_results.json
+│   ├── bsd_theoretical_analysis.json
+│   ├── advanced_analysis_results.json
+│   ├── convergence_pattern_analysis.json
+│   ├── stochastic_riemann_test*.json (6 versions)
+│   ├── stochastic_xor_*.json (3 versions)
+│   ├── markov_*_results.json (3 versions)
+│   ├── ou_pure_generation_results.json
+│   ├── theta_gamma_connection_results.json
+│   ├── test_t5000_results.json
 │   │
-│   ├── hodge_xor_test.py            # Algebraic cycles validation
-│   ├── hodge_xor_analysis.json      # Cohomology results
+│   ├── # Figures (PNG)
+│   ├── riemann_fourier_spectrum.png
+│   ├── riemann_pair_correlation.png
+│   ├── bsd_analysis.png
+│   ├── bsd_direct_analysis.png
+│   ├── bsd_proof_analysis.png
+│   ├── analise_binaria_primos.png
+│   ├── analise_periodicidade_fcosmos.png
+│   ├── convergence_pattern_analysis.png
+│   ├── stochastic_riemann_test*.png (6 versions)
+│   ├── markov_*_test.png (3 versions)
+│   ├── theta_gamma_connection.png
+│   └── [15+ additional visualization files]
 │   │
-│   ├── validate_p_mod_k_squared.py  # BSD modular arithmetic validator
-│   │
-│   └── binario/                     # Twin prime mining system
-│       ├── twin_prime_miner_v5_ultra_mpmc.cpp  # MPMC parallel miner
-│       ├── miner_v5_ultra           # Compiled executable
-│       ├── deploy_ultra.sh          # Automated deployment
-│       ├── setup_database_v5_ultra.sql  # Database schema
-│       ├── monitor.sh               # Real-time mining monitor
-│       │
-│       ├── bsd_massive_test.py      # Massive BSD validation
-│       ├── bsd_rank_verification.py # Elliptic curve rank computation
-│       ├── bsd_test_results.json    # 2,678 curves analyzed
-│       │
-│       ├── analise_1B_60GB.py       # Billion-scale analysis tools
-│       ├── analise_ultra_1B.py      # Parallel processing pipeline
-│       └── [80+ analysis scripts]
+│   └── # Documentation (MD)
+│       ├── BSD_DISCOVERY_REPORT.md
+│       ├── IMPORTANCE_ANALYSIS.md
+│       ├── RELATORIO_FINAL_PERIODICIDADE.md
+│       ├── RELATORIO_HIPOTESE_ALPHA_EM.md
+│       ├── STOCHASTIC_MECHANISM_FINAL_REPORT.md
+│       ├── SUMARIO_HARMONICOS_PRIMOS.md
+│       └── millennium_xor_connections.md
 │
-├── validacao/                       # Massive validation system
-│   ├── ultra_v4.cpp                 # Final validator (mmap + OpenMP)
-│   ├── ultra_v4                     # Compiled executable
-│   ├── ultra_v4.log                 # Execution log (18.36 minutes)
-│   │
-│   ├── csv_validator.cpp            # Previous version (sampling approach)
-│   ├── massive_validation.cpp       # MySQL version (deprecated)
-│   │
-│   ├── validation_results_final.json    # Complete validation results
-│   ├── validation_results_final.csv     # Tabular format
-│   ├── validation_section.tex       # LaTeX section for papers
-│   │
-│   ├── validation_report_standalone.tex  # Standalone report
-│   ├── validation_report_standalone.pdf  # PDF report (216 KB)
-│   │
-│   ├── visual_proof.py              # Visual XOR pattern demonstration
-│   │
-│   ├── run_validation.sh            # Automated validation pipeline
-│   ├── Makefile                     # Compilation automation
-│   └── README.md                    # Validation system documentation
-│
-├── resultados/                      # Output directory
-│   ├── graficos/                    # Generated plots and visualizations
-│   ├── relatorios/                  # Analysis reports
-│   └── tabelas/                     # Data tables
-│
-├── teoria/                          # Theoretical documentation
-│   ├── fundamentos.md               # Fundamental principles
-│   ├── derivacoes.md                # Mathematical derivations
-│   ├── conexoes.md                  # Problem interconnections
-│   └── predicoes.md                 # Theoretical predictions
-│
-├── SUBMISSION_README.md             # Detailed submission guide
-├── WORKFLOW.md                      # Development workflow
+├── .gitignore                       # Git exclusions
+├── CITATION.cff                     # Citation metadata
+├── LICENSE                          # MIT License
 └── README.md                        # This file
 ```
+
+**Note**: LaTeX source files (.tex) are maintained locally but excluded from the repository. Only compiled PDFs are versioned.
 
 ## Methodology
 
