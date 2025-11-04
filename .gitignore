@@ -145,6 +145,7 @@ miner_checkpoint.txt
 # Large CSV datasets (regenerate with miner)
 /tmp/twin_primes.csv
 twin_primes.csv
+validacao/twin_primes.csv
 
 # Compressed archives
 *.zip
