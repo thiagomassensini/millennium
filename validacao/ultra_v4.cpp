@@ -39,7 +39,7 @@ inline bool is_prime64(u64 n) {
 }
 
 inline int calc_k(u64 p, u64 p2) {
-    return __builtin_ctzll((p ^ p2) + 2);
+    return __builtin_ctzll((p ^ p2) + 2) - 1;
 }
 
 struct TwinPrime {
