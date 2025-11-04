@@ -1,0 +1,52 @@
+{
+  "validation_timestamp": "1762218914",
+  "total_tested": 0,
+  "total_valid": 0,
+  "total_invalid": 0,
+  "elapsed_seconds": 0.057295,
+  "tests_per_second": 0,
+  "twin_primality": {
+    "both_prime": 0,
+    "p_not_prime": 0,
+    "p2_not_prime": 0
+  },
+  "k_validation": {
+    "matches": 0,
+    "mismatches": 0,
+    "distribution": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0,
+      "20": 0,
+      "21": 0,
+      "22": 0,
+      "23": 0,
+      "24": 0
+    }
+  },
+  "p_mod_k2": {
+    "valid": 0,
+    "invalid": 0
+  },
+  "distribution_test": {
+    "chi_squared": 0,
+    "p_value": 0.1
+  }
+}

@@ -1,0 +1,610 @@
+{
+  "use_pari": true,
+  "total": 200,
+  "matches": 0,
+  "accuracy": 0.0,
+  "correlation": 0.46164439532614593,
+  "p_value": 5.973872916337885e-12,
+  "results": [
+    {
+      "p": 3,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 5,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 11,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 17,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 29,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 41,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 59,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 71,
+      "k_real": 4,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 101,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 107,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 137,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 149,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 179,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 191,
+      "k_real": 7,
+      "rank": 2,
+      "match": false
+    },
+    {
+      "p": 197,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 227,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 239,
+      "k_real": 5,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 269,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 281,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 311,
+      "k_real": 4,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 347,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 419,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 431,
+      "k_real": 5,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 461,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 521,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 569,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 599,
+      "k_real": 4,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 617,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 641,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 659,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 809,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 821,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 827,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 857,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 881,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1019,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1031,
+      "k_real": 4,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1049,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1061,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1091,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1151,
+      "k_real": 8,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1229,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1277,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1289,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1301,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1319,
+      "k_real": 4,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1427,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1451,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1481,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1487,
+      "k_real": 5,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1607,
+      "k_real": 4,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1619,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1667,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1697,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1721,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1787,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1871,
+      "k_real": 5,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1877,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1931,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1949,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 1997,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2027,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2081,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2087,
+      "k_real": 4,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2111,
+      "k_real": 7,
+      "rank": 2,
+      "match": false
+    },
+    {
+      "p": 2129,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2141,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2237,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2267,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2309,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2339,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2381,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2549,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2591,
+      "k_real": 6,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2657,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2687,
+      "k_real": 8,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2711,
+      "k_real": 4,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2729,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2789,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2801,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2969,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 2999,
+      "k_real": 4,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3119,
+      "k_real": 5,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3167,
+      "k_real": 6,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3251,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3257,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3299,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3329,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3359,
+      "k_real": 6,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3371,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3389,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3461,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3467,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3527,
+      "k_real": 4,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3539,
+      "k_real": 3,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3557,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3581,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3671,
+      "k_real": 4,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3767,
+      "k_real": 4,
+      "rank": 1,
+      "match": false
+    },
+    {
+      "p": 3821,
+      "k_real": 2,
+      "rank": 1,
+      "match": false
+    }
+  ]
+}
