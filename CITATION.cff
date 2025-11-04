@@ -1,12 +1,13 @@
-cff-version: 1.0.0
+cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
 authors:
   - family-names: "Massensini"
     given-names: "Thiago"
-    email: "thiago@massensini@.com.br"
+    email: "thiagomassensini@gmail.com"
 title: "XOR Millennium Framework: Binary Structure in the Millennium Prize Problems"
 version: 1.0.0
-date-released: 2024-11-04
+doi: 10.5281/zenodo.17520242
+date-released: 2025-11-04
 url: "https://github.com/thiagomassensini/millennium"
 repository-code: "https://github.com/thiagomassensini/millennium"
 keywords:
