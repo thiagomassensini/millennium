@@ -67,7 +67,7 @@ First complete release of the XOR Millennium Framework with comprehensive valida
 Within 10 minutes, Zenodo will:
 - Detect the new GitHub release
 - Create archive snapshot
-- Generate permanent DOI (format: 10.5281/zenodo.XXXXXXX)
+- Generate permanent DOI (format: 10.5281/zenodo.17520242)
 - Create landing page with citation metadata
 
 ### Step 5: Get Your DOI
@@ -82,7 +82,7 @@ Within 10 minutes, Zenodo will:
 After DOI is generated, add to README.md:
 
 ```markdown
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17520242.svg)](https://doi.org/10.5281/zenodo.17520242)
 ```
 
 ## Metadata Configuration
@@ -146,23 +146,23 @@ After DOI assignment, use:
 
 **APA**:
 ```
-Massensini, T. (2024). XOR Millennium Framework: Binary Structure in the 
+Massensini, T. (2025). XOR Millennium Framework: Binary Structure in the 
 Millennium Prize Problems (Version 1.0.0) [Computer software]. Zenodo. 
-https://doi.org/10.5281/zenodo.XXXXXXX
+https://doi.org/10.5281/zenodo.17520242
 ```
 
 **BibTeX**:
 ```bibtex
-@software{massensini2024xor,
+@software{massensini2025xor,
   author       = {Massensini, Thiago},
   title        = {{XOR Millennium Framework: Binary Structure in the 
                    Millennium Prize Problems}},
   month        = nov,
-  year         = 2024,
+  year         = 2025,
   publisher    = {Zenodo},
   version      = {1.0.0},
-  doi          = {10.5281/zenodo.XXXXXXX},
-  url          = {https://doi.org/10.5281/zenodo.XXXXXXX}
+  doi          = {10.5281/zenodo.17520242},
+  url          = {https://doi.org/10.5281/zenodo.17520242}
 }
 ```
 
