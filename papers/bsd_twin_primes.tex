@@ -72,7 +72,7 @@ This matches exactly the Goldfeld-Katz-Sarnak prediction \cite{GKS} for the dist
 
 \subsection{Empirical Validation}
 
-I mined $1,004,800,004$ twin primes in the range $[10^{15}, 10^{15} + 10^{13}]$ and computed $k_{\text{real}}$ for each. The observed distribution:
+I mined $1,004,800,003$ twin primes in the range $[10^{15}, 10^{15} + 10^{13}]$ and computed $k_{\text{real}}$ for each. The observed distribution:
 \begin{center}
 \begin{tabular}{c|c|c|c}
 $k$ & Count & Observed \% & Theoretical ($2^{-k}$) \\
@@ -142,7 +142,7 @@ For $k = 2^n$ with $n \geq 1$, we have $2^{k+1} = 2^{2^n+1}$ and $k^2 = 2^{2n}$.
 
 Since $2^n + 1 \geq 2n$ for all $n \geq 1$ (equality at $n=1$, strict inequality for $n>1$), we have $2^{k+1} \geq k^2$.
 
-Therefore: $p \equiv 2^{k+1} - 1 \equiv k^2 - 1 \pmod{k^2}$ ∎
+Therefore: $p \equiv 2^{k+1} - 1 \equiv k^2 - 1 \pmod{k^2}$ \qed
 
 \textbf{Carry Chain Mechanism:} This congruence arises because adding 2 to a number with bits 0 through k all set to 1 causes a carry chain propagating through all these bits. The XOR detects exactly this carry pattern: $p \oplus (p+2) = 2^{k+1} - 2$ (k+1 consecutive 1-bits followed by 0).
 
