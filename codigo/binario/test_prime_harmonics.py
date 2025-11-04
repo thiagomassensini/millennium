@@ -19,7 +19,7 @@ print("=" * 80)
 print("\nCarregando 10M primos...")
 df = pd.read_csv('results_sorted_10M.csv', header=0)
 primos = df['p'].values
-print(f"✓ {len(primos):,} primos")
+print(f"[OK] {len(primos):,} primos")
 
 # Calcular densidade
 WINDOW_SIZE = 10000
@@ -36,7 +36,7 @@ for i in range(0, len(primos) - WINDOW_SIZE, STEP):
 
 posicoes = np.array(posicoes)
 densidades = np.array(densidades)
-print(f"✓ {len(densidades):,} janelas\n")
+print(f"[OK] {len(densidades):,} janelas\n")
 
 # FFT
 dens_norm = (densidades - np.mean(densidades)) / np.std(densidades)
@@ -94,7 +94,7 @@ for i, idx in enumerate(idx_sorted[:30], 1):
             })
             break
     
-    primo_str = f"{primo_match}✓" if primo_match else "—"
+    primo_str = f"{primo_match}[OK]" if primo_match else "—"
     print(f"│  {i:2d}  │ {f:>11.6f} │ {ratio:>10.3f} │ {sigma:>8.1f} │ {primo_str:>9s} │ {f_scaled:>10.3f} │")
 
 print("└──────┴─────────────┴────────────┴──────────┴───────────┴────────────┘")
@@ -105,7 +105,7 @@ print("HARMÔNICOS PRIMOS DETECTADOS")
 print("=" * 80)
 
 if len(harmonicos_primos) > 0:
-    print(f"\n✅ {len(harmonicos_primos)} harmônicos correspondem a PRIMOS!\n")
+    print(f"\n[OK] {len(harmonicos_primos)} harmônicos correspondem a PRIMOS!\n")
     
     print("┌──────┬───────┬──────────┬────────────┐")
     print("│ Rank │ Primo │  Razão   │  Erro (%)  │")
@@ -121,7 +121,7 @@ if len(harmonicos_primos) > 0:
     print(f"Erro mínimo: {np.min(erros):.2f}%")
     
 else:
-    print("\n❌ Nenhum harmônico corresponde a primos (dentro da tolerância)")
+    print("\n[FAIL] Nenhum harmônico corresponde a primos (dentro da tolerância)")
 
 # Teste específico: 7, 11, 13, 17, 19
 print("\n" + "=" * 80)
@@ -144,7 +144,7 @@ for p in primos_alvo:
     f_detectado = picos_freq[idx_closest]
     erro = abs(f_detectado - f_esperado) / f_esperado * 100
     
-    presente = "✓" if erro < 15.0 else "✗"
+    presente = "[OK]" if erro < 15.0 else "[FAIL]"
     
     print(f"│  {p:3d}  │  {f_esperado:>10.6f} │  {f_detectado:>10.6f} │ {erro:>7.2f}% │    {presente:^6s}  │")
 
@@ -203,9 +203,9 @@ def is_prime(n):
     return True
 
 print(f"\n137 é primo? {is_prime(137)}")
-print(f"  → α_EM^(-1) = 137.035999084 ≈ 137 (primo!) ✓")
+print(f"  → α_EM^(-1) = 137.035999084 ≈ 137 (primo!) [OK]")
 
-print(f"\n🔬 Se α_EM conecta física e primos, então:")
+print(f"\n[SCI] Se α_EM conecta física e primos, então:")
 print(f"   • 137 sendo PRIMO não é acidente")
 print(f"   • Estrutura fina tem origem na teoria dos números")
 print(f"   • Harmônicos primos refletem hierarquia fundamental")
@@ -354,7 +354,7 @@ ax6.text(1, compostos_count + 0.5, f'{taxa_compostos:.0f}%', ha='center', fontsi
 
 plt.tight_layout()
 plt.savefig('harmonicos_primos.png', dpi=150, bbox_inches='tight')
-print("✓ Salvo: harmonicos_primos.png\n")
+print("[OK] Salvo: harmonicos_primos.png\n")
 
 # Conclusão
 print("=" * 80)
@@ -363,7 +363,7 @@ print("=" * 80)
 
 if len(harmonicos_primos) >= 3:
     print(f"""
-✅ DESCOBERTA EXTRAORDINÁRIA!
+[OK] DESCOBERTA EXTRAORDINÁRIA!
 
 Detectamos {len(harmonicos_primos)} harmônicos que correspondem a NÚMEROS PRIMOS!
 
@@ -383,13 +383,13 @@ Se harmônicos são primos (não compostos), então:
 → Recursão fundamental: primos → periodicidade → harmônicos primos
 → Teoria dos números tem estrutura espectral intrínseca
 
-🎯 PRÓXIMO TESTE CRÍTICO:
+[TARGET] PRÓXIMO TESTE CRÍTICO:
 Verificar se TODOS os harmônicos fortes são primos,
 ou se alguns compostos também aparecem (controle).
 """)
 else:
     print(f"""
-⚠️ POUCOS HARMÔNICOS PRIMOS DETECTADOS ({len(harmonicos_primos)})
+[WARNING] POUCOS HARMÔNICOS PRIMOS DETECTADOS ({len(harmonicos_primos)})
 
 Pode ser:
 1. Dataset 10M ainda pequeno (precisa 1B)

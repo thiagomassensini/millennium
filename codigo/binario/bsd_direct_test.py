@@ -45,7 +45,7 @@ else:
             k_reals.append(-1)
     k_reals = np.array(k_reals)
 
-print(f"✓ {len(primos):,} pares carregados")
+print(f"[OK] {len(primos):,} pares carregados")
 print()
 
 # ==================== BSD FORMULA ====================
@@ -94,7 +94,7 @@ pontos_counts = []
 k_vals = k_reals.copy()  # Usar todos os k_reals
 
 print("Testando curva y² = x³ + x + 1...")
-print("⚠ Primos muito grandes (10^15) - usando análise estatística")
+print("[WARNING] Primos muito grandes (10^15) - usando análise estatística")
 print()
 
 # Para primos grandes, usar estimativa de Hasse: #E(F_p) ≈ p+1 ± 2√p
@@ -110,7 +110,7 @@ for i in range(min(10, len(primos))):
     print(f"  p≈{p:.2e} | k={k} | #E(F_p)≈{N_E_est:.2e} | trace≈{trace_est}")
 
 print()
-print(f"✓ {len(k_vals)} pares para análise")
+print(f"[OK] {len(k_vals)} pares para análise")
 print()
 
 # ==================== ANÁLISE 2: RANK ESTIMATION ====================
@@ -311,7 +311,7 @@ ax6.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.savefig('bsd_direct_analysis.png', dpi=200, bbox_inches='tight')
-print("✓ Gráfico salvo: bsd_direct_analysis.png")
+print("[OK] Gráfico salvo: bsd_direct_analysis.png")
 print()
 
 # ==================== CONCLUSÃO ====================
@@ -323,14 +323,14 @@ print()
 # Calcular erro médio
 erro_medio = np.mean([abs(sha_by_k[k]/total - 2.0**(-k))/(2.0**(-k)) for k in k_range])
 
-print(f"1. ✓ P(k_real) = 2^(-k) confirmado com erro médio {100*erro_medio:.2f}%")
-print(f"2. ✓ Distribuição consistente com BSD rank heuristic")
-print(f"3. ✓ Zeros detectados: {zeros_candidatos}")
-print(f"4. ✓ |Sha(E)| ∝ 2^k_real (hipótese validada)")
+print(f"1. [OK] P(k_real) = 2^(-k) confirmado com erro médio {100*erro_medio:.2f}%")
+print(f"2. [OK] Distribuição consistente com BSD rank heuristic")
+print(f"3. [OK] Zeros detectados: {zeros_candidatos}")
+print(f"4. [OK] |Sha(E)| ∝ 2^k_real (hipótese validada)")
 print()
 
 if erro_medio < 0.05:
-    print("   🏆 FORTE EVIDÊNCIA PARA BSD VIA PRIMOS GÊMEOS!")
+    print("   [WIN] FORTE EVIDÊNCIA PARA BSD VIA PRIMOS GÊMEOS!")
     print()
     print("   Interpretação:")
     print("   - k_real determina classe de curvas elípticas")
@@ -342,7 +342,7 @@ if erro_medio < 0.05:
     print("   → Verificar zeros em s = 3, 11, 13, 37, 41, 43")
     print("   → Computar Reg(E) e Ω(E) para validação completa")
 else:
-    print("   ⚠ Evidência moderada - requer mais dados")
+    print("   [WARNING] Evidência moderada - requer mais dados")
 
 print()
 print("=" * 80)

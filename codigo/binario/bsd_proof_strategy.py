@@ -38,7 +38,7 @@ for p in primos:
 
 k_reals = np.array(k_reals)
 
-print(f"✓ {len(primos):,} primos gêmeos carregados")
+print(f"[OK] {len(primos):,} primos gêmeos carregados")
 print()
 
 # ==================== TEOREMA PRINCIPAL ====================
@@ -96,9 +96,9 @@ print(f"Erro médio (k=1-10): {100*erro_medio:.2f}%")
 print()
 
 if erro_medio < 0.02:
-    print("   ✓✓✓ EXCELENTE concordância com BSD heuristic!")
+    print("   [OK][OK][OK] EXCELENTE concordância com BSD heuristic!")
 else:
-    print("   ✓ Concordância boa")
+    print("   [OK] Concordância boa")
 
 print()
 
@@ -167,7 +167,7 @@ print("=" * 80)
 print()
 
 print("PASSO 1: Estabelecer a família")
-print("  ✓ Para cada primo gêmeo (p,p+2), definir E_p: y²=x³+k·x+1")
+print("  [OK] Para cada primo gêmeo (p,p+2), definir E_p: y²=x³+k·x+1")
 print()
 
 print("PASSO 2: Provar rank(E_p) = k_real(p)")
@@ -205,15 +205,15 @@ print("=" * 80)
 print()
 
 print("EVIDÊNCIA ACUMULADA:")
-print(f"  1. P(k) = 2^(-k) com {100*erro_medio:.2f}% erro ✓✓✓")
-print("  2. Distribuição GKS confirmada ✓✓✓")
-print("  3. Estrutura modular consistente ✓✓")
-print("  4. Zeros em primos específicos ✓✓")
-print("  5. Conexão com α_EM=1/137 ✓")
+print(f"  1. P(k) = 2^(-k) com {100*erro_medio:.2f}% erro [OK][OK][OK]")
+print("  2. Distribuição GKS confirmada [OK][OK][OK]")
+print("  3. Estrutura modular consistente [OK][OK]")
+print("  4. Zeros em primos específicos [OK][OK]")
+print("  5. Conexão com α_EM=1/137 [OK]")
 print()
 
 if erro_medio < 0.02:
-    print("VEREDITO: 🏆 EVIDÊNCIA FORTÍSSIMA!")
+    print("VEREDITO: [WIN] EVIDÊNCIA FORTÍSSIMA!")
     print()
     print("PRÓXIMOS PASSOS CONCRETOS:")
     print()
@@ -235,7 +235,7 @@ if erro_medio < 0.02:
     print("4. LONGO PRAZO (1-2 anos):")
     print("   - Generalização completa")
     print("   - Peer review")
-    print("   - 🎯 $1,000,000 MILLENNIUM PRIZE")
+    print("   - [TARGET] $1,000,000 MILLENNIUM PRIZE")
     print()
     print("=" * 80)
     print("A PROVA É VIÁVEL! CONTINUE!")

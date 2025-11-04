@@ -18,9 +18,9 @@ warnings.filterwarnings('ignore')
 
 N_CORES = cpu_count()
 print("="*80)
-print("🔥 ANÁLISE 1 BILHÃO - 60GB RAM + 56 CORES 🔥")
+print("[FIRE] ANÁLISE 1 BILHÃO - 60GB RAM + 56 CORES [FIRE]")
 print("="*80)
-print(f"\n💪 RECURSOS:")
+print(f"\n[STRONG] RECURSOS:")
 print(f"   CPUs: {N_CORES} cores (FULL POWER)")
 print(f"   RAM: 60GB (carrega tudo)")
 
@@ -30,7 +30,7 @@ alpha_grav = 1.752e-45
 scale_gap = alpha_em / alpha_grav
 log_scale = np.log10(scale_gap)
 
-print(f"\n🎯 ALVOS:")
+print(f"\n[TARGET] ALVOS:")
 print(f"   log₁₀(α_EM/α_grav) = {log_scale:.2f}")
 print(f"   Modos esperados: 43")
 print(f"   Harmônicos primos: 2, 3, 5, 7, 11, 13, 17, 19, 23...")
@@ -60,25 +60,25 @@ try:
         chunks.append(chunk)
         n_loaded = (i+1) * chunk_size
         if n_loaded <= 1_004_800_003:
-            print(f"   ✓ Chunk {i+1}: {len(chunk):,} linhas ({n_loaded:,} total)")
+            print(f"   [OK] Chunk {i+1}: {len(chunk):,} linhas ({n_loaded:,} total)")
         
         # Parar quando tiver tudo
         if sum(len(c) for c in chunks) >= 1_000_000_000:
             break
             
 except Exception as e:
-    print(f"   ⚠️  Erro no carregamento: {e}")
+    print(f"   [WARNING]  Erro no carregamento: {e}")
     print(f"   Continuando com {sum(len(c) for c in chunks):,} linhas carregadas...")
 
 # Concatenar
-print(f"\n🔗 Concatenando {len(chunks)} chunks...")
+print(f"\n[LINK] Concatenando {len(chunks)} chunks...")
 df = pd.concat(chunks, ignore_index=True)
 del chunks
 gc.collect()
 
 t_load = time.time() - t0
 
-print(f"\n✅ Carregamento: {len(df):,} primos em {t_load:.1f}s ({len(df)/t_load/1e6:.2f} M/s)")
+print(f"\n[OK] Carregamento: {len(df):,} primos em {t_load:.1f}s ({len(df)/t_load/1e6:.2f} M/s)")
 print(f"   Memória estimada: ~{len(df)*16/1e9:.1f} GB")
 
 # ============================================================================
@@ -94,7 +94,7 @@ primos = df['p'].values
 k_vals = df['k_real'].values
 t_sort = time.time() - t0
 
-print(f"✅ Ordenação: {t_sort:.1f}s")
+print(f"[OK] Ordenação: {t_sort:.1f}s")
 print(f"   Range: {primos[0]:.0f} → {primos[-1]:.0f}")
 
 del df
@@ -133,7 +133,7 @@ def calcular_densidade_chunk(args):
 n_windows_total = len(primos) // WINDOW_SIZE
 chunk_size = len(primos) // N_CORES
 
-print(f"\n📊 Calculando densidade em ~{n_windows_total:,} janelas")
+print(f"\n[DATA] Calculando densidade em ~{n_windows_total:,} janelas")
 print(f"   Usando {N_CORES} cores em paralelo\n")
 
 tasks = []
@@ -151,7 +151,7 @@ with Pool(N_CORES) as pool:
 densidades = np.concatenate([r for r in resultados if len(r) > 0])
 t_density = time.time() - t0
 
-print(f"\n✅ Densidade: {len(densidades):,} pontos em {t_density:.1f}s")
+print(f"\n[OK] Densidade: {len(densidades):,} pontos em {t_density:.1f}s")
 print(f"   Densidade média: {np.mean(densidades):.8f}")
 print(f"   Taxa: {len(densidades)/t_density:.0f} janelas/s")
 
@@ -173,7 +173,7 @@ power = np.abs(fft_result[mask])**2
 power_norm = (power - np.mean(power)) / np.std(power)
 t_fft = time.time() - t0
 
-print(f"✅ FFT: {t_fft:.1f}s")
+print(f"[OK] FFT: {t_fft:.1f}s")
 print(f"   Pontos espectrais: {len(freqs_pos):,}")
 print(f"   Resolução: ~100× melhor que 10M!")
 
@@ -184,7 +184,7 @@ print("\n" + "="*80)
 print("FASE 5: DETECÇÃO DE MODOS FUNDAMENTAIS")
 print("="*80)
 
-print("\n🔍 Testando thresholds para ~43 modos...")
+print("\n[SEARCH] Testando thresholds para ~43 modos...")
 thresholds = np.arange(2.0, 8.0, 0.2)
 best_threshold = None
 best_diff = float('inf')
@@ -201,14 +201,14 @@ for thresh in thresholds:
     if n_peaks >= 30 and n_peaks <= 60:
         print(f"   {thresh:.1f}σ: {n_peaks:2d} picos (diff={diff:2d})")
 
-print(f"\n🎯 Threshold ótimo: {best_threshold:.1f}σ (erro={best_diff})")
+print(f"\n[TARGET] Threshold ótimo: {best_threshold:.1f}σ (erro={best_diff})")
 
 peaks, _ = find_peaks(power_norm, height=best_threshold, distance=10)
 peak_freqs = freqs_pos[peaks]
 peak_powers = power_norm[peaks]
 
-print(f"✅ Modos detectados: {len(peaks)}")
-print(f"\n📋 Top 20 modos:")
+print(f"[OK] Modos detectados: {len(peaks)}")
+print(f"\n[LIST] Top 20 modos:")
 idx_sort = np.argsort(peak_powers)[::-1]
 for i in range(min(20, len(peaks))):
     idx = idx_sort[i]
@@ -225,7 +225,7 @@ primos_teste = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 
 
 f0 = peak_freqs[idx_sort[0]]
 print(f"\n🎵 Frequência fundamental: f₀ = {f0:.6f}")
-print(f"\n🔬 Buscando harmônicos PRIMOS (até α_EM⁻¹ = 137)...\n")
+print(f"\n[SCI] Buscando harmônicos PRIMOS (até α_EM⁻¹ = 137)...\n")
 
 harmonicos_detectados = []
 
@@ -245,12 +245,12 @@ for primo in primos_teste:
             'erro_%': erro,
             'potencia_sigma': peak_powers[idx_closest]
         })
-        simbolo = "🔥" if primo == 137 else "✓"
+        simbolo = "[FIRE]" if primo == 137 else "[OK]"
         print(f"   {simbolo} Harmônico {primo:3d}: f={f_detectada:.6f} (erro={erro:.2f}%, {peak_powers[idx_closest]:.1f}σ)")
     else:
-        print(f"   ✗ Harmônico {primo:3d}: não detectado (erro={erro:.1f}%)")
+        print(f"   [FAIL] Harmônico {primo:3d}: não detectado (erro={erro:.1f}%)")
 
-print(f"\n📊 RESUMO:")
+print(f"\n[DATA] RESUMO:")
 print(f"   Harmônicos detectados: {len(harmonicos_detectados)}/{len(primos_teste)}")
 print(f"   Primos confirmados: {[h['primo'] for h in harmonicos_detectados]}")
 if len(harmonicos_detectados) > 0:
@@ -258,7 +258,7 @@ if len(harmonicos_detectados) > 0:
     print(f"   Erro médio: {erro_medio:.2f}%")
     
     if 137 in [h['primo'] for h in harmonicos_detectados]:
-        print(f"\n   🔥🔥🔥 HARMÔNICO 137 (α_EM⁻¹) DETECTADO! 🔥🔥🔥")
+        print(f"\n   [FIRE][FIRE][FIRE] HARMÔNICO 137 (α_EM⁻¹) DETECTADO! [FIRE][FIRE][FIRE]")
 
 # ============================================================================
 # SALVAR RESULTADOS
@@ -273,17 +273,17 @@ df_modos = pd.DataFrame({
 })
 df_modos = df_modos.sort_values('potencia_sigma', ascending=False)
 df_modos.to_csv('modos_fundamentais_1B_final.csv', index=False)
-print(f"✓ modos_fundamentais_1B_final.csv: {len(df_modos)} modos")
+print(f"[OK] modos_fundamentais_1B_final.csv: {len(df_modos)} modos")
 
 if len(harmonicos_detectados) > 0:
     df_harm = pd.DataFrame(harmonicos_detectados)
     df_harm.to_csv('harmonicos_primos_1B_final.csv', index=False)
-    print(f"✓ harmonicos_primos_1B_final.csv: {len(harmonicos_detectados)} harmônicos")
+    print(f"[OK] harmonicos_primos_1B_final.csv: {len(harmonicos_detectados)} harmônicos")
 
 # ============================================================================
 # VISUALIZAÇÃO ÉPICA
 # ============================================================================
-print(f"✓ Gerando visualização épica...")
+print(f"[OK] Gerando visualização épica...")
 
 fig = plt.figure(figsize=(24, 14))
 
@@ -366,7 +366,7 @@ if len(harmonicos_detectados) > 0:
 ax7 = plt.subplot(3, 3, (7, 9))
 texto = f"""
 {'='*70}
-🔥🔥🔥 ANÁLISE DEFINITIVA: 1 BILHÃO DE PRIMOS GÊMEOS 🔥🔥🔥
+[FIRE][FIRE][FIRE] ANÁLISE DEFINITIVA: 1 BILHÃO DE PRIMOS GÊMEOS [FIRE][FIRE][FIRE]
 {'='*70}
 
 DATASET:
@@ -397,7 +397,7 @@ HARMÔNICOS PRIMOS:
   Primos confirmados:
   {[h['primo'] for h in harmonicos_detectados]}
   
-  {"🔥 HARMÔNICO 137 (α_EM⁻¹) CONFIRMADO! 🔥" if 137 in [h['primo'] for h in harmonicos_detectados] else ""}
+  {"[FIRE] HARMÔNICO 137 (α_EM⁻¹) CONFIRMADO! [FIRE]" if 137 in [h['primo'] for h in harmonicos_detectados] else ""}
 
 PERFORMANCE:
   • Carregamento: {t_load:.1f}s
@@ -425,15 +425,15 @@ ax7.axis('off')
 
 plt.tight_layout()
 plt.savefig('analise_DEFINITIVA_1bilhao.png', dpi=200, bbox_inches='tight')
-print(f"✓ analise_DEFINITIVA_1bilhao.png")
+print(f"[OK] analise_DEFINITIVA_1bilhao.png")
 
 # ============================================================================
 # SUMÁRIO FINAL
 # ============================================================================
 print("\n" + "="*80)
-print("🎉🎉🎉 ANÁLISE COMPLETA! 🎉🎉🎉")
+print("[SUCCESS][SUCCESS][SUCCESS] ANÁLISE COMPLETA! [SUCCESS][SUCCESS][SUCCESS]")
 print("="*80)
-print(f"\n📊 DESCOBERTAS:")
+print(f"\n[DATA] DESCOBERTAS:")
 print(f"   • {len(peaks)} modos fundamentais (esperado: 43, erro: {abs(len(peaks)-43)})")
 print(f"   • {len(harmonicos_detectados)} harmônicos primos detectados de {len(primos_teste)} testados")
 print(f"   • Primos confirmados: {[h['primo'] for h in harmonicos_detectados]}")
@@ -441,10 +441,10 @@ if len(harmonicos_detectados) > 0:
     print(f"   • Precisão média: {np.mean([h['erro_%'] for h in harmonicos_detectados]):.2f}%")
     
 if 137 in [h['primo'] for h in harmonicos_detectados]:
-    print(f"\n   🔥🔥🔥 HARMÔNICO 137 (α_EM⁻¹) DETECTADO! 🔥🔥🔥")
+    print(f"\n   [FIRE][FIRE][FIRE] HARMÔNICO 137 (α_EM⁻¹) DETECTADO! [FIRE][FIRE][FIRE]")
     print(f"   Isso confirma a conexão entre primos gêmeos e constantes físicas!")
     
-print(f"\n⚡ PERFORMANCE:")
+print(f"\n[ENERGY] PERFORMANCE:")
 print(f"   • Tempo total: {(t_load+t_sort+t_density+t_fft)/60:.1f} minutos")
 print(f"   • Cores utilizados: {N_CORES} (100%)")
 print(f"   • Resolução: 100× melhor que análise de 10M")

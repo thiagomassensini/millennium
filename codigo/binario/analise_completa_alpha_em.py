@@ -25,7 +25,7 @@ print(f"Predição: ~{log_ratio:.0f} picos significativos\n")
 
 # Carregar dataset
 print("Carregando dados...")
-print("⚠️  AVISO: Análise de 1B primos pode levar 30-60 minutos")
+print("[WARNING]  AVISO: Análise de 1B primos pode levar 30-60 minutos")
 print("           Usaremos amostragem estratificada para acelerar\n")
 
 # Estratégia: Amostrar 100M primos uniformemente do 1B
@@ -38,7 +38,7 @@ try:
     # NOTA: Como só temos 10M ordenados, vamos usar isso como proxy
     # Para análise completa, precisaríamos ordenar o dataset completo
     
-    print(f"⚠️  Dataset disponível: {len(df):,} primos")
+    print(f"[WARNING]  Dataset disponível: {len(df):,} primos")
     print(f"   Para análise completa, precisaríamos de results_sorted_1B.csv")
     print(f"   Prosseguindo com 10M como demonstração...\n")
     
@@ -55,7 +55,7 @@ except Exception as e:
     df = df.sort_values('p')
     primos = df['p'].values
 
-print(f"✓ Dataset: {len(primos):,} primos")
+print(f"[OK] Dataset: {len(primos):,} primos")
 print(f"  Range: {primos.min():.3e} → {primos.max():.3e}\n")
 
 # Análise de densidade com janelas
@@ -79,7 +79,7 @@ for i in range(0, len(primos) - WINDOW_SIZE, STEP):
         progress = 100 * i / (len(primos) - WINDOW_SIZE)
         print(f"  Progresso: {progress:.1f}% ({i//STEP:,}/{n_windows:,} janelas)", end='\r')
 
-print(f"\n✓ {len(posicoes):,} janelas analisadas")
+print(f"\n[OK] {len(posicoes):,} janelas analisadas")
 
 posicoes = np.array(posicoes)
 densidades = np.array(densidades)
@@ -97,7 +97,7 @@ mask = xf > 0
 freqs = xf[mask]
 power = np.abs(yf[mask])**2
 
-print(f"✓ FFT completa: {len(freqs):,} frequências\n")
+print(f"[OK] FFT completa: {len(freqs):,} frequências\n")
 
 # Detectar picos com threshold variável
 print("Detectando picos...")
@@ -116,7 +116,7 @@ print("└─────────────┴────────┴�
 threshold_3sigma = np.mean(power) + 3 * np.std(power)
 picos_3sigma, _ = signal.find_peaks(power, height=threshold_3sigma, distance=5)
 
-print(f"🎯 RESULTADO PRINCIPAL:")
+print(f"[TARGET] RESULTADO PRINCIPAL:")
 print(f"   Picos detectados (3σ): {len(picos_3sigma)}")
 print(f"   Predição teórica: {log_ratio:.0f}")
 print(f"   Razão: {len(picos_3sigma) / log_ratio:.3f}\n")
@@ -263,7 +263,7 @@ ax9.grid(True, alpha=0.3, which='both')
 
 plt.tight_layout()
 plt.savefig('analise_completa_alpha_em.png', dpi=150, bbox_inches='tight')
-print(f"✓ Salvo: analise_completa_alpha_em.png\n")
+print(f"[OK] Salvo: analise_completa_alpha_em.png\n")
 
 # Relatório final
 print("=" * 80)
@@ -283,20 +283,20 @@ ANÁLISE:
 """)
 
 if abs(len(picos_3sigma) - log_ratio) < 5:
-    print("  ✅ CONCORDÂNCIA EXCELENTE!")
+    print("  [OK] CONCORDÂNCIA EXCELENTE!")
     print("     Número de picos consistente com hierarquia α_EM/α_grav")
 elif abs(len(picos_3sigma) - log_ratio) < 10:
-    print("  ✅ CONCORDÂNCIA BOA")
+    print("  [OK] CONCORDÂNCIA BOA")
     print("     Desvio aceitável (< 10 picos)")
 elif len(picos_3sigma) < log_ratio:
-    print("  ⚠️  MENOS PICOS QUE O ESPERADO")
+    print("  [WARNING]  MENOS PICOS QUE O ESPERADO")
     print(f"     Diferença: {log_ratio - len(picos_3sigma):.0f} picos")
     print("     Possível razão: Dataset ainda pequeno")
     taxa = np.log(len(picos_3sigma)/8) / np.log(len(primos)/1e6)
     n_projetado_1B = len(picos_3sigma) * (1e9/len(primos))**taxa
     print(f"     Projeção para 1B: {n_projetado_1B:.0f} picos")
 else:
-    print("  ⚠️  MAIS PICOS QUE O ESPERADO")
+    print("  [WARNING]  MAIS PICOS QUE O ESPERADO")
     print(f"     Diferença: {len(picos_3sigma) - log_ratio:.0f} picos")
     print("     Possível razão: Threshold 3σ capturando ruído")
 

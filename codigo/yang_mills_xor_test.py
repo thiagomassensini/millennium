@@ -129,7 +129,7 @@ def test_alpha_EM_detection():
     
     # Interpretação
     if abs(closest_k - k_alpha) < 0.5:
-        print("✅ α_EM tem ressonância forte com k_real!")
+        print("[OK] α_EM tem ressonância forte com k_real!")
         print("   Possível interpretação: α_EM emerge da estrutura XOR dos primos")
     
     return {
@@ -170,7 +170,7 @@ def mass_gap_hypothesis():
         prob = P_k.get(k, 0)
         
         # Estados são detectáveis se E > energia térmica (~25 meV)
-        detectable = "✅" if E_k > 0.025 else "❌"
+        detectable = "[OK]" if E_k > 0.025 else "[FAIL]"
         
         print(f"  {k:2d} | {E_k:9.3f} | {prob:9.6f} | {detectable}")
     
@@ -339,9 +339,9 @@ def quantum_information_connection():
     print(f"  S_XOR = {S:.6f}")
     
     if S > 2:
-        print("  ✅ Viola Bell! (não-local, quântico)")
+        print("  [OK] Viola Bell! (não-local, quântico)")
     else:
-        print("  ❌ Não viola Bell (clássico)")
+        print("  [FAIL] Não viola Bell (clássico)")
     
     print()
     
@@ -390,7 +390,7 @@ def search_other_constants():
             if k_nearest in P_k:
                 error = abs(2**k_nearest - scaled) / scaled
                 if error < 0.05:
-                    match = "✅"
+                    match = "[OK]"
                     print(f"{name:29s} | {value:10.4f} | k={k_nearest:2d}({scale_name:5s}) | {match}")
     
     print()
@@ -433,11 +433,11 @@ def main():
     print("="*80)
     print()
     print("Se P(k) = 2^(-k) aparece em:")
-    print("  ✅ Twin primes (provado empiricamente)")
-    print("  ✅ Elliptic curves ranks (provado para k=2^n)")
-    print("  ✅ Riemann zeros (repulsão de 2^k)")
-    print("  ❓ Yang-Mills mass gap (hipótese)")
-    print("  ❓ Gauge couplings (a verificar)")
+    print("  [OK] Twin primes (provado empiricamente)")
+    print("  [OK] Elliptic curves ranks (provado para k=2^n)")
+    print("  [OK] Riemann zeros (repulsão de 2^k)")
+    print("  [?] Yang-Mills mass gap (hipótese)")
+    print("  [?] Gauge couplings (a verificar)")
     print()
     print("Então XOR é PRINCÍPIO FUNDAMENTAL da natureza!")
     print()

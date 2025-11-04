@@ -23,7 +23,7 @@ ARQUIVO = sys.argv[1] if len(sys.argv) > 1 else "results.csv"
 MAX_TEST = int(sys.argv[2]) if len(sys.argv) > 2 else 100
 
 # Carregar dados
-print(f"📂 Carregando {ARQUIVO}...")
+print(f"[FOLDER] Carregando {ARQUIVO}...")
 df = pd.read_csv(ARQUIVO, nrows=10000, on_bad_lines='skip')
 primos = df.iloc[:, 0].values
 
@@ -39,7 +39,7 @@ for p in primos:
         k_reals.append(-1)
 
 k_reals = np.array(k_reals)
-print(f"✓ {len(primos):,} primos carregados")
+print(f"[OK] {len(primos):,} primos carregados")
 print()
 
 # ==================== RANK ESTIMATION ====================
@@ -161,7 +161,7 @@ for i in range(min(MAX_TEST, len(primos))):
         # Média dos dois métodos
         rank_est = int(np.round((rank_simple + rank_modular) / 2))
         
-        match = "✓" if rank_est == k else "✗"
+        match = "[OK]" if rank_est == k else "[FAIL]"
         method = f"s={rank_simple},m={rank_modular}"
         
         results.append({
@@ -237,7 +237,7 @@ if len(results) > 0:
             'results': results[:100]  # Primeiros 100
         }, f, indent=2)
     
-    print(f"✓ Resultados salvos em {output_file}")
+    print(f"[OK] Resultados salvos em {output_file}")
     print()
     
     # ==================== CONCLUSÃO ====================
@@ -247,23 +247,23 @@ if len(results) > 0:
     print()
     
     if r_pearson > 0.7:
-        print("🎯 CORRELAÇÃO FORTE DETECTADA!")
+        print("[TARGET] CORRELAÇÃO FORTE DETECTADA!")
         print()
         print(f"   rank(E_p) ≈ k_real(p) com r = {r_pearson:.3f}")
         print()
         
         if accuracy > 0.6:
-            print("   ✓✓✓ Hipótese BSD FORTEMENTE SUPORTADA!")
+            print("   [OK][OK][OK] Hipótese BSD FORTEMENTE SUPORTADA!")
             print()
             print("   PRÓXIMO PASSO:")
             print("   - Usar SageMath/PARI para ranks EXATOS")
             print("   - Testar 10,000 curvas")
             print("   - Escrever paper se r > 0.95")
         else:
-            print("   ✓✓ Evidência moderada")
+            print("   [OK][OK] Evidência moderada")
             print("   → Método de estimativa de rank precisa melhorar")
     elif r_pearson > 0.5:
-        print("✓ Correlação moderada detectada")
+        print("[OK] Correlação moderada detectada")
         print(f"  r = {r_pearson:.3f}")
         print()
         print("  Limitações:")
@@ -271,7 +271,7 @@ if len(results) > 0:
         print("  - Primos pequenos podem ter comportamento diferente")
         print("  - SageMath/PARI necessário para ranks exatos")
     else:
-        print("⚠ Correlação fraca")
+        print("[WARNING] Correlação fraca")
         print("  → Método de estimativa não é confiável")
         print("  → Precisa usar algoritmos exatos (SageMath/PARI)")
     
@@ -284,7 +284,7 @@ if len(results) > 0:
     print()
 
 else:
-    print("❌ Nenhum resultado válido")
+    print("[FAIL] Nenhum resultado válido")
     print("   → Primos muito grandes (p > 10^6)")
     print("   → Use primos menores ou PARI/GP")
 

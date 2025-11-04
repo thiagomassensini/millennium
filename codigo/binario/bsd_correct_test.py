@@ -26,9 +26,9 @@ def generate_twin_primes(max_n):
             twins.append(p)
     return twins
 
-print("🔍 Gerando primos gêmeos < 10,000...")
+print("[SEARCH] Gerando primos gêmeos < 10,000...")
 twin_primes = generate_twin_primes(10000)
-print(f"✓ {len(twin_primes)} primos gêmeos encontrados")
+print(f"[OK] {len(twin_primes)} primos gêmeos encontrados")
 print()
 
 # Calcular k_real
@@ -91,7 +91,7 @@ def test_curve_family(name, get_curve_params):
             continue
     
     if len(results) == 0:
-        print("\n❌ Nenhum resultado")
+        print("\n[FAIL] Nenhum resultado")
         return None
     
     # Análise
@@ -119,11 +119,11 @@ def test_curve_family(name, get_curve_params):
     print()
     
     if r_corr > 0.7:
-        print(f"✓✓✓ CORRELAÇÃO FORTE! Esta família é promissora!")
+        print(f"[OK][OK][OK] CORRELAÇÃO FORTE! Esta família é promissora!")
     elif r_corr > 0.5:
-        print(f"✓✓ Correlação moderada")
+        print(f"[OK][OK] Correlação moderada")
     else:
-        print(f"✗ Correlação fraca")
+        print(f"[FAIL] Correlação fraca")
     
     return {
         'name': name,
@@ -190,13 +190,13 @@ for i, f in enumerate(families):
     print()
 
 if len(families) > 0 and families[0]['correlation'] > 0.7:
-    print(f"🏆 MELHOR: {families[0]['name']}")
+    print(f"[WIN] MELHOR: {families[0]['name']}")
     print(f"   r = {families[0]['correlation']:.4f}")
     print()
-    print("✓ Esta família mostra conexão forte entre k_real e rank!")
-    print("✓ Investigar mais para confirmar BSD!")
+    print("[OK] Esta família mostra conexão forte entre k_real e rank!")
+    print("[OK] Investigar mais para confirmar BSD!")
 else:
-    print("⚠ Nenhuma família mostrou correlação forte > 0.7")
+    print("[WARNING] Nenhuma família mostrou correlação forte > 0.7")
     print("  → Pode precisar de família diferente")
     print("  → Ou k_real não mapeia diretamente para rank")
 
@@ -206,5 +206,5 @@ print("\n" + "=" * 80)
 with open('bsd_families_comparison.json', 'w') as f:
     json.dump(families, f, indent=2)
 
-print("✓ Resultados salvos em bsd_families_comparison.json")
+print("[OK] Resultados salvos em bsd_families_comparison.json")
 print("=" * 80)

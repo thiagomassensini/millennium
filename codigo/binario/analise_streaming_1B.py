@@ -18,9 +18,9 @@ warnings.filterwarnings('ignore')
 
 N_CORES = cpu_count()
 print("="*80)
-print("🔥 ANÁLISE STREAMING: 1 BILHÃO DE PRIMOS 🔥")
+print("[FIRE] ANÁLISE STREAMING: 1 BILHÃO DE PRIMOS [FIRE]")
 print("="*80)
-print(f"\n💪 RECURSOS:")
+print(f"\n[STRONG] RECURSOS:")
 print(f"   CPUs: {N_CORES} cores")
 print(f"   RAM: Uso mínimo (streaming)")
 print(f"   Estratégia: Processar em chunks pequenos")
@@ -31,7 +31,7 @@ alpha_grav = 1.752e-45
 scale_gap = alpha_em / alpha_grav
 log_scale = np.log10(scale_gap)
 
-print(f"\n🎯 ALVOS:")
+print(f"\n[TARGET] ALVOS:")
 print(f"   log₁₀(α_EM/α_grav) = {log_scale:.2f}")
 print(f"   Modos esperados: 43")
 print(f"   Harmônicos primos: 2, 3, 5, 7, 11, 13, 17, 19, 23...")
@@ -42,7 +42,7 @@ print(f"   Harmônicos primos: 2, 3, 5, 7, 11, 13, 17, 19, 23...")
 print("\n" + "="*80)
 print("FASE 1: AMOSTRAGEM ESTRATÉGICA")
 print("="*80)
-print("\nℹ️  Para FFT, não precisamos TODOS os primos.")
+print("\nℹ  Para FFT, não precisamos TODOS os primos.")
 print("   Vamos amostrar uniformemente 100M pontos do 1B total")
 print("   Isso dá resolução 10× melhor que os 10M anteriores!\n")
 
@@ -77,7 +77,7 @@ primos_sample = np.array(primos_sample)
 k_sample = np.array(k_sample)
 t_load = time.time() - t0
 
-print(f"\n✅ Amostragem: {len(primos_sample):,} pontos em {t_load:.1f}s")
+print(f"\n[OK] Amostragem: {len(primos_sample):,} pontos em {t_load:.1f}s")
 
 # ============================================================================
 # FASE 2: ORDENAÇÃO
@@ -92,7 +92,7 @@ primos = primos_sample[idx_sort]
 k_vals = k_sample[idx_sort]
 t_sort = time.time() - t0
 
-print(f"✅ Ordenação: {t_sort:.1f}s")
+print(f"[OK] Ordenação: {t_sort:.1f}s")
 print(f"   Range: {primos[0]:.0f} → {primos[-1]:.0f}")
 
 del primos_sample, k_sample, idx_sort
@@ -130,7 +130,7 @@ def calcular_densidade_chunk(args):
 n_windows_total = len(primos) // WINDOW_SIZE
 chunk_size = len(primos) // N_CORES
 
-print(f"\n📊 Calculando densidade em ~{n_windows_total:,} janelas")
+print(f"\n[DATA] Calculando densidade em ~{n_windows_total:,} janelas")
 print(f"   Dividindo entre {N_CORES} cores\n")
 
 tasks = []
@@ -148,7 +148,7 @@ with Pool(N_CORES) as pool:
 densidades = np.concatenate([r for r in resultados if len(r) > 0])
 t_density = time.time() - t0
 
-print(f"\n✅ Densidade: {len(densidades):,} pontos em {t_density:.1f}s")
+print(f"\n[OK] Densidade: {len(densidades):,} pontos em {t_density:.1f}s")
 print(f"   Densidade média: {np.mean(densidades):.6f}")
 
 # ============================================================================
@@ -168,7 +168,7 @@ freqs_pos = freqs[mask]
 power = np.abs(fft_result[mask])**2
 t_fft = time.time() - t0
 
-print(f"✅ FFT: {t_fft:.1f}s")
+print(f"[OK] FFT: {t_fft:.1f}s")
 print(f"   Pontos espectrais: {len(freqs_pos):,}")
 
 # ============================================================================
@@ -180,7 +180,7 @@ print("="*80)
 
 power_norm = (power - np.mean(power)) / np.std(power)
 
-print("\n🔍 Testando thresholds para ~43 modos...")
+print("\n[SEARCH] Testando thresholds para ~43 modos...")
 thresholds = np.arange(1.5, 6.0, 0.2)
 best_threshold = None
 best_diff = float('inf')
@@ -197,14 +197,14 @@ for thresh in thresholds:
     if n_peaks >= 30 and n_peaks <= 60:
         print(f"   {thresh:.1f}σ: {n_peaks:2d} picos (diff={diff:2d})")
 
-print(f"\n🎯 Threshold ótimo: {best_threshold:.1f}σ (erro={best_diff})")
+print(f"\n[TARGET] Threshold ótimo: {best_threshold:.1f}σ (erro={best_diff})")
 
 peaks, properties = find_peaks(power_norm, height=best_threshold, distance=10)
 peak_freqs = freqs_pos[peaks]
 peak_powers = power_norm[peaks]
 
-print(f"✅ Modos detectados: {len(peaks)}")
-print(f"\n📋 Top 10 modos:")
+print(f"[OK] Modos detectados: {len(peaks)}")
+print(f"\n[LIST] Top 10 modos:")
 idx_sort = np.argsort(peak_powers)[::-1]
 for i in range(min(10, len(peaks))):
     idx = idx_sort[i]
@@ -222,7 +222,7 @@ primos_teste = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 
 f0 = peak_freqs[idx_sort[0]]
 print(f"\n🎵 Frequência fundamental: f₀ = {f0:.6f}")
 
-print(f"\n🔬 Buscando harmônicos em primos...\n")
+print(f"\n[SCI] Buscando harmônicos em primos...\n")
 harmonicos_detectados = []
 
 for primo in primos_teste:
@@ -241,11 +241,11 @@ for primo in primos_teste:
             'erro_%': erro,
             'potencia_sigma': peak_powers[idx_closest]
         })
-        print(f"   ✓ Harmônico {primo:2d}: f={f_detectada:.6f} (erro={erro:.2f}%, {peak_powers[idx_closest]:.1f}σ)")
+        print(f"   [OK] Harmônico {primo:2d}: f={f_detectada:.6f} (erro={erro:.2f}%, {peak_powers[idx_closest]:.1f}σ)")
     else:
-        print(f"   ✗ Harmônico {primo:2d}: não detectado (erro={erro:.1f}%)")
+        print(f"   [FAIL] Harmônico {primo:2d}: não detectado (erro={erro:.1f}%)")
 
-print(f"\n📊 RESUMO:")
+print(f"\n[DATA] RESUMO:")
 print(f"   Harmônicos detectados: {len(harmonicos_detectados)}/{len(primos_teste)}")
 print(f"   Primos confirmados: {[h['primo'] for h in harmonicos_detectados]}")
 if len(harmonicos_detectados) > 0:
@@ -265,17 +265,17 @@ df_modos = pd.DataFrame({
 })
 df_modos = df_modos.sort_values('potencia_sigma', ascending=False)
 df_modos.to_csv('modos_fundamentais_100M.csv', index=False)
-print(f"✓ modos_fundamentais_100M.csv: {len(df_modos)} modos")
+print(f"[OK] modos_fundamentais_100M.csv: {len(df_modos)} modos")
 
 if len(harmonicos_detectados) > 0:
     df_harm = pd.DataFrame(harmonicos_detectados)
     df_harm.to_csv('harmonicos_primos_100M.csv', index=False)
-    print(f"✓ harmonicos_primos_100M.csv: {len(harmonicos_detectados)} harmônicos")
+    print(f"[OK] harmonicos_primos_100M.csv: {len(harmonicos_detectados)} harmônicos")
 
 # ============================================================================
 # VISUALIZAÇÃO
 # ============================================================================
-print(f"✓ Gerando visualização...")
+print(f"[OK] Gerando visualização...")
 
 fig = plt.figure(figsize=(20, 12))
 
@@ -342,7 +342,7 @@ ax5.grid(True, alpha=0.3)
 # 6. Resumo
 ax6 = plt.subplot(3, 2, 6)
 texto = f"""
-🔥 ANÁLISE STREAMING (100M sample) 🔥
+[FIRE] ANÁLISE STREAMING (100M sample) [FIRE]
 
 Dataset: 100M de 1B primos (10× anterior)
 Resolução: {len(densidades):,} janelas
@@ -379,21 +379,21 @@ ax6.axis('off')
 
 plt.tight_layout()
 plt.savefig('analise_streaming_100M.png', dpi=150, bbox_inches='tight')
-print(f"✓ analise_streaming_100M.png")
+print(f"[OK] analise_streaming_100M.png")
 
 # ============================================================================
 # SUMÁRIO FINAL
 # ============================================================================
 print("\n" + "="*80)
-print("🎉 ANÁLISE COMPLETA!")
+print("[SUCCESS] ANÁLISE COMPLETA!")
 print("="*80)
-print(f"\n📊 DESCOBERTAS:")
+print(f"\n[DATA] DESCOBERTAS:")
 print(f"   • {len(peaks)} modos fundamentais (esperado: 43)")
 print(f"   • {len(harmonicos_detectados)} harmônicos primos detectados")
 print(f"   • Primos confirmados: {[h['primo'] for h in harmonicos_detectados]}")
 if len(harmonicos_detectados) > 0:
     print(f"   • Precisão média: {np.mean([h['erro_%'] for h in harmonicos_detectados]):.2f}%")
-print(f"\n⚡ PERFORMANCE:")
+print(f"\n[ENERGY] PERFORMANCE:")
 print(f"   • Tempo total: {t_load+t_sort+t_density+t_fft:.1f}s")
 print(f"   • RAM máxima: ~10GB (streaming)")
 print(f"   • Resolução: 10× melhor que análise anterior (10M)")

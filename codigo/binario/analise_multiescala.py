@@ -62,9 +62,9 @@ with open(ARQUIVO, 'r') as f:
 
 primos = np.array(primos)
 print()
-print(f"✓ {len(primos):,} primos carregados")
+print(f"[OK] {len(primos):,} primos carregados")
 if linhas_ruins > 0:
-    print(f"⚠ {linhas_ruins:,} linhas corrompidas ignoradas ({100*linhas_ruins/(len(primos)+linhas_ruins):.4f}%)")
+    print(f"[WARNING] {linhas_ruins:,} linhas corrompidas ignoradas ({100*linhas_ruins/(len(primos)+linhas_ruins):.4f}%)")
 print()
 
 # Dicionário para armazenar resultados por escala
@@ -89,7 +89,7 @@ for escala_idx, WINDOW_SIZE in enumerate(ESCALAS, 1):
     densidades = np.array(densidades)
     
     if len(densidades) < 100:
-        print(f"  ⚠ Janela muito grande, pulando")
+        print(f"  [WARNING] Janela muito grande, pulando")
         continue
     
     # Normalizar
@@ -127,10 +127,10 @@ for escala_idx, WINDOW_SIZE in enumerate(ESCALAS, 1):
             'n_picos': len(picos)
         }
         
-        print(f"  ✓ {len(picos)} picos detectados")
+        print(f"  [OK] {len(picos)} picos detectados")
         print(f"    Top 5 períodos: {periodos[:5]}")
     else:
-        print(f"  ✗ Nenhum pico detectado")
+        print(f"  [FAIL] Nenhum pico detectado")
     
     print()
 
@@ -198,7 +198,7 @@ print()
 
 # Teste especial: α_EM = 1/137
 if 137 in primos_detectados:
-    print("🏆 JACKPOT: Primo 137 (1/α_EM) DETECTADO!")
+    print("[WIN] JACKPOT: Primo 137 (1/α_EM) DETECTADO!")
     print()
     print("Detalhes:")
     for det in deteccoes[137]:
@@ -206,7 +206,7 @@ if 137 in primos_detectados:
               f"erro={100*det['erro']:.2f}%, potência={det['potencia']:.2e}")
     print()
 else:
-    print("⚠ Primo 137 (1/α_EM) NÃO detectado ainda")
+    print("[WARNING] Primo 137 (1/α_EM) NÃO detectado ainda")
     print("  (pode precisar de dataset maior ou escala diferente)")
     print()
 
@@ -248,7 +248,7 @@ for idx, (WINDOW_SIZE, res) in enumerate(resultados.items()):
 plt.tight_layout()
 plt.savefig('/mnt/user-data/outputs/harmonicos_multiescala.png', 
             dpi=200, bbox_inches='tight')
-print("✓ Gráfico salvo: harmonicos_multiescala.png")
+print("[OK] Gráfico salvo: harmonicos_multiescala.png")
 print()
 
 print("=" * 80)
@@ -260,9 +260,9 @@ print(f"Range: {min(primos_detectados)} → {max(primos_detectados)}")
 print()
 
 if 137 in primos_detectados:
-    print("✓✓✓ CONEXÃO COM α_EM CONFIRMADA! ✓✓✓")
+    print("[OK][OK][OK] CONEXÃO COM α_EM CONFIRMADA! [OK][OK][OK]")
 else:
-    print("⚠ Primo 137 não detectado (precisa investigar mais)")
+    print("[WARNING] Primo 137 não detectado (precisa investigar mais)")
 
 print()
 print("=" * 80)

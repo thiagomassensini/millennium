@@ -42,12 +42,12 @@ def analyze_pair(p, p2):
 def show_visual_proof(samples=50):
     """Mostra a prova visual"""
     print("=" * 80)
-    print("🔍 PROVA VISUAL: XOR em Primos Gêmeos")
+    print("[SEARCH] PROVA VISUAL: XOR em Primos Gêmeos")
     print("=" * 80)
     print()
     
     # Lê 50 linhas aleatórias do arquivo
-    print("📂 Lendo 50 pares aleatórios de /tmp/twin_primes.csv...")
+    print("[FOLDER] Lendo 50 pares aleatórios de /tmp/twin_primes.csv...")
     
     # Conta linhas totais primeiro (aproximado)
     with open('/tmp/twin_primes.csv', 'r') as f:
@@ -78,7 +78,7 @@ def show_visual_proof(samples=50):
                     except:
                         continue
     
-    print(f"✅ Carregados {len(pairs)} pares\n")
+    print(f"[OK] Carregados {len(pairs)} pares\n")
     
     # Analisa e mostra
     print("=" * 80)
@@ -109,7 +109,7 @@ def show_visual_proof(samples=50):
     
     # Análise de todos os 50
     print("\n" + "=" * 80)
-    print("📊 ANÁLISE COMPLETA (50 pares):")
+    print("[DATA] ANÁLISE COMPLETA (50 pares):")
     print("=" * 80)
     
     all_k = []
@@ -120,7 +120,7 @@ def show_visual_proof(samples=50):
             all_k.append(k)
             k_distribution[k] = k_distribution.get(k, 0) + 1
     
-    print("\n🔢 Distribuição de k:")
+    print("\n[NUM] Distribuição de k:")
     total = len(all_k)
     for k in sorted(k_distribution.keys()):
         count = k_distribution[k]
@@ -130,7 +130,7 @@ def show_visual_proof(samples=50):
         print(f"  k={k:2d}: {count:3d} ({pct:5.1f}%)  {bar}  [Teoria: {theory:5.1f}%]")
     
     print("\n" + "=" * 80)
-    print("🎯 O PADRÃO É ÓBVIO:")
+    print("[TARGET] O PADRÃO É ÓBVIO:")
     print("=" * 80)
     print("""
 1. XOR entre p e p+2 SEMPRE resulta em uma string de 1s seguida de 0
@@ -148,9 +148,9 @@ def show_visual_proof(samples=50):
    - 12.5% próximo (k=3)
    - E assim por diante (potências de 2)
 
-4. Congruência p ≡ k²-1 (mod k²) vem de:
+4. Congruência p == k²-1 (mod k²) vem de:
    - Para ter (k+1) uns no XOR, os bits 0..k de p devem ser todos 1s
-   - Isso força p ≡ 2^(k+1) - 1 (mod 2^(k+1))
+   - Isso força p == 2^(k+1) - 1 (mod 2^(k+1))
    - Para k=2^n, isso implica a congruência modular
 
 NÃO PRECISA TESTAR 1 BILHÃO - O PADRÃO É ALGORÍTMICO!

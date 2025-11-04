@@ -46,14 +46,14 @@ print(f"│ P × 137²    = {periodo_dominante * alpha_em_inv**2:>15,.0f} │")
 print(f"└───────────────────────────┘")
 
 # Razões especiais
-print(f"\n🔍 Razões matemáticas especiais:")
+print(f"\n[SEARCH] Razões matemáticas especiais:")
 print(f"  P / (137 × π)   = {periodo_dominante / (alpha_em_inv * np.pi):,.2f}")
 print(f"  P / (137 × e)   = {periodo_dominante / (alpha_em_inv * np.e):,.2f}")
 print(f"  P / (137 × 2π)  = {periodo_dominante / (alpha_em_inv * 2*np.pi):,.2f}")
 print(f"  P / √137        = {periodo_dominante / np.sqrt(alpha_em_inv):,.2f}")
 
 # Análise de janelas
-print(f"\n🔍 Razões com período em janelas:")
+print(f"\n[SEARCH] Razões com período em janelas:")
 print(f"  165 / 137       = {periodo_janelas / alpha_em_inv:.6f}")
 print(f"  165 × 137       = {periodo_janelas * alpha_em_inv:,.1f}")
 print(f"  165 - 137       = {periodo_janelas - alpha_em_inv:.1f}")
@@ -137,7 +137,7 @@ print(f"  f_Pl / f_cosmos   = {ratio_Pl_cosmos:.3e} ≈ α_grav^(-1/3)")
 print(f"  f_cosmos / f_char = {ratio_cosmos_char:.3e}")
 
 # Testar se α_EM aparece
-print(f"\n🔬 Testando mediação de α_EM:")
+print(f"\n[SCI] Testando mediação de α_EM:")
 print(f"  (f_cosmos/f_char) × α_EM   = {ratio_cosmos_char * alpha_em:.3e}")
 print(f"  (f_cosmos/f_char) / α_EM   = {ratio_cosmos_char / alpha_em:.3e}")
 print(f"  (f_cosmos/f_char)^(1/137)  = {ratio_cosmos_char**(1/alpha_em_inv):.3e}")
@@ -171,7 +171,7 @@ print(f"\nlog₁₀(α_EM/α_grav) = {log_ratio:.2f}")
 print(f"  → Se cada ordem contribui ~1 pico: ~{log_ratio:.0f} picos esperados")
 
 # Testar relações
-print(f"\n🔍 Relações com 137:")
+print(f"\n[SEARCH] Relações com 137:")
 print(f"  50 / 137        = {picos_kreal / alpha_em_inv:.4f}")
 print(f"  17 × 137        = {picos_10M * alpha_em_inv:.1f}")
 print(f"  8 × 137         = {picos_1M * alpha_em_inv:.1f}")
@@ -206,26 +206,26 @@ print("CONCLUSÕES PRELIMINARES")
 print("=" * 80)
 
 print("""
-✅ α_EM/α_grav ≈ 4.2 × 10⁴² (42.6 ordens de grandeza)
+[OK] α_EM/α_grav ≈ 4.2 × 10⁴² (42.6 ordens de grandeza)
    → Exatamente o "scale gap" observado!
 
-🔍 RAZÕES COM 137:
+[SEARCH] RAZÕES COM 137:
    • Período dominante / 137 ≈ 12,043
    • Período dominante / 137² ≈ 87.9
    • Nenhuma razão simples óbvia (1, 2, π, e)
    
-🔍 NÚMERO DE PICOS:
+[SEARCH] NÚMERO DE PICOS:
    • Extrapolação sugere ~43 picos para 1B primos
    • Consistente com log₁₀(α_EM/α_grav) ≈ 42.6
    • HIPÓTESE: Cada ordem de grandeza contribui ~1 modo
 
-⚡ PRÓXIMOS TESTES:
+[ENERGY] PRÓXIMOS TESTES:
    1. Analisar dataset completo (1B) para confirmar ~42-43 picos
    2. Buscar conexão: período ∝ N^(1/137)?
    3. Testar: frequências ∝ α_EM^n para n inteiro
    4. Investigar: γ_cosmos × 137 ≈ 306 Hz aparece?
 
-🎯 HIPÓTESE REFINADA:
+[TARGET] HIPÓTESE REFINADA:
    A periodicidade reflete a HIERARQUIA de acoplamentos:
    - Estrutura em ~42-43 níveis (α_EM/α_grav)
    - Mediação via α_EM (constante de estrutura fina)

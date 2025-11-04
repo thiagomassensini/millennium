@@ -49,7 +49,7 @@ try:
     primos = df.iloc[:, 0].values.astype(np.float64)
     k_values = df.iloc[:, 2].values.astype(int) if df.shape[1] > 2 else None
     
-    print(f"✓ {len(primos):,} primos carregados")
+    print(f"[OK] {len(primos):,} primos carregados")
     print(f"  Range: {primos[0]:.6e} → {primos[-1]:.6e}")
     print(f"  Span: {primos[-1] - primos[0]:.6e}")
     
@@ -59,7 +59,7 @@ try:
     
     print()
 except Exception as e:
-    print(f"✗ Erro ao carregar: {e}")
+    print(f"[FAIL] Erro ao carregar: {e}")
     sys.exit(1)
 
 # ==============================================================================
@@ -110,7 +110,7 @@ densidades = densidades[:idx]
 if k_medios is not None:
     k_medios = k_medios[:idx]
 
-print(f"✓ {len(posicoes):,} janelas calculadas")
+print(f"[OK] {len(posicoes):,} janelas calculadas")
 print(f"  Gap médio: {np.mean(gaps_medios):.2f} ± {np.std(gaps_medios):.2f}")
 print(f"  Range gaps: [{np.min(gaps_medios):.2f}, {np.max(gaps_medios):.2f}]")
 print()
@@ -137,7 +137,7 @@ fft_result = np.fft.fftshift(fft_result)
 threshold = np.mean(fft_result) + 3 * np.std(fft_result)
 picos_2d = fft_result > threshold
 
-print(f"✓ Picos 2D detectados: {np.sum(picos_2d)}")
+print(f"[OK] Picos 2D detectados: {np.sum(picos_2d)}")
 print()
 
 # ==============================================================================
@@ -165,7 +165,7 @@ picos_angulares, props = find_peaks(hist_theta, height=np.mean(hist_theta))
 # Converter para graus
 angulos_picos = np.degrees(theta_bins[picos_angulares])
 
-print(f"✓ Picos angulares detectados: {len(picos_angulares)}")
+print(f"[OK] Picos angulares detectados: {len(picos_angulares)}")
 if len(picos_angulares) > 0:
     print(f"  Ângulos principais (graus):")
     for i, ang in enumerate(angulos_picos[:10], 1):
@@ -191,7 +191,7 @@ hist_r, r_bins = np.histogram(r, bins=n_r_bins)
 # Detectar picos radiais (camadas)
 picos_radiais, props_r = find_peaks(hist_r, height=np.mean(hist_r))
 
-print(f"✓ Camadas radiais detectadas: {len(picos_radiais)}")
+print(f"[OK] Camadas radiais detectadas: {len(picos_radiais)}")
 if len(picos_radiais) > 0:
     print(f"  Raios das camadas:")
     for i, idx in enumerate(picos_radiais[:10], 1):
@@ -377,7 +377,7 @@ if len(picos_angulares) >= 6:
     stats_text += f"\n• Espaçamento angular: {espacamento:.1f}°"
     stats_text += f"\n• Desvio de 60°: {abs(espacamento - 60):.1f}°"
     if abs(espacamento - 60) < 10:
-        stats_text += "\n\n✓ ESTRUTURA HEXAGONAL CONFIRMADA!"
+        stats_text += "\n\n[OK] ESTRUTURA HEXAGONAL CONFIRMADA!"
 
 if k_medios is not None:
     stats_text += f"\n\nBits (k):\n• k médio: {np.mean(k_medios):.3f}"
@@ -390,7 +390,7 @@ ax12.text(0.1, 0.95, stats_text, transform=ax12.transAxes,
 plt.tight_layout()
 plt.savefig('geometria_hexagonal_primos.png', 
             dpi=200, bbox_inches='tight')
-print("✓ Gráfico salvo: geometria_hexagonal_primos.png")
+print("[OK] Gráfico salvo: geometria_hexagonal_primos.png")
 
 # ==============================================================================
 # ANÁLISE QUANTITATIVA DE HEXAGONALIDADE
@@ -409,13 +409,13 @@ if len(picos_angulares) >= 6:
     print(f"   Espaçamento médio: {espacamento:.2f}° (ideal: 60°)")
     print(f"   Desvio: {desvio_60:.2f}°")
     if desvio_60 < 5:
-        print("   ✓ HEXAGONAL PERFEITO")
+        print("   [OK] HEXAGONAL PERFEITO")
     elif desvio_60 < 10:
-        print("   ✓ HEXAGONAL (leve distorção)")
+        print("   [OK] HEXAGONAL (leve distorção)")
     else:
-        print("   ⚠ Simetria aproximada")
+        print("   [WARNING] Simetria aproximada")
 else:
-    print(f"   ✗ Insuficiente ({len(picos_angulares)} picos, necessário ≥6)")
+    print(f"   [FAIL] Insuficiente ({len(picos_angulares)} picos, necessário ≥6)")
 
 print()
 
@@ -425,9 +425,9 @@ print(f"   Camadas detectadas: {len(picos_radiais)}")
 if len(picos_radiais) >= 3:
     espacamento_radial = np.mean(np.diff(r_bins[picos_radiais]))
     print(f"   Espaçamento médio: {espacamento_radial:.4f}")
-    print("   ✓ Estrutura em camadas confirmada")
+    print("   [OK] Estrutura em camadas confirmada")
 else:
-    print("   ⚠ Poucas camadas detectadas")
+    print("   [WARNING] Poucas camadas detectadas")
 
 print()
 
@@ -436,11 +436,11 @@ print("3. CORRELAÇÃO GAP-DENSIDADE:")
 corr_gap_dens = np.corrcoef(gaps_medios, densidades)[0, 1]
 print(f"   Correlação: {corr_gap_dens:.4f}")
 if abs(corr_gap_dens) > 0.7:
-    print("   ✓ Forte correlação (estrutura cristalina)")
+    print("   [OK] Forte correlação (estrutura cristalina)")
 elif abs(corr_gap_dens) > 0.4:
-    print("   ✓ Correlação moderada")
+    print("   [OK] Correlação moderada")
 else:
-    print("   ⚠ Correlação fraca")
+    print("   [WARNING] Correlação fraca")
 
 print()
 print("=" * 80)

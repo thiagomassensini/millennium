@@ -37,7 +37,7 @@ for i in range(n_janelas):
     spec /= np.max(spec)
     fft_map[i, :] = spec
 
-print(f"✓ FFT por janelas concluída ({n_janelas} janelas)")
+print(f"[OK] FFT por janelas concluída ({n_janelas} janelas)")
 
 # --------------------------------------------------------------------------
 # Identificar picos médios (frequências harmônicas dominantes)
@@ -45,7 +45,7 @@ mean_spec = np.mean(fft_map, axis=0)
 peaks, props = find_peaks(mean_spec, height=0.1)
 harmonics = freqs[peaks]
 
-print(f"✓ Frequências dominantes detectadas: {len(harmonics)}")
+print(f"[OK] Frequências dominantes detectadas: {len(harmonics)}")
 for i, f in enumerate(harmonics[:10], 1):
     print(f"  {i:2d}. f = {f:.4e}")
 
@@ -63,7 +63,7 @@ for f in harmonics:
     plt.axhline(f, color='r', linestyle='--', alpha=0.4)
 plt.tight_layout()
 plt.savefig("afinacao_espectral_gaps.png", dpi=200)
-print("✓ Gráfico salvo: afinacao_espectral_gaps.png")
+print("[OK] Gráfico salvo: afinacao_espectral_gaps.png")
 
 # --------------------------------------------------------------------------
 # Correlação entre entropia local e potência harmônica

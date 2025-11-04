@@ -34,7 +34,7 @@ print("\n" + "=" * 80)
 print("CARREGANDO DATASET (1B primos)")
 print("=" * 80)
 
-print("\n⚠️  Estratégia: Amostragem inteligente")
+print("\n[WARNING]  Estratégia: Amostragem inteligente")
 print("   • Dataset completo: 1,004,800,003 primos")
 print("   • Memória disponível: ~12GB")
 print("   • Solução: Processar 100M primos ordenados")
@@ -45,24 +45,24 @@ try:
     # Tentar carregar grande chunk com error handling
     df = pd.read_csv('results.csv', nrows=100_000_000, header=0, 
                      on_bad_lines='skip', engine='python')
-    print(f"✓ Carregados {len(df):,} primos")
+    print(f"[OK] Carregados {len(df):,} primos")
     
     # Ordenar
     print("Ordenando por p...")
     df = df.sort_values('p', ignore_index=True)
     primos = df['p'].values
     
-    print(f"✓ Ordenados: {len(primos):,} primos")
+    print(f"[OK] Ordenados: {len(primos):,} primos")
     print(f"  Range: {primos.min():.6e} → {primos.max():.6e}")
     
 except (MemoryError, Exception) as e:
-    print(f"⚠️  Erro: {type(e).__name__}")
+    print(f"[WARNING]  Erro: {type(e).__name__}")
     print("   Usando 50M...")
     df = pd.read_csv('results.csv', nrows=50_000_000, header=0,
                      on_bad_lines='skip', engine='python')
     df = df.sort_values('p', ignore_index=True)
     primos = df['p'].values
-    print(f"✓ {len(primos):,} primos ordenados")
+    print(f"[OK] {len(primos):,} primos ordenados")
 
 # Análise de densidade
 print("\n" + "=" * 80)
@@ -94,7 +94,7 @@ for i in range(0, len(primos) - WINDOW_SIZE, STEP):
         progress = 100 * i / (len(primos) - WINDOW_SIZE)
         print(f"  {progress:.1f}% ({len(densidades):,}/{n_windows:,} janelas)", end='\r')
 
-print(f"\n✓ {len(densidades):,} janelas calculadas")
+print(f"\n[OK] {len(densidades):,} janelas calculadas")
 
 posicoes = np.array(posicoes)
 densidades = np.array(densidades)
@@ -119,7 +119,7 @@ mask = xf > 0
 freqs = xf[mask]
 power = np.abs(yf[mask])**2
 
-print(f"✓ FFT completa: {len(freqs):,} frequências")
+print(f"[OK] FFT completa: {len(freqs):,} frequências")
 
 # Detectar picos com múltiplos thresholds
 print("\n" + "=" * 80)
@@ -155,7 +155,7 @@ th_otimo = min(resultados_threshold.keys(),
                key=lambda k: resultados_threshold[k]['diff'])
 picos_otimos = resultados_threshold[th_otimo]['picos_idx']
 
-print(f"\n🎯 THRESHOLD ÓTIMO: {th_otimo:.1f}σ")
+print(f"\n[TARGET] THRESHOLD ÓTIMO: {th_otimo:.1f}σ")
 print(f"   Picos detectados: {len(picos_otimos)}")
 print(f"   Predição: {N_MODOS_TEORICO}")
 print(f"   Diferença: {resultados_threshold[th_otimo]['diff']}")
@@ -203,7 +203,7 @@ for i, idx in enumerate(idx_sorted[:min(30, len(idx_sorted))], 1):
             })
             break
     
-    primo_str = f"{primo_match}✓" if primo_match else "—"
+    primo_str = f"{primo_match}[OK]" if primo_match else "—"
     print(f"│  {i:2d}  │ {f:>11.6f} │ {ratio:>10.3f} │ {sigma:>8.1f} │ {primo_str:>9s} │")
 
 print(f"└──────┴─────────────┴────────────┴──────────┴───────────┘")
@@ -214,7 +214,7 @@ print("HARMÔNICOS PRIMOS DETECTADOS")
 print("=" * 80)
 
 if len(harmonicos_detectados) > 0:
-    print(f"\n✅ {len(harmonicos_detectados)} harmônicos correspondem a PRIMOS!\n")
+    print(f"\n[OK] {len(harmonicos_detectados)} harmônicos correspondem a PRIMOS!\n")
     
     print("┌──────┬───────┬──────────┬──────────┬──────────┐")
     print("│ Rank │ Primo │  Razão   │ Erro (%) │   σ      │")
@@ -237,12 +237,12 @@ if len(harmonicos_detectados) > 0:
     alvos = [7, 11, 13, 17, 19]
     encontrados_alvos = [p for p in alvos if p in primos_encontrados]
     
-    print(f"\n🎯 DOS ALVOS (7, 11, 13, 17, 19):")
+    print(f"\n[TARGET] DOS ALVOS (7, 11, 13, 17, 19):")
     print(f"   Encontrados: {encontrados_alvos}")
     print(f"   Faltando: {[p for p in alvos if p not in primos_encontrados]}")
 
 else:
-    print("\n❌ Nenhum harmônico primo detectado (threshold muito alto?)")
+    print("\n[FAIL] Nenhum harmônico primo detectado (threshold muito alto?)")
 
 # Visualização
 print("\n" + "=" * 80)
@@ -365,7 +365,7 @@ for p in alvos_test:
     f_det = picos_freq[idx_closest]
     erro = abs(f_det - f_esp) / f_esp * 100
     erros_alvos.append(erro)
-    status_alvos.append('✓' if erro < 15 else '✗')
+    status_alvos.append('[OK]' if erro < 15 else '[FAIL]')
 
 colors_alvos = ['green' if e < 10 else 'orange' if e < 15 else 'red' for e in erros_alvos]
 ax9.bar(range(len(alvos_test)), erros_alvos, color=colors_alvos, edgecolor='black')
@@ -424,8 +424,8 @@ DOS ALVOS (7,11,13,17,19):
 Erro médio: {np.mean(erros):.1f}% (primos)
 
 STATUS:
-{'✅ CONVERGINDO!' if abs(len(picos_otimos)-N_MODOS_TEORICO)<10 else '⚠️  Ainda divergente'}
-{'✅ HARMÔNICOS OK!' if len(encontrados_alvos)>=3 else '⚠️  Poucos harmônicos'}
+{'[OK] CONVERGINDO!' if abs(len(picos_otimos)-N_MODOS_TEORICO)<10 else '[WARNING]  Ainda divergente'}
+{'[OK] HARMÔNICOS OK!' if len(encontrados_alvos)>=3 else '[WARNING]  Poucos harmônicos'}
 """
 
 ax12.text(0.1, 0.5, texto_conclusao, fontsize=11, verticalalignment='center',
@@ -433,7 +433,7 @@ ax12.text(0.1, 0.5, texto_conclusao, fontsize=11, verticalalignment='center',
 
 plt.tight_layout()
 plt.savefig('analise_1bilhao_primos.png', dpi=150, bbox_inches='tight')
-print("✓ Salvo: analise_1bilhao_primos.png")
+print("[OK] Salvo: analise_1bilhao_primos.png")
 
 # Resumo final
 print("\n" + "=" * 80)
@@ -461,18 +461,18 @@ AVALIAÇÃO:
 """)
 
 if abs(len(picos_otimos) - N_MODOS_TEORICO) <= 5:
-    print("  ✅ EXCELENTE! Número de modos consistente com α_EM/α_grav")
+    print("  [OK] EXCELENTE! Número de modos consistente com α_EM/α_grav")
 elif abs(len(picos_otimos) - N_MODOS_TEORICO) <= 10:
-    print("  ✅ BOM! Desvio aceitável da predição")
+    print("  [OK] BOM! Desvio aceitável da predição")
 else:
-    print("  ⚠️  DESVIO SIGNIFICATIVO da predição")
+    print("  [WARNING]  DESVIO SIGNIFICATIVO da predição")
     print(f"     Pode indicar: N_verdadeiro ≠ 43, ou resolução ainda insuficiente")
 
 if len(encontrados_alvos) >= 4:
-    print("  ✅ EXCELENTE! Harmônicos 7,11,13,17,19 confirmados")
+    print("  [OK] EXCELENTE! Harmônicos 7,11,13,17,19 confirmados")
 elif len(encontrados_alvos) >= 2:
-    print("  ✅ BOM! Alguns harmônicos primos detectados")
+    print("  [OK] BOM! Alguns harmônicos primos detectados")
 else:
-    print("  ⚠️  POUCOS harmônicos primos detectados")
+    print("  [WARNING]  POUCOS harmônicos primos detectados")
 
 print("\n" + "=" * 80)

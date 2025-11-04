@@ -44,7 +44,7 @@ def calc_k_real(p):
     k = v.bit_length() - 2
     return k if 0 <= k < 25 else -1
 
-print("🔬 VALIDAÇÃO MASSIVA: 100.000 AMOSTRAS ALEATÓRIAS")
+print("[SCI] VALIDAÇÃO MASSIVA: 100.000 AMOSTRAS ALEATÓRIAS")
 print("=" * 70)
 
 # Ler arquivo e pegar linhas aleatórias
@@ -72,10 +72,10 @@ with open('results.csv', 'r') as f:
         if total_lines % 100000000 == 0:
             print(f"   Processadas: {total_lines:,} linhas...")
 
-print(f"✅ Total de primos no arquivo: {total_lines:,}")
-print(f"🎲 Selecionadas {len(samples):,} amostras aleatórias\n")
+print(f"[OK] Total de primos no arquivo: {total_lines:,}")
+print(f"[RANDOM] Selecionadas {len(samples):,} amostras aleatórias\n")
 
-print("🔍 VALIDANDO AMOSTRAS...")
+print("[SEARCH] VALIDANDO AMOSTRAS...")
 print("-" * 70)
 
 valid = 0
@@ -119,21 +119,21 @@ for i, line in enumerate(samples):
 
 print()
 print("=" * 70)
-print("📊 RESULTADO FINAL:")
+print("[DATA] RESULTADO FINAL:")
 print("=" * 70)
-print(f"✅ Válidos:   {valid:,} ({100*valid/sample_size:.4f}%)")
-print(f"❌ Inválidos: {invalid:,} ({100*invalid/sample_size:.4f}%)")
+print(f"[OK] Válidos:   {valid:,} ({100*valid/sample_size:.4f}%)")
+print(f"[FAIL] Inválidos: {invalid:,} ({100*invalid/sample_size:.4f}%)")
 print()
 
 if invalid == 0:
-    print("🎉 PERFEITO! TODOS OS 100.000 PRIMOS SÃO VÁLIDOS!")
-    print("   ✅ Teste de primalidade Miller-Rabin: 100% correto")
-    print("   ✅ Pares gêmeos (p, p+2): 100% correto")
-    print("   ✅ k_real calculado: 100% correto")
+    print("[SUCCESS] PERFEITO! TODOS OS 100.000 PRIMOS SÃO VÁLIDOS!")
+    print("   [OK] Teste de primalidade Miller-Rabin: 100% correto")
+    print("   [OK] Pares gêmeos (p, p+2): 100% correto")
+    print("   [OK] k_real calculado: 100% correto")
     print()
-    print("🏆 O MINERADOR ESTÁ FUNCIONANDO PERFEITAMENTE!")
+    print("[WIN] O MINERADOR ESTÁ FUNCIONANDO PERFEITAMENTE!")
 else:
-    print(f"⚠️  Encontrados {invalid} primos com problemas:")
+    print(f"[WARNING]  Encontrados {invalid} primos com problemas:")
     for err in errors[:10]:  # Mostrar primeiros 10 erros
         print(f"   p={err['p']}, twin={err['is_twin']}, "
               f"p_prime={err['p_prime']}, p2_prime={err['p2_prime']}, "
@@ -141,7 +141,7 @@ else:
 
 print()
 print("=" * 70)
-print(f"📈 ESTATÍSTICAS:")
+print(f"[UP] ESTATÍSTICAS:")
 print(f"   Arquivo analisado: results.csv")
 print(f"   Total de primos: {total_lines:,}")
 print(f"   Amostras testadas: {sample_size:,}")

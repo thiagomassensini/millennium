@@ -29,7 +29,7 @@ primos = df.iloc[:, 0].values
 primos_2 = df.iloc[:, 1].values
 k_reals = df.iloc[:, 2].values if df.shape[1] > 2 else None
 
-print(f"✓ {len(primos):,} pares carregados")
+print(f"[OK] {len(primos):,} pares carregados")
 print()
 
 # ==================== ANÁLISE 1: k_real DISTRIBUTION ====================
@@ -47,7 +47,7 @@ if k_reals is not None:
         print(f"  k={k:2d}: {k_counts[k]:8,} pares ({100*k_counts[k]/len(primos):.2f}%)")
     print()
 else:
-    print("⚠ Coluna k_real não encontrada, calculando...")
+    print("[WARNING] Coluna k_real não encontrada, calculando...")
     k_reals = []
     for p in primos:
         # k_real: menor k tal que (p XOR (p+2)) + 2 = 2^k
@@ -59,7 +59,7 @@ else:
         else:
             k_reals.append(-1)
     k_reals = np.array(k_reals)
-    print("✓ k_real calculado")
+    print("[OK] k_real calculado")
     print()
 
 # ==================== ANÁLISE 2: PROPRIEDADES MODULARES ====================
@@ -183,7 +183,7 @@ if len(densidades) > 10:
     else:
         print(f"  → Correlação fraca (pode precisar mais dados)")
 else:
-    print("  ⚠ Poucos dados para análise de correlação")
+    print("  [WARNING] Poucos dados para análise de correlação")
 
 print()
 
@@ -233,10 +233,10 @@ if len(k_reals) > 1000:
                     print(f"    → Primo {primo} (período obs: {periodo:.2f})")
         
         if len(detectados) > 0:
-            print(f"\n  ✓✓✓ {len(detectados)} primos detectados!")
+            print(f"\n  [OK][OK][OK] {len(detectados)} primos detectados!")
             print(f"  → BSD hint: Esses podem ser zeros de L(E,s)!")
         else:
-            print(f"\n  ⚠ Nenhum primo detectado com tolerância 15%")
+            print(f"\n  [WARNING] Nenhum primo detectado com tolerância 15%")
 
 print()
 
@@ -297,7 +297,7 @@ if len(k_reals) > 1000:
 
 plt.tight_layout()
 plt.savefig('bsd_analysis.png', dpi=200, bbox_inches='tight')
-print("✓ Gráfico salvo: bsd_analysis.png")
+print("[OK] Gráfico salvo: bsd_analysis.png")
 print()
 
 # ==================== CONCLUSÃO ====================
@@ -306,18 +306,18 @@ print("CONCLUSÃO: BSD CONJECTURE HINTS")
 print("=" * 80)
 print()
 
-print("1. ✓ k_real apresenta estrutura modular clara")
-print("2. ✓ Correlação densidade vs k_real detectada")
-print("3. ✓ Periodicidade em k_real sugere zeros de L-function")
+print("1. [OK] k_real apresenta estrutura modular clara")
+print("2. [OK] Correlação densidade vs k_real detectada")
+print("3. [OK] Periodicidade em k_real sugere zeros de L-function")
 
 if len(detectados) > 0:
-    print(f"4. ✓✓✓ {len(detectados)} primos detectados como períodos!")
+    print(f"4. [OK][OK][OK] {len(detectados)} primos detectados como períodos!")
     print(f"   → Candidatos a zeros de L(E,s): {sorted(set(detectados))}")
     print()
-    print("   🏆 BSD CONNECTION CONFIRMED!")
+    print("   [WIN] BSD CONNECTION CONFIRMED!")
     print("   → Próximo: Calcular L(E,s) explicitamente com SageMath")
 else:
-    print("4. ⚠ Primos não detectados com dados atuais")
+    print("4. [WARNING] Primos não detectados com dados atuais")
     print("   → Pode precisar de mais dados ou análise refinada")
 
 print()

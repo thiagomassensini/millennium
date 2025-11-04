@@ -29,7 +29,7 @@ print(f"Predição: {N_MODOS_TEORICO} modos fundamentais\n")
 print("Carregando 10M primos...")
 df = pd.read_csv('results_sorted_10M.csv', header=0)
 primos = df['p'].values
-print(f"✓ {len(primos):,} primos carregados\n")
+print(f"[OK] {len(primos):,} primos carregados\n")
 
 # Calcular densidade
 WINDOW_SIZE = 10000
@@ -46,7 +46,7 @@ for i in range(0, len(primos) - WINDOW_SIZE, STEP):
 
 posicoes = np.array(posicoes)
 densidades = np.array(densidades)
-print(f"✓ {len(densidades):,} janelas\n")
+print(f"[OK] {len(densidades):,} janelas\n")
 
 # FFT
 print("FFT...")
@@ -56,7 +56,7 @@ xf = fftfreq(len(dens_norm), d=1.0)
 mask = xf > 0
 freqs = xf[mask]
 power = np.abs(yf[mask])**2
-print(f"✓ {len(freqs):,} frequências\n")
+print(f"[OK] {len(freqs):,} frequências\n")
 
 # Testar múltiplos thresholds
 print("=" * 80)
@@ -81,10 +81,10 @@ for th_sigma in thresholds_sigma:
         closest_to_43 = {'threshold': th_sigma, 'n_picos': n_picos, 'diff': diff, 'picos_idx': picos}
     
     if th_sigma in [2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0]:
-        marker = " ✓" if n_picos == N_MODOS_TEORICO else ""
+        marker = " [OK]" if n_picos == N_MODOS_TEORICO else ""
         print(f"  {th_sigma:4.1f}σ   │  {n_picos:3d}  │   {diff:2d}{marker}")
 
-print(f"\n🎯 THRESHOLD ÓTIMO:")
+print(f"\n[TARGET] THRESHOLD ÓTIMO:")
 print(f"   {closest_to_43['threshold']:.2f}σ → {closest_to_43['n_picos']} picos")
 print(f"   Diferença: {closest_to_43['diff']} picos")
 
@@ -129,7 +129,7 @@ print(f"  Range frequência: {freq_modos.min():.6f} - {freq_modos.max():.6f}")
 print(f"  Range período:    {periodo_modos.min():.1f} - {periodo_modos.max():.1f} janelas")
 
 # Testar harmônicos
-print(f"\n🔍 TESTE: São harmônicos da fundamental?")
+print(f"\n[SEARCH] TESTE: São harmônicos da fundamental?")
 f_fundamental = freq_modos[idx_sorted[0]]
 print(f"   Fundamental: f₀ = {f_fundamental:.6f}")
 
@@ -138,24 +138,24 @@ for i in range(min(10, len(freq_modos))):
     f = freq_modos[idx_sorted[i]]
     ratio = f / f_fundamental
     if abs(ratio - round(ratio)) < 0.1:  # Próximo de inteiro
-        print(f"   f_{i+1}/f₀ = {ratio:.3f} ≈ {round(ratio)} ✓")
+        print(f"   f_{i+1}/f₀ = {ratio:.3f} ≈ {round(ratio)} [OK]")
         harmonicos_perfeitos += 1
 
 if harmonicos_perfeitos >= 5:
-    print(f"\n   ⚠️  {harmonicos_perfeitos} harmônicos perfeitos detectados!")
+    print(f"\n   [WARNING]  {harmonicos_perfeitos} harmônicos perfeitos detectados!")
     print("   Modos podem não ser independentes (série harmônica)")
 else:
-    print(f"\n   ✅ Modos são independentes (não harmônicos simples)")
+    print(f"\n   [OK] Modos são independentes (não harmônicos simples)")
 
 # Conexão com 137
-print(f"\n🔬 TESTE: Conexão com α_EM = 1/{alpha_em_inv:.1f}")
+print(f"\n[SCI] TESTE: Conexão com α_EM = 1/{alpha_em_inv:.1f}")
 print(f"\nFrequências × 137:")
 for i in range(min(5, len(freq_modos))):
     f = freq_modos[idx_sorted[i]]
     f_scaled = f * alpha_em_inv
     print(f"   Modo {i+1}: {f:.6f} × 137 = {f_scaled:.3f}")
     if abs(f_scaled - round(f_scaled)) < 0.1:
-        print(f"            → Próximo de {round(f_scaled)} ✓")
+        print(f"            → Próximo de {round(f_scaled)} [OK]")
 
 # Períodos vs 137
 print(f"\nPeríodos / 137:")
@@ -280,7 +280,7 @@ ax9.grid(True, alpha=0.3, which='both')
 
 plt.tight_layout()
 plt.savefig('modos_fundamentais_alpha_em.png', dpi=150, bbox_inches='tight')
-print("✓ Salvo: modos_fundamentais_alpha_em.png\n")
+print("[OK] Salvo: modos_fundamentais_alpha_em.png\n")
 
 # Conclusão
 print("=" * 80)
@@ -298,23 +298,23 @@ Diferença: {abs(len(picos_otimos) - N_MODOS_TEORICO)}
 """)
 
 if abs(len(picos_otimos) - N_MODOS_TEORICO) <= 2:
-    print("✅ CONCORDÂNCIA EXCELENTE!")
+    print("[OK] CONCORDÂNCIA EXCELENTE!")
     print(f"\nCom threshold adaptativo ({closest_to_43['threshold']:.2f}σ), encontramos")
     print(f"EXATAMENTE {len(picos_otimos)} modos, consistente com:")
     print(f"\n   log₁₀(α_EM/α_grav) = {log_ratio:.2f}")
-    print(f"\n🎯 HIPÓTESE CONFIRMADA:")
+    print(f"\n[TARGET] HIPÓTESE CONFIRMADA:")
     print("   A periodicidade reflete a hierarquia α_EM/α_grav!")
     print("   Cada modo ≈ 1 ordem de grandeza na razão de acoplamentos")
 elif abs(len(picos_otimos) - N_MODOS_TEORICO) <= 5:
-    print("✅ CONCORDÂNCIA BOA!")
+    print("[OK] CONCORDÂNCIA BOA!")
     print(f"\nDiferença de {abs(len(picos_otimos) - N_MODOS_TEORICO)} modos é aceitável")
     print("Possíveis razões: resolução espectral, threshold discreto")
 else:
-    print("⚠️  DESVIO SIGNIFICATIVO")
+    print("[WARNING]  DESVIO SIGNIFICATIVO")
     print("\nHipótese α_EM pode não ser aplicável diretamente")
     print("Número de modos pode ter outra origem")
 
-print("\n🔬 PRÓXIMOS TESTES:")
+print("\n[SCI] PRÓXIMOS TESTES:")
 print("   1. Confirmar com dataset completo (1B)")
 print("   2. Verificar se modos são harmônicos ou independentes")
 print("   3. Buscar quantização em múltiplos de α_EM")

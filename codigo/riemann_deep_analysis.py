@@ -121,7 +121,7 @@ def fourier_analysis(gaps):
     plt.tight_layout()
     plt.savefig('riemann_fourier_spectrum.png', dpi=150)
     print()
-    print("✓ Gráfico salvo: riemann_fourier_spectrum.png")
+    print("[OK] Gráfico salvo: riemann_fourier_spectrum.png")
     
     return {
         'frequencies': freq_positive.tolist()[:100],
@@ -213,7 +213,7 @@ def pair_correlation(zeros):
     plt.ylim(0, 1.2)
     plt.savefig('riemann_pair_correlation.png', dpi=150)
     print()
-    print("✓ Gráfico salvo: riemann_pair_correlation.png")
+    print("[OK] Gráfico salvo: riemann_pair_correlation.png")
     
     return {
         's_centers': s_centers.tolist(),

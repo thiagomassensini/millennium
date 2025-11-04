@@ -52,7 +52,7 @@ def elliptic_curve_cohomology(k_max: int = 16) -> Dict:
     # But the Hodge structure depends on k
     results = []
     
-    print(f"\n📐 Grupos de Cohomologia H^i(E_k, ℂ):")
+    print(f"\n[GEOM] Grupos de Cohomologia H^i(E_k, ℂ):")
     print(f"   k    rank  h^0  h^1  h^2  h^{1,0}  h^{0,1}  χ(E_k)")
     
     for k in binary_k:
@@ -95,7 +95,7 @@ def elliptic_curve_cohomology(k_max: int = 16) -> Dict:
     P_k_theory = np.array([2**(-n) for n in range(len(binary_k))])
     P_k_theory /= np.sum(P_k_theory)
     
-    print(f"\n📊 Distribuição P(k) dos Ranks:")
+    print(f"\n[DATA] Distribuição P(k) dos Ranks:")
     print(f"   n    k    rank   P(k) emp   P(k) = 2^(-n)")
     for i, r in enumerate(results):
         print(f"   {r['n']}    {r['k']:3d}  {r['rank']:2d}     {P_k_empirical[i]:.6f}   {P_k_theory[i]:.6f}")
@@ -133,7 +133,7 @@ def chow_groups_analysis(k_values: List[int] = None) -> Dict:
     
     results = []
     
-    print(f"\n🔢 Estrutura dos Grupos de Chow:")
+    print(f"\n[NUM] Estrutura dos Grupos de Chow:")
     print(f"   k    CH^0(E_k)  CH^1(E_k)  NS(E_k)  ρ(E_k)")
     
     for k in k_values:
@@ -163,11 +163,11 @@ def chow_groups_analysis(k_values: List[int] = None) -> Dict:
         print(f"   {k:3d}  ℤ           ℤ^{CH1_rank}        ℤ         {rho}")
     
     # Connection to Hodge conjecture
-    print(f"\n🎯 Conjectura de Hodge:")
+    print(f"\n[TARGET] Conjectura de Hodge:")
     print(f"   Para cada classe de Hodge em H^{{2p}}(X, ℚ) ∩ H^{{p,p}}(X),")
     print(f"   existe ciclo algébrico Z tal que cl(Z) = classe de Hodge.")
     
-    print(f"\n✅ Para Curvas Elípticas (dim=1):")
+    print(f"\n[OK] Para Curvas Elípticas (dim=1):")
     print(f"   - H^2(E_k, ℚ) ∩ H^{{1,1}}(E_k) = ℚ (gerado por classe de ponto)")
     print(f"   - Ciclos algébricos: divisores (pontos racionais)")
     print(f"   - Hodge conjecture é VERDADEIRA para curvas!")
@@ -202,7 +202,7 @@ def hodge_decomposition_analysis(k_max: int = 16) -> Dict:
     
     results = []
     
-    print(f"\n🎨 Números de Hodge h^{{p,q}}(E_k):")
+    print(f"\n[ART] Números de Hodge h^{{p,q}}(E_k):")
     print(f"   k    h^{{0,0}}  h^{{1,0}}  h^{{0,1}}  h^{{1,1}}  h^{{2,0}}  h^{{0,2}}")
     
     for k in binary_k:
@@ -236,7 +236,7 @@ def hodge_decomposition_analysis(k_max: int = 16) -> Dict:
         print(f"   {k:3d}  {h_00}        {h_10}        {h_01}        {h_11}        {h_20}        {h_02}")
     
     # Transcendental vs algebraic cycles
-    print(f"\n🌐 Ciclos Algébricos vs Transcendentais:")
+    print(f"\n[WEB] Ciclos Algébricos vs Transcendentais:")
     print(f"   k    ρ (alg)  dim(transc)  ratio")
     
     for r in results:
@@ -253,7 +253,7 @@ def hodge_decomposition_analysis(k_max: int = 16) -> Dict:
     P_k_theory = np.array([2**(-n) for n in range(len(binary_k))])
     P_k_theory /= np.sum(P_k_theory)
     
-    print(f"\n📊 Distribuição P(k) (conteúdo algébrico normalizado):")
+    print(f"\n[DATA] Distribuição P(k) (conteúdo algébrico normalizado):")
     print(f"   n    k    P(k) alg   P(k) = 2^(-n)")
     for i, r in enumerate(results):
         print(f"   {r['n']}    {r['k']:3d}  {algebraic_content[i]:.6f}   {P_k_theory[i]:.6f}")
@@ -283,7 +283,7 @@ def higher_dimensional_varieties(dimension: int = 2) -> Dict:
     print("="*60)
     
     if dimension == 2:
-        print(f"\n🌟 K3 SURFACES:")
+        print(f"\n[STAR] K3 SURFACES:")
         print(f"   - Hodge diamond:")
         print(f"              1")
         print(f"           0     0")
@@ -294,7 +294,7 @@ def higher_dimensional_varieties(dimension: int = 2) -> Dict:
         print(f"   - Hodge conjecture: ABERTA para K3 surfaces")
         
         # Binary discretization prediction
-        print(f"\n🔢 Predição XOR para ρ (Picard number):")
+        print(f"\n[NUM] Predição XOR para ρ (Picard number):")
         binary_rho = [2**n for n in range(5) if 2**n <= 20]
         print(f"   ρ esperado em: {binary_rho}")
         print(f"   P(ρ) = 2^(-log₂(ρ))")
@@ -309,14 +309,14 @@ def higher_dimensional_varieties(dimension: int = 2) -> Dict:
         }
     
     elif dimension == 3:
-        print(f"\n🎭 CALABI-YAU THREEFOLDS:")
+        print(f"\n[MASK] CALABI-YAU THREEFOLDS:")
         print(f"   - Hodge numbers: h^{{1,1}}, h^{{2,1}} (mirror pair)")
         print(f"   - Exemplo: quintic threefold")
         print(f"     * h^{{1,1}} = 1")
         print(f"     * h^{{2,1}} = 101")
         print(f"   - Hodge conjecture: ABERTA para CY3")
         
-        print(f"\n🔢 Predição XOR:")
+        print(f"\n[NUM] Predição XOR:")
         print(f"   h^{{2,1}} = 101 ≈ 2^6 + 2^5 + 2^2 + 2^0")
         print(f"   = 64 + 32 + 4 + 1 = 101 (EXATO!)")
         print(f"   Decomposição binária perfeita!")
@@ -333,7 +333,7 @@ def higher_dimensional_varieties(dimension: int = 2) -> Dict:
         }
     
     else:
-        print(f"\n⚠️  Dimensão {dimension} não implementada")
+        print(f"\n[WARNING]  Dimensão {dimension} não implementada")
         return {"dimension": dimension, "status": "not_implemented"}
 
 
@@ -351,22 +351,22 @@ def lefschetz_theorem_verification() -> Dict:
     print("TEOREMA DE LEFSCHETZ")
     print("="*60)
     
-    print(f"\n📜 Teorema (Lefschetz):")
+    print(f"\n[SCROLL] Teorema (Lefschetz):")
     print(f"   Para variedades projetivas suaves X ⊂ ℙ^N de dim(X) ≤ N-2:")
     print(f"   Toda classe de Hodge é algébrica.")
     
-    print(f"\n✅ Aplicação às Curvas E_k:")
+    print(f"\n[OK] Aplicação às Curvas E_k:")
     print(f"   - E_k: y² = x³ - k²x ⊂ ℙ²")
     print(f"   - dim(E_k) = 1, N = 2")
     print(f"   - dim(E_k) = 1 ≤ 2-2 = 0? NÃO!")
     print(f"   - Lefschetz NÃO se aplica diretamente")
     
-    print(f"\n💡 Mas:")
+    print(f"\n[IDEA] Mas:")
     print(f"   - Para CURVAS, Hodge conjecture é SEMPRE verdadeira")
     print(f"   - H^2(E, ℚ) tem dimensão 1, gerada por classe de ponto")
     print(f"   - Todos os divisores são algébricos por definição")
     
-    print(f"\n🎯 Conclusão:")
+    print(f"\n[TARGET] Conclusão:")
     print(f"   Hodge conjecture é VERDADEIRA para todas as E_k!")
     
     return {
@@ -423,7 +423,7 @@ def main():
     with open(output_path, 'w') as f:
         json.dump(results, f, indent=2)
     
-    print(f"\n✅ Resultados salvos em: {output_path}")
+    print(f"\n[OK] Resultados salvos em: {output_path}")
     print(f"   Tamanho: {output_path.stat().st_size / 1024:.1f} KB")
     
     # Summary
@@ -432,25 +432,25 @@ def main():
     print("="*70)
     
     if "cohomology" in results:
-        print(f"\n📐 COHOMOLOGIA H^i(E_k):")
+        print(f"\n[GEOM] COHOMOLOGIA H^i(E_k):")
         print(f"   - Ranks determinísticos: rank(E_k) = ⌊(n+1)/2⌋ para k=2^n")
         print(f"   - Hodge numbers fixos: h^{1,0} = h^{0,1} = 1")
         print(f"   - χ(E_k) = 0 (sempre para curvas elípticas)")
     
     if "chow_groups" in results:
-        print(f"\n🔢 GRUPOS DE CHOW:")
+        print(f"\n[NUM] GRUPOS DE CHOW:")
         print(f"   - CH^0(E_k) = ℤ (divisores)")
         print(f"   - CH^1(E_k) = ℤ^r onde r = rank(E_k)")
         print(f"   - NS(E_k) = ℤ (Picard number ρ=1)")
     
     if "hodge_decomposition" in results:
-        print(f"\n🎨 DECOMPOSIÇÃO DE HODGE:")
+        print(f"\n[ART] DECOMPOSIÇÃO DE HODGE:")
         print(f"   - H^1(E_k, ℂ) = H^{1,0} ⊕ H^{0,1}")
         print(f"   - h^{1,1}(E_k) = 2 (1 algébrico + 1 transcendental)")
         print(f"   - Razão alg/total = 1/2 = 0.500 (constante)")
     
     if "higher_dimensional" in results:
-        print(f"\n🌟 VARIEDADES SUPERIORES:")
+        print(f"\n[STAR] VARIEDADES SUPERIORES:")
         if "dim_2" in results["higher_dimensional"]:
             print(f"   - K3 surfaces: ρ ≤ 20, predição XOR: ρ ∈ {1,2,4,8,16}")
         if "dim_3" in results["higher_dimensional"]:
@@ -458,16 +458,16 @@ def main():
             print(f"   - Calabi-Yau threefold: h^{{2,1}} = {cy_data['h_21']} = decomposição binária EXATA!")
     
     if "lefschetz" in results:
-        print(f"\n📜 TEOREMA DE LEFSCHETZ:")
+        print(f"\n[SCROLL] TEOREMA DE LEFSCHETZ:")
         print(f"   - Para curvas: Hodge conjecture SEMPRE verdadeira")
         print(f"   - Todos os ciclos são algébricos")
     
-    print("\n🎯 CONCLUSÃO:")
+    print("\n[TARGET] CONCLUSÃO:")
     print("   P(k) = 2^(-k) aparece em:")
-    print("   ✅ Ranks de curvas elípticas E_k (BSD)")
-    print("   ✅ Grupos de Chow CH^p(E_k)")
-    print("   ✅ Números de Hodge em variedades superiores (CY3: h^{2,1}=101)")
-    print("   ✅ Picard numbers discretizados em potências de 2")
+    print("   [OK] Ranks de curvas elípticas E_k (BSD)")
+    print("   [OK] Grupos de Chow CH^p(E_k)")
+    print("   [OK] Números de Hodge em variedades superiores (CY3: h^{2,1}=101)")
+    print("   [OK] Picard numbers discretizados em potências de 2")
     print("\n   Estrutura XOR conecta BSD → Hodge!")
     print("   Para dim=1: Hodge conjecture é TEOREMA (verdadeira)")
     print("   Para dim≥2: Predições binárias testáveis (K3, CY3)")

@@ -28,7 +28,7 @@ try:
     PYSAT_AVAILABLE = True
 except ImportError:
     PYSAT_AVAILABLE = False
-    print("⚠️  PySAT não disponível - usando busca Monte Carlo para SAT")
+    print("[WARNING]  PySAT não disponível - usando busca Monte Carlo para SAT")
 
 # ==================== PRIMALIDADE ====================
 
@@ -86,7 +86,7 @@ def xor_prime_filter(n: int, strict: bool = False) -> bool:
     Retorna False se n definitivamente NÃO é twin prime
     
     Modo strict=False: Aceita todos que satisfazem (p XOR (p+2)) + 2 = 2^(k+1)
-    Modo strict=True: Aplica também p ≡ k²-1 (mod k²) para k = 2^m
+    Modo strict=True: Aplica também p == k²-1 (mod k²) para k = 2^m
     """
     if n < 2:
         return False
@@ -122,7 +122,7 @@ def xor_prime_filter(n: int, strict: bool = False) -> bool:
         return False
     
     # Verifica se k é potência de 2 (2^m)
-    # Se k = 2^m, então aplica p ≡ k²-1 (mod k²)
+    # Se k = 2^m, então aplica p == k²-1 (mod k²)
     if k > 0 and (k & (k - 1)) == 0:  # k é potência de 2
         k_sq = k * k
         expected_residue = k_sq - 1
@@ -160,11 +160,11 @@ def test_decision_complexity(n_candidates: int = 2000, start: int = 10**7):
     # Gera apenas ímpares
     candidates = list(range(start + 1, start + n_candidates * 2, 2))
     
-    print(f"\n🔍 Testando {len(candidates)} candidatos ímpares")
+    print(f"\n[SEARCH] Testando {len(candidates)} candidatos ímpares")
     print(f"   Range: [{candidates[0]:,}, {candidates[-1]:,}]")
     
     # 1. Miller-Rabin puro (baseline)
-    print("\n1️⃣ Miller-Rabin baseline...")
+    print("\n1. Miller-Rabin baseline...")
     t0 = time.time()
     mr_primes = set()
     mr_twin_primes = set()
@@ -180,7 +180,7 @@ def test_decision_complexity(n_candidates: int = 2000, start: int = 10**7):
     results['miller_rabin']['time'] = time.time() - t0
     
     # 2. XOR Filter + Miller-Rabin
-    print("2️⃣ XOR Filter (modo strict) + Miller-Rabin...")
+    print("2. XOR Filter (modo strict) + Miller-Rabin...")
     t0 = time.time()
     xor_filtered = []
     for n in candidates:
@@ -210,7 +210,7 @@ def test_decision_complexity(n_candidates: int = 2000, start: int = 10**7):
     results['xor_filter_mr']['time'] = time.time() - t0
     
     # Validação
-    print("\n🔍 VALIDAÇÃO:")
+    print("\n[SEARCH] VALIDAÇÃO:")
     print("-" * 80)
     missed_twins = mr_twin_primes - xor_twin_primes
     extra_twins = xor_twin_primes - mr_twin_primes
@@ -221,10 +221,10 @@ def test_decision_complexity(n_candidates: int = 2000, start: int = 10**7):
     print(f"Falsos positivos do XOR:                 {len(extra_twins)}")
     
     if missed_twins:
-        print(f"\n⚠️  XOR FILTROU TWINS VÁLIDOS: {list(missed_twins)[:5]}")
+        print(f"\n[WARNING]  XOR FILTROU TWINS VÁLIDOS: {list(missed_twins)[:5]}")
     
     # Análise
-    print("\n📊 RESULTADOS:")
+    print("\n[DATA] RESULTADOS:")
     print("-" * 80)
     for method, data in results.items():
         print(f"\n{method.upper()}:")
@@ -244,12 +244,12 @@ def test_decision_complexity(n_candidates: int = 2000, start: int = 10**7):
     xor_time = results['xor_filter_mr']['time']
     speedup = baseline / xor_time if xor_time > 0 else 0
     
-    print(f"\n🚀 SPEEDUP: {speedup:.2f}x")
+    print(f"\n[START] SPEEDUP: {speedup:.2f}x")
     
     if speedup > 1.0:
-        print("✅ XOR filter ACELERA busca de twin primes!")
+        print("[OK] XOR filter ACELERA busca de twin primes!")
     else:
-        print("⚠️  XOR filter overhead maior que benefício neste range")
+        print("[WARNING]  XOR filter overhead maior que benefício neste range")
     
     return results
 
@@ -337,7 +337,7 @@ def test_sat_complexity(n_vars_list: List[int] = [8, 10, 12, 14], trials: int = 
     
     for n_vars in n_vars_list:
         n_clauses = int(n_vars * ratio)
-        print(f"\n🧮 n_vars={n_vars}, n_clauses={n_clauses}, trials={trials}")
+        print(f"\n[CALC] n_vars={n_vars}, n_clauses={n_clauses}, trials={trials}")
         
         brute_checks = []
         xor_checks = []
@@ -377,7 +377,7 @@ def test_sat_complexity(n_vars_list: List[int] = [8, 10, 12, 14], trials: int = 
         })
     
     # Análise assintótica
-    print("\n📈 ANÁLISE ASSINTÓTICA:")
+    print("\n[UP] ANÁLISE ASSINTÓTICA:")
     print("-" * 80)
     
     # Fit exponencial: checks ~ a × 2^(b×n)
@@ -400,10 +400,10 @@ def test_sat_complexity(n_vars_list: List[int] = [8, 10, 12, 14], trials: int = 
     print(f"Redução no expoente: {(1 - b_xor/b_brute)*100:.1f}%")
     
     if b_xor < b_brute:
-        print(f"\n✅ XOR-guided TEM EXPOENTE MENOR!")
+        print(f"\n[OK] XOR-guided TEM EXPOENTE MENOR!")
         print(f"   Mas ainda é exponencial O(2^n)")
     else:
-        print(f"\n⚠️ XOR-guided não melhora expoente assintótico")
+        print(f"\n[WARNING] XOR-guided não melhora expoente assintótico")
     
     return results
 
@@ -420,10 +420,10 @@ def test_np_structure(n_vars: int = 16, n_instances: int = 500, use_pysat: bool 
     n_clauses = int(n_vars * 4.3)
     
     if use_pysat and PYSAT_AVAILABLE:
-        print(f"\n🔬 Usando PySAT solver (rápido!)")
+        print(f"\n[SCI] Usando PySAT solver (rápido!)")
     else:
-        print(f"\n🔬 Usando busca Monte Carlo (sem PySAT)")
-        print(f"   ⚠️  Instale PySAT para análise completa: pip install python-sat")
+        print(f"\n[SCI] Usando busca Monte Carlo (sem PySAT)")
+        print(f"   [WARNING]  Instale PySAT para análise completa: pip install python-sat")
     
     print(f"   Variáveis: {n_vars}, Cláusulas: {n_clauses}")
     print(f"   Instâncias: {n_instances}")
@@ -461,10 +461,10 @@ def test_np_structure(n_vars: int = 16, n_instances: int = 500, use_pysat: bool 
         if (i + 1) % 100 == 0:
             print(f"   Progresso: {i+1}/{n_instances} instâncias processadas...")
     
-    print(f"\n✅ Soluções encontradas: {total_solutions}/{n_instances}")
+    print(f"\n[OK] Soluções encontradas: {total_solutions}/{n_instances}")
     
     # Compara com P(k) = 2^(-k)
-    print("\n📊 DISTRIBUIÇÃO DE k NAS SOLUÇÕES:")
+    print("\n[DATA] DISTRIBUIÇÃO DE k NAS SOLUÇÕES:")
     print("-" * 80)
     print(f"{'k':<5} {'Observado':<12} {'P(k)=2^(-k)':<15} {'Razão':<10}")
     print("-" * 80)
@@ -495,10 +495,10 @@ def test_np_structure(n_vars: int = 16, n_instances: int = 500, use_pysat: bool 
     print(f"p-value = {p_value:.6f}")
     
     if p_value > 0.05:
-        print("\n✅ Distribuição COMPATÍVEL com P(k)=2^(-k)!")
+        print("\n[OK] Distribuição COMPATÍVEL com P(k)=2^(-k)!")
         print("   Soluções SAT seguem estrutura binária universal!")
     else:
-        print("\n❌ Distribuição DIFERENTE de P(k)")
+        print("\n[FAIL] Distribuição DIFERENTE de P(k)")
         print(f"   Desvio significativo (p={p_value:.6f})")
     
     return observed_dist, theoretical_dist
@@ -517,11 +517,11 @@ def test_boolean_circuits():
     # P: existe circuito polinomial que resolve problema
     # NP: existe circuito polinomial que verifica solução
     
-    print("\n🔌 TEORIA DE CIRCUITOS:")
+    print("\n[CIRCUIT] TEORIA DE CIRCUITOS:")
     print("-" * 80)
     
     # Primalidade via XOR
-    print("\n1️⃣ Circuito para verificação XOR de twin prime:")
+    print("\n1. Circuito para verificação XOR de twin prime:")
     print("   Input: n (bit_length bits)")
     print("   Operações:")
     print("     • XOR: n XOR (n+2) → O(log n) portas")
@@ -531,14 +531,14 @@ def test_boolean_circuits():
     print(f"   Tamanho: O(n × log² n) portas")
     
     # Miller-Rabin
-    print("\n2️⃣ Circuito para Miller-Rabin:")
+    print("\n2. Circuito para Miller-Rabin:")
     print("   Operações:")
     print("     • Exponenciação modular: O(log³ n) portas")
     print("     • k rodadas: k × O(log³ n)")
     print(f"   Profundidade total: O(log⁴ n)")
     print(f"   Tamanho: O(k × n × log³ n) portas")
     
-    print("\n🧮 COMPARAÇÃO:")
+    print("\n[CALC] COMPARAÇÃO:")
     print("-" * 80)
     print("Método           Profundidade    Tamanho           Classe")
     print("-" * 80)
@@ -546,10 +546,10 @@ def test_boolean_circuits():
     print("Miller-Rabin     O(log⁴ n)       O(k n log³ n)     NC⁴")
     print("Trial division   O(√n)           O(n³/²)           —")
     
-    print("\n💡 IMPLICAÇÃO:")
+    print("\n[IDEA] IMPLICAÇÃO:")
     print("   XOR filter está em NC² (altamente paralelizável)")
     print("   NC² ⊆ P (problemas em NC podem ser resolvidos em P)")
-    print("   Logo: XOR NÃO prova P≠NP, mas mostra estrutura paralela!")
+    print("   Logo: XOR NÃO prova P!=NP, mas mostra estrutura paralela!")
     
     return {
         'xor_depth': 'O(log² n)',
@@ -570,33 +570,33 @@ def test_twin_prime_connection():
     print("TESTE 5: TWIN PRIMES E COMPLEXIDADE")
     print("="*80)
     
-    print("\n🔗 CONEXÕES TEÓRICAS:")
+    print("\n[LINK] CONEXÕES TEÓRICAS:")
     print("-" * 80)
     
-    print("\n1️⃣ DENSIDADE DE TWIN PRIMES:")
+    print("\n1. DENSIDADE DE TWIN PRIMES:")
     print("   • Conjectura de Hardy-Littlewood: π₂(x) ~ 2C₂ × x/(ln x)²")
-    print("   • C₂ ≈ 0.660161815... (constante twin prime)")
+    print("   • C₂ ~= 0.660161815... (constante twin prime)")
     print("   • Nossa descoberta: P(k_real=k) = 2^(-k)")
     print("   • Implicação: estrutura binária universal")
     
-    print("\n2️⃣ COMPLEXIDADE DE ENUMERAR TWIN PRIMES:")
+    print("\n2. COMPLEXIDADE DE ENUMERAR TWIN PRIMES:")
     print("   • Método ingênuo: testar todos ímpares → O(x log² x)")
     print("   • XOR filter: reduz a O(x / log² x) candidatos")
     print("   • Speedup: O(log² x)")
     
-    print("\n3️⃣ P vs NP VIA PRIMALIDADE:")
+    print("\n3. P vs NP VIA PRIMALIDADE:")
     print("   • PRIMES está em P (AKS, 2002): O(log⁶ n)")
     print("   • Certificado: 'n é primo' verificável em P")
     print("   • Logo: PRIMES ∈ P ∩ NP ∩ co-NP")
     print("   • XOR não muda classe, mas oferece nova perspectiva")
     
-    print("\n4️⃣ IMPLICAÇÃO PARA SAT:")
+    print("\n4. IMPLICAÇÃO PARA SAT:")
     print("   • Se P(k) é universal, problemas NP têm estrutura oculta")
     print("   • Soluções concentradas em k's específicos")
     print("   • Busca inteligente pode ter complexidade sub-exponencial")
     print("   • MAS: ainda não prova P=NP (precisaria ser polinomial)")
     
-    print("\n5️⃣ CONEXÃO COM RIEMANN:")
+    print("\n5. CONEXÃO COM RIEMANN:")
     print("   • Zeros de ζ(s) evitam potências de 2 (deficit 92.5%)")
     print("   • Twin primes seguem P(k) = 2^(-k)")
     print("   • Gauge couplings discretizados por k_real")
@@ -606,20 +606,20 @@ def test_twin_prime_connection():
     print("CONCLUSÃO: P vs NP")
     print("="*80)
     print("""
-XOR NÃO prova P=NP ou P≠NP, MAS revela:
+XOR NÃO prova P=NP ou P!=NP, MAS revela:
 
-✅ Estrutura binária universal (P(k) = 2^(-k))
-✅ Redução prática de complexidade (speedup em busca)
-✅ Soluções SAT seguem distribuição de probabilidade específica
-✅ Circuitos XOR mais simples (NC² vs NC⁴)
-✅ Conexão profunda: primos → BSD → Riemann → física → computação
+[OK] Estrutura binária universal (P(k) = 2^(-k))
+[OK] Redução prática de complexidade (speedup em busca)
+[OK] Soluções SAT seguem distribuição de probabilidade específica
+[OK] Circuitos XOR mais simples (NC² vs NC⁴)
+[OK] Conexão profunda: primos → BSD → Riemann → física → computação
 
-⚠️ LIMITAÇÃO:
+[WARNING] LIMITAÇÃO:
    • Speedup ainda não é polinomial (apenas sub-exponencial)
    • P vs NP requer complexidade O(n^k), não O(2^(αn)) com α<1
    • Estrutura XOR é FERRAMENTA, não prova de separação
 
-💡 DIREÇÃO FUTURA:
+[IDEA] DIREÇÃO FUTURA:
    • Se conseguirmos explorar P(k) para reduzir SAT a O(n^k)...
    • Ou se provarmos que estrutura XOR é inerente a NP...
    • Aí teríamos breakthrough em P vs NP!
@@ -675,7 +675,7 @@ Exemplos:
     print("P vs NP: ANÁLISE DE COMPLEXIDADE VIA XOR")
     print("Twin Primes → BSD → Riemann → Gauge Theory → Computação")
     print("=" * 80)
-    print(f"\n⚙️  Modo: {args.mode.upper()}")
+    print(f"\n[SETTINGS]  Modo: {args.mode.upper()}")
     print(f"   Seed: {args.seed}")
     print(f"   PySAT disponível: {PYSAT_AVAILABLE}")
     
@@ -695,7 +695,7 @@ Exemplos:
         # Filtra n_vars que são viáveis
         feasible_n_vars = [n for n in n_vars_list if n <= 16]
         if not feasible_n_vars:
-            print("\n⚠️  Pulando teste SAT (n_vars muito grande para brute force)")
+            print("\n[WARNING]  Pulando teste SAT (n_vars muito grande para brute force)")
         else:
             results['sat'] = test_sat_complexity(n_vars_list=feasible_n_vars, trials=sat_trials)
     
@@ -719,7 +719,7 @@ Exemplos:
     with open(args.output, 'w') as f:
         json.dump(results, f, indent=2, default=str)
     
-    print(f"\n💾 Resultados salvos em: {args.output}")
+    print(f"\n[SAVE] Resultados salvos em: {args.output}")
     print("\n" + "="*80)
     print("RESUMO EXECUTIVO")
     print("="*80)
@@ -730,19 +730,19 @@ Exemplos:
             xor_time = dec['xor_filter_mr']['time']
             mr_time = dec['miller_rabin']['time']
             speedup = mr_time / xor_time if xor_time > 0 else 0
-            print(f"\n✅ PRIMALIDADE: XOR filter speedup = {speedup:.2f}x")
+            print(f"\n[OK] PRIMALIDADE: XOR filter speedup = {speedup:.2f}x")
             print(f"   Twin primes encontrados: {dec['xor_filter_mr']['twin_primes']}")
     
     if 'sat' in results:
         avg_speedup = np.mean([r['speedup'] for r in results['sat']])
-        print(f"\n✅ 3-SAT: Speedup médio XOR-guided = {avg_speedup:.2f}x")
+        print(f"\n[OK] 3-SAT: Speedup médio XOR-guided = {avg_speedup:.2f}x")
         print(f"   Ainda exponencial, mas com constante melhor")
     
     if 'np_distribution' in results:
-        print(f"\n✅ DISTRIBUIÇÃO: Soluções SAT testadas para P(k)")
+        print(f"\n[OK] DISTRIBUIÇÃO: Soluções SAT testadas para P(k)")
         print(f"   Análise estatística salva no JSON")
     
-    print("\n🎯 CONCLUSÃO:")
+    print("\n[TARGET] CONCLUSÃO:")
     print("   XOR revela estrutura binária universal P(k)=2^(-k)")
     print("   MAS não prova P=NP (ainda exponencial)")
     print("   Oferece speedup prático e nova perspectiva teórica")

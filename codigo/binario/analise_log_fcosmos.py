@@ -42,7 +42,7 @@ for nome, f_c in f_cosmos.items():
 print('\n1. Carregando dados...')
 df = pd.read_csv('results_sorted_10M.csv')
 primos = df['p'].values
-print(f'✓ {len(primos):,} primos')
+print(f'[OK] {len(primos):,} primos')
 
 # ANÁLISE EM ESPAÇO LOG
 print('\n2. Transformação logarítmica...')
@@ -69,7 +69,7 @@ mask_valid = densidades_log > 0
 bin_centers_valid = bin_centers[mask_valid]
 densidades_log_valid = densidades_log[mask_valid]
 
-print(f'✓ {len(bin_centers_valid)} bins válidos')
+print(f'[OK] {len(bin_centers_valid)} bins válidos')
 print(f'  CV: {np.std(densidades_log_valid)/np.mean(densidades_log_valid):.4f}')
 
 # Normalizar e FFT
@@ -85,7 +85,7 @@ power = np.abs(yf[mask_pos])**2
 
 threshold = np.mean(power) + 3 * np.std(power)
 picos, _ = signal.find_peaks(power, height=threshold, distance=5)
-print(f'✓ {len(picos)} picos detectados (>3σ)')
+print(f'[OK] {len(picos)} picos detectados (>3σ)')
 
 if len(picos) > 0:
     idx_sorted = np.argsort(power[picos])[::-1]
@@ -142,10 +142,10 @@ for i_pico, idx_pico in enumerate(picos[:30]):  # Top 30 picos
 
 if len(correlacoes) > 0:
     df_corr = pd.DataFrame(correlacoes).sort_values('erro')
-    print(f'\n✓ {len(df_corr)} CORRELAÇÕES:')
+    print(f'\n[OK] {len(df_corr)} CORRELAÇÕES:')
     print(df_corr.head(20).to_string(index=False))
 else:
-    print('\n✗ Nenhuma correlação direta')
+    print('\n[FAIL] Nenhuma correlação direta')
 
 # VISUALIZAÇÃO
 print('\n6. Visualização...')
@@ -226,7 +226,7 @@ if len(correlacoes) > 0:
 
 plt.tight_layout()
 plt.savefig('analise_logaritmica_fcosmos.png', dpi=150, bbox_inches='tight')
-print('✓ Gráfico salvo: analise_logaritmica_fcosmos.png')
+print('[OK] Gráfico salvo: analise_logaritmica_fcosmos.png')
 
 print(f'\n{'='*80}')
 print('CONCLUSÃO:')

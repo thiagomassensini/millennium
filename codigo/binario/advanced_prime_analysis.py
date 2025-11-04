@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 from collections import Counter
 import json
 
-print("🔬 ANÁLISE AVANÇADA DOS DADOS DE PRIMOS GÊMEOS")
-print("🎯 Explorando padrões profundos e aplicações")
+print("[SCI] ANÁLISE AVANÇADA DOS DADOS DE PRIMOS GÊMEOS")
+print("[TARGET] Explorando padrões profundos e aplicações")
 print("=" * 70)
 
 class PrimeDataAnalyzer:
@@ -26,12 +26,12 @@ class PrimeDataAnalyzer:
         else:
             self.df = pd.read_csv(self.csv_file)
             
-        print(f"✅ {len(self.df):,} primos gêmeos carregados")
+        print(f"[OK] {len(self.df):,} primos gêmeos carregados")
         return self.df
     
     def analyze_k_distribution(self):
         """Análise detalhada da distribuição k"""
-        print(f"\n📊 ANALISANDO DISTRIBUIÇÃO K...")
+        print(f"\n[DATA] ANALISANDO DISTRIBUIÇÃO K...")
         
         k_counts = Counter(self.df['k_real'])
         total = len(self.df)
@@ -59,7 +59,7 @@ class PrimeDataAnalyzer:
     
     def calculate_entropy_metrics(self):
         """Calcula métricas de entropia dos dados"""
-        print(f"\n🧮 CALCULANDO ENTROPIA E ESTRUTURA...")
+        print(f"\n[CALC] CALCULANDO ENTROPIA E ESTRUTURA...")
         
         # Entropia de Shannon da distribuição k
         probs = [r['observed_pct']/100 for r in self.k_distribution]
@@ -81,7 +81,7 @@ class PrimeDataAnalyzer:
     
     def find_patterns_in_primes(self):
         """Busca padrões interessantes nos primos"""
-        print(f"\n🔍 BUSCANDO PADRÕES ESPECIAIS...")
+        print(f"\n[SEARCH] BUSCANDO PADRÕES ESPECIAIS...")
         
         # Primos com k alto (raros)
         high_k_primes = self.df[self.df['k_real'] >= 8]
@@ -117,7 +117,7 @@ class PrimeDataAnalyzer:
     
     def analyze_prime_gaps(self):
         """Analisa gaps entre primos gêmeos"""
-        print(f"\n📈 ANALISANDO GAPS ENTRE PRIMOS...")
+        print(f"\n[UP] ANALISANDO GAPS ENTRE PRIMOS...")
         
         gaps = []
         primes_sorted = sorted(self.df['p'])
@@ -143,7 +143,7 @@ class PrimeDataAnalyzer:
 
 def create_visualizations(analyzer):
     """Cria visualizações avançadas dos dados"""
-    print(f"\n📊 CRIANDO VISUALIZAÇÕES...")
+    print(f"\n[DATA] CRIANDO VISUALIZAÇÕES...")
     
     fig, axes = plt.subplots(2, 2, figsize=(15, 12))
     
@@ -156,7 +156,7 @@ def create_visualizations(analyzer):
     axes[0,0].plot(k_vals, expected, 'ro-', label='Teórico: 2^(-k)')
     axes[0,0].set_xlabel('k')
     axes[0,0].set_ylabel('Frequência (%)')
-    axes[0,0].set_title('📈 DISTRIBUIÇÃO K: OBSERVADO vs TEÓRICO')
+    axes[0,0].set_title('[UP] DISTRIBUIÇÃO K: OBSERVADO vs TEÓRICO')
     axes[0,0].legend()
     axes[0,0].grid(True, alpha=0.3)
     
@@ -165,7 +165,7 @@ def create_visualizations(analyzer):
     axes[0,1].bar(k_vals, errors, color='orange', alpha=0.7)
     axes[0,1].set_xlabel('k')
     axes[0,1].set_ylabel('Erro (%)')
-    axes[0,1].set_title('🎯 PRECISÃO: ERRO vs k')
+    axes[0,1].set_title('[TARGET] PRECISÃO: ERRO vs k')
     axes[0,1].grid(True, alpha=0.3)
     
     for i, v in enumerate(errors):
@@ -180,7 +180,7 @@ def create_visualizations(analyzer):
     axes[1,0].plot(k_vals, cumulative_exp, 'r--', label='Teórico')
     axes[1,0].set_xlabel('k')
     axes[1,0].set_ylabel('Frequência Acumulada (%)')
-    axes[1,0].set_title('📊 DISTRIBUIÇÃO ACUMULADA')
+    axes[1,0].set_title('[DATA] DISTRIBUIÇÃO ACUMULADA')
     axes[1,0].legend()
     axes[1,0].grid(True, alpha=0.3)
     
@@ -190,12 +190,12 @@ def create_visualizations(analyzer):
     axes[1,1].set_xlabel('k')
     axes[1,1].set_ylabel('Quantidade de Primos')
     axes[1,1].set_yscale('log')
-    axes[1,1].set_title('🧮 CONTAGEM POR k (Escala Log)')
+    axes[1,1].set_title('[CALC] CONTAGEM POR k (Escala Log)')
     axes[1,1].grid(True, alpha=0.3)
     
     plt.tight_layout()
     plt.savefig('advanced_prime_analysis.png', dpi=300, bbox_inches='tight')
-    print(f"✅ Gráfico salvo: advanced_prime_analysis.png")
+    print(f"[OK] Gráfico salvo: advanced_prime_analysis.png")
 
 def main():
     # Análise com amostra para velocidade (ou completo para precisão)
@@ -232,10 +232,10 @@ def main():
     with open('advanced_analysis_results.json', 'w') as f:
         json.dump(results, f, indent=2)
     
-    print(f"\n💾 Resultados salvos: advanced_analysis_results.json")
-    print(f"📊 Gráficos salvos: advanced_prime_analysis.png")
+    print(f"\n[SAVE] Resultados salvos: advanced_analysis_results.json")
+    print(f"[DATA] Gráficos salvos: advanced_prime_analysis.png")
     
-    print(f"\n🎯 CONCLUSÃO:")
+    print(f"\n[TARGET] CONCLUSÃO:")
     print(f"   A distribuição P(k) = 2^(-k) está confirmada com precisão extraordinária!")
     print(f"   Erro máximo: {results['validation']['max_error']:.4f}%")
     print(f"   Status: {results['validation']['theory_confirmation']}")

@@ -65,7 +65,7 @@ def calculate_zeta_zeros(n_zeros=10000, start_t=0):
     
     elapsed = time.time() - start_time
     print()
-    print(f"✓ {n_zeros} zeros calculados em {elapsed:.1f}s")
+    print(f"[OK] {n_zeros} zeros calculados em {elapsed:.1f}s")
     print(f"  Primeiro zero: t = {zeros[0]:.6f}")
     print(f"  Último zero:   t = {zeros[-1]:.6f}")
     
@@ -186,7 +186,7 @@ def test_power_of_2_harmonics(zeros):
     Testa se zeros aparecem em harmônicos de potências de 2.
     
     Se XOR tem "memória sistêmica", zeros deveriam aparecer em:
-    t ≈ 2^k * constante
+    t ~= 2^k * constante
     """
     print()
     print("="*80)

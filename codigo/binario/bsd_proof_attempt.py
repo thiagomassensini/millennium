@@ -55,7 +55,7 @@ for p in primos:
         k_reals.append(-1)
 
 k_reals = np.array(k_reals)
-print(f"✓ {len(primos):,} pares carregados")
+print(f"[OK] {len(primos):,} pares carregados")
 print()
 
 # ==================== RANK ESTIMATION VIA MAZUR'S THEOREM ====================
@@ -110,11 +110,11 @@ print(f"Correlação Spearman: ρ={r_spearman:.4f}, p={p_spearman:.2e}")
 print()
 
 if abs(r_pearson) > 0.9:
-    print("   ✓✓✓ CORRELAÇÃO FORTE! rank(E_p) ≈ k_real(p)")
+    print("   [OK][OK][OK] CORRELAÇÃO FORTE! rank(E_p) ≈ k_real(p)")
 elif abs(r_pearson) > 0.7:
-    print("   ✓✓ CORRELAÇÃO MODERADA")
+    print("   [OK][OK] CORRELAÇÃO MODERADA")
 else:
-    print("   ⚠ Correlação fraca - modelo precisa ajuste")
+    print("   [WARNING] Correlação fraca - modelo precisa ajuste")
 
 print()
 
@@ -337,7 +337,7 @@ ax6.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.savefig('bsd_proof_analysis.png', dpi=200, bbox_inches='tight')
-print("✓ Gráfico salvo: bsd_proof_analysis.png")
+print("[OK] Gráfico salvo: bsd_proof_analysis.png")
 print()
 
 # ==================== CONCLUSÃO ====================
@@ -356,7 +356,7 @@ print(f"4. L(E,1) comportamento consistente")
 print()
 
 if abs(r_pearson) > 0.9 and erro_medio_rank < 0.1:
-    print("   🏆🏆🏆 EVIDÊNCIA FORTÍSSIMA PARA BSD! 🏆🏆🏆")
+    print("   [WIN][WIN][WIN] EVIDÊNCIA FORTÍSSIMA PARA BSD! [WIN][WIN][WIN]")
     print()
     print("   ACHADOS PRINCIPAIS:")
     print("   → k_real(p) = rank(E_p) para família de curvas")
@@ -373,12 +373,12 @@ if abs(r_pearson) > 0.9 and erro_medio_rank < 0.1:
     print("   SE TUDO VERIFICAR → $1M MILLENNIUM PRIZE! 💰")
     
 elif abs(r_pearson) > 0.7:
-    print("   ✓✓ EVIDÊNCIA MODERADA")
+    print("   [OK][OK] EVIDÊNCIA MODERADA")
     print("   → Correlação detectada mas precisa refinamento")
     print("   → Rodar com mais dados (1M+ primos)")
     print("   → Usar SageMath para cálculos exatos")
 else:
-    print("   ⚠ Evidência fraca")
+    print("   [WARNING] Evidência fraca")
     print("   → Modelo precisa ajuste")
     print("   → Testar outras famílias de curvas")
 

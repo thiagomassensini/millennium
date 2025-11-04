@@ -27,9 +27,9 @@ MEMORIA_DISPONIVEL_GB = 55  # Deixar margem para SO
 CHUNK_SIZE = 100_000_000  # 100M linhas por chunk (otimizado)
 
 print("=" * 80)
-print("🔥 ANÁLISE 1 BILHÃO - QUANTUM OPTIMIZED 🔥")
+print("[FIRE] ANÁLISE 1 BILHÃO - QUANTUM OPTIMIZED [FIRE]")
 print("=" * 80)
-print(f"\n⚙️  CONFIGURAÇÃO:")
+print(f"\n[SETTINGS]  CONFIGURAÇÃO:")
 print(f"   Cores: {N_CORES}")
 print(f"   RAM disponível: {MEMORIA_DISPONIVEL_GB} GB")
 print(f"   Chunk size: {CHUNK_SIZE:,}")
@@ -40,7 +40,7 @@ ALPHA_GRAV_ELECTRON = 1.7518e-45
 SCALE_GAP = ALPHA_EM / ALPHA_GRAV_ELECTRON
 LOG_SCALE = np.log10(SCALE_GAP)
 
-print(f"\n🎯 ALVOS TEÓRICOS:")
+print(f"\n[TARGET] ALVOS TEÓRICOS:")
 print(f"   α_EM = 1/{1/ALPHA_EM:.6f}")
 print(f"   log₁₀(α_EM/α_grav) = {LOG_SCALE:.2f}")
 print(f"   Modos esperados: ~43")
@@ -85,14 +85,14 @@ def carregar_primos_otimizado(arquivo='results.csv', max_linhas=1_004_800_003):
             # Progress report a cada 100M
             if (i + 1) % (100_000_000 // CHUNK_SIZE) == 0:
                 mem_uso = psutil.virtual_memory().percent
-                print(f"   ✓ {total_carregado:,} linhas ({mem_uso:.1f}% RAM)")
+                print(f"   [OK] {total_carregado:,} linhas ({mem_uso:.1f}% RAM)")
             
             # Parar se atingir limite
             if total_carregado >= max_linhas:
                 break
                 
     except Exception as e:
-        print(f"   ⚠️  Erro ao carregar: {e}")
+        print(f"   [WARNING]  Erro ao carregar: {e}")
         print(f"   Carregado até agora: {total_carregado:,}")
     
     # Concatenar todos os chunks
@@ -103,7 +103,7 @@ def carregar_primos_otimizado(arquivo='results.csv', max_linhas=1_004_800_003):
     
     t_load = time.time() - t0
     
-    print(f"\n✅ Carregamento completo:")
+    print(f"\n[OK] Carregamento completo:")
     print(f"   Total: {len(primos):,} primos")
     print(f"   Tempo: {t_load:.1f}s")
     print(f"   Taxa: {len(primos)/t_load:,.0f} linhas/s")
@@ -143,7 +143,7 @@ def calcular_densidade_sliding_paralelo(primos, window_size=10000, step=1000, n_
     print("FASE 2: DENSIDADE COM SLIDING WINDOWS")
     print("=" * 80)
     
-    print(f"\n📊 Configuração:")
+    print(f"\n[DATA] Configuração:")
     print(f"   Window size: {window_size:,}")
     print(f"   Step: {step:,}")
     print(f"   Overlap: {100*(1-step/window_size):.1f}%")
@@ -166,7 +166,7 @@ def calcular_densidade_sliding_paralelo(primos, window_size=10000, step=1000, n_
         primos_slice = primos[start:end]
         tasks.append((primos_slice, start, end, window_size, step, i + 1))
     
-    print(f"\n💪 Processando com {len(tasks)} workers em paralelo...\n")
+    print(f"\n[STRONG] Processando com {len(tasks)} workers em paralelo...\n")
     
     # Processar em paralelo
     with Pool(n_cores) as pool:
@@ -179,7 +179,7 @@ def calcular_densidade_sliding_paralelo(primos, window_size=10000, step=1000, n_
     
     t_density = time.time() - t0
     
-    print(f"\n✅ Densidade calculada:")
+    print(f"\n[OK] Densidade calculada:")
     print(f"   Janelas: {len(densidades):,}")
     print(f"   Tempo: {t_density:.1f}s")
     print(f"   Taxa: {len(densidades)/t_density:,.0f} janelas/s")
@@ -202,7 +202,7 @@ def analisar_espectro(densidades, target_modes=43):
     t0 = time.time()
     
     # Normalizar
-    print("\n📐 Normalizando densidade...")
+    print("\n[GEOM] Normalizando densidade...")
     dens_norm = (densidades - np.mean(densidades)) / np.std(densidades)
     
     # FFT
@@ -220,13 +220,13 @@ def analisar_espectro(densidades, target_modes=43):
     
     t_fft = time.time() - t0
     
-    print(f"\n✅ FFT completa:")
+    print(f"\n[OK] FFT completa:")
     print(f"   Tempo: {t_fft:.1f}s")
     print(f"   Pontos espectrais: {len(freqs):,}")
     print(f"   Resolução: Δf = {1/len(densidades):.8f}")
     
     # Buscar threshold ótimo para ~43 modos
-    print(f"\n🔍 Buscando threshold ótimo (alvo: {target_modes} modos)...")
+    print(f"\n[SEARCH] Buscando threshold ótimo (alvo: {target_modes} modos)...")
     
     best_threshold = None
     best_diff = float('inf')
@@ -247,7 +247,7 @@ def analisar_espectro(densidades, target_modes=43):
     # Detectar picos com threshold ótimo
     peaks, _ = find_peaks(power_norm, height=best_threshold, distance=10)
     
-    print(f"\n🎯 Threshold ótimo: {best_threshold:.1f}σ")
+    print(f"\n[TARGET] Threshold ótimo: {best_threshold:.1f}σ")
     print(f"   Modos detectados: {len(peaks)}")
     print(f"   Diferença do alvo: {abs(len(peaks) - target_modes)}")
     
@@ -275,7 +275,7 @@ def buscar_harmonicos_primos(freqs, power_norm, peaks, primos_lista, tolerancia=
     print(f"   f₀ = {f0:.8f} ciclos/janela")
     print(f"   Potência: {peak_powers[idx_fundamental]:.1f}σ")
     
-    print(f"\n🔬 Buscando harmônicos PRIMOS (tolerância {tolerancia*100:.0f}%)...\n")
+    print(f"\n[SCI] Buscando harmônicos PRIMOS (tolerância {tolerancia*100:.0f}%)...\n")
     
     harmonicos = []
     
@@ -298,13 +298,13 @@ def buscar_harmonicos_primos(freqs, power_norm, peaks, primos_lista, tolerancia=
                 'potencia_sigma': peak_powers[idx_closest]
             })
             
-            simbolo = "🔥" if primo == 137 else "✓"
+            simbolo = "[FIRE]" if primo == 137 else "[OK]"
             print(f"   {simbolo} n={primo:3d}: f={f_detectada:.6f} (erro={erro_rel*100:.2f}%, {peak_powers[idx_closest]:.1f}σ)")
         else:
             if primo in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 137]:
-                print(f"   ✗ n={primo:3d}: não detectado (erro={erro_rel*100:.1f}%)")
+                print(f"   [FAIL] n={primo:3d}: não detectado (erro={erro_rel*100:.1f}%)")
     
-    print(f"\n📊 RESUMO HARMÔNICOS:")
+    print(f"\n[DATA] RESUMO HARMÔNICOS:")
     print(f"   Detectados: {len(harmonicos)}/{len(primos_lista)}")
     
     if len(harmonicos) > 0:
@@ -313,7 +313,7 @@ def buscar_harmonicos_primos(freqs, power_norm, peaks, primos_lista, tolerancia=
         print(f"   Erro médio: {np.mean([h['erro'] for h in harmonicos]):.2f}%")
         
         if 137 in primos_det:
-            print(f"\n   🔥🔥🔥 HARMÔNICO 137 (α_EM⁻¹) DETECTADO! 🔥🔥🔥")
+            print(f"\n   [FIRE][FIRE][FIRE] HARMÔNICO 137 (α_EM⁻¹) DETECTADO! [FIRE][FIRE][FIRE]")
             idx_137 = next(i for i, h in enumerate(harmonicos) if h['primo'] == 137)
             h137 = harmonicos[idx_137]
             print(f"   Detalhes:")
@@ -459,7 +459,7 @@ def gerar_visualizacao(freqs, power_norm, peaks, best_threshold,
     ax9.axis('off')
     
     resumo = f"""
-🔥 ANÁLISE 1 BILHÃO - QUANTUM OPTIMIZED 🔥
+[FIRE] ANÁLISE 1 BILHÃO - QUANTUM OPTIMIZED [FIRE]
 
 DATASET:
   • Primos analisados: {len(densidades)*10:,}
@@ -477,7 +477,7 @@ HARMÔNICOS PRIMOS:
   • Primos: {[h['primo'] for h in harmonicos][:10]}...
   • Erro médio: {np.mean([h['erro'] for h in harmonicos]):.2f}%
   
-{"🔥 HARMÔNICO 137 DETECTADO! 🔥" if 137 in [h['primo'] for h in harmonicos] else "❌ Harmônico 137 não detectado"}
+{"[FIRE] HARMÔNICO 137 DETECTADO! [FIRE]" if 137 in [h['primo'] for h in harmonicos] else "[FAIL] Harmônico 137 não detectado"}
 
 CONSTANTES FÍSICAS:
   • α_EM = {ALPHA_EM:.8f}
@@ -496,7 +496,7 @@ SISTEMA:
     
     plt.tight_layout()
     plt.savefig(output, dpi=200, bbox_inches='tight')
-    print(f"\n✓ Salvo: {output}")
+    print(f"\n[OK] Salvo: {output}")
 
 # ============================================================================
 # MAIN EXECUTION
@@ -516,11 +516,11 @@ def main():
     
     # Ordenar se necessário
     if not np.all(np.diff(primos) >= 0):
-        print("\n📊 Ordenando dataset...")
+        print("\n[DATA] Ordenando dataset...")
         t0_sort = time.time()
         primos = np.sort(primos)
         t_sort = time.time() - t0_sort
-        print(f"✓ Ordenação: {t_sort:.1f}s")
+        print(f"[OK] Ordenação: {t_sort:.1f}s")
     
     # FASE 2: Calcular densidade
     densidades, posicoes, t_density = calcular_densidade_sliding_paralelo(
@@ -555,23 +555,23 @@ def main():
     })
     df_modos = df_modos.sort_values('potencia_sigma', ascending=False)
     df_modos.to_csv('modos_fundamentais_1B.csv', index=False)
-    print(f"✓ modos_fundamentais_1B.csv: {len(df_modos)} modos")
+    print(f"[OK] modos_fundamentais_1B.csv: {len(df_modos)} modos")
     
     # Harmônicos
     if len(harmonicos) > 0:
         df_harm = pd.DataFrame(harmonicos)
         df_harm.to_csv('harmonicos_primos_1B.csv', index=False)
-        print(f"✓ harmonicos_primos_1B.csv: {len(harmonicos)} harmônicos")
+        print(f"[OK] harmonicos_primos_1B.csv: {len(harmonicos)} harmônicos")
     
     tempo_total = time.time() - tempo_total_inicio
     
     # RESUMO FINAL
     print("\n" + "=" * 80)
-    print("🎉 ANÁLISE COMPLETA!")
+    print("[SUCCESS] ANÁLISE COMPLETA!")
     print("=" * 80)
     
-    print(f"\n⏱️  TEMPO TOTAL: {tempo_total/60:.1f} minutos")
-    print(f"\n📊 RESULTADOS:")
+    print(f"\n[TIME]  TEMPO TOTAL: {tempo_total/60:.1f} minutos")
+    print(f"\n[DATA] RESULTADOS:")
     print(f"   • Primos analisados: {len(primos):,}")
     print(f"   • Janelas: {len(densidades):,}")
     print(f"   • Modos detectados: {len(peaks)} (esperado: 43)")
@@ -582,12 +582,12 @@ def main():
         print(f"   • Precisão média: {np.mean([h['erro'] for h in harmonicos]):.2f}%")
         
         if 137 in [h['primo'] for h in harmonicos]:
-            print(f"\n   🔥🔥🔥 HARMÔNICO 137 (α_EM⁻¹) CONFIRMADO! 🔥🔥🔥")
+            print(f"\n   [FIRE][FIRE][FIRE] HARMÔNICO 137 (α_EM⁻¹) CONFIRMADO! [FIRE][FIRE][FIRE]")
             h137 = next(h for h in harmonicos if h['primo'] == 137)
             print(f"   Erro: {h137['erro']:.2f}%")
             print(f"   Potência: {h137['potencia_sigma']:.1f}σ")
         else:
-            print(f"\n   ❌ Harmônico 137 não detectado")
+            print(f"\n   [FAIL] Harmônico 137 não detectado")
     
     print("\n" + "=" * 80)
 

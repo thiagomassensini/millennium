@@ -74,7 +74,7 @@ def main():
     twins = generate_twin_primes(1_000_000)
     t1 = time.time()
     
-    print(f"✓ Generated {len(twins)} twin primes in {t1-t0:.1f}s")
+    print(f"[OK] Generated {len(twins)} twin primes in {t1-t0:.1f}s")
     print()
     print("Computing k_real and ranks...")
     print()
@@ -105,7 +105,7 @@ def main():
     
     t2 = time.time()
     print()
-    print(f"✓ Processed {processed} curves in {t2-t1:.1f}s")
+    print(f"[OK] Processed {processed} curves in {t2-t1:.1f}s")
     print(f"  Skipped: {skipped}")
     print()
     
@@ -130,9 +130,9 @@ def main():
         # Check matches
         match = ""
         if abs(avg - fib_k_minus_2) < 0.3:
-            match = "F(k-2) ✓✓✓"
+            match = "F(k-2) [OK][OK][OK]"
         elif abs(avg - k_minus_2) < 0.3:
-            match = "k-2 ✓"
+            match = "k-2 [OK]"
         elif abs(avg - fib_k_minus_2) < 0.5:
             match = "F(k-2) ~"
         
@@ -163,7 +163,7 @@ def main():
     print()
     
     if fib_matches >= len(results) * 0.7:
-        print("🎯 FIBONACCI PATTERN CONFIRMED!")
+        print("[TARGET] FIBONACCI PATTERN CONFIRMED!")
         print("   rank(E_p) ≈ F(k_real(p) - 2)")
         print()
         print("   This is a MAJOR result connecting:")
@@ -171,9 +171,9 @@ def main():
         print("   - Fibonacci sequence")
         print("   - BSD conjecture ranks")
         print()
-        print("   ⚠️  PAPER READY FOR SUBMISSION")
+        print("   [WARNING]  PAPER READY FOR SUBMISSION")
     elif linear_matches >= len(results) * 0.7:
-        print("📊 LINEAR PATTERN CONFIRMED!")
+        print("[DATA] LINEAR PATTERN CONFIRMED!")
         print("   rank(E_p) ≈ k_real(p) - 2")
         print()
         print("   Still publishable - linear relationship found")
@@ -198,7 +198,7 @@ def main():
     with open('bsd_massive_test_results.json', 'w') as f:
         json.dump(output, f, indent=2)
     
-    print("✓ Results saved to bsd_massive_test_results.json")
+    print("[OK] Results saved to bsd_massive_test_results.json")
     print()
 
 if __name__ == '__main__':

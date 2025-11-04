@@ -177,6 +177,14 @@ resultados/graficos/*.png
 resultados/graficos/*.pdf
 resultados/graficos/*.svg
 
+# codigo/binario generated files
+codigo/binario/*.png
+codigo/binario/*.json
+codigo/binario/*.csv
+codigo/binario/*.log
+codigo/binario/files/
+codigo/binario/files.zip
+
 # Temporary files
 *.tmp
 *.temp

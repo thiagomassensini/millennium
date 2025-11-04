@@ -207,7 +207,7 @@ def comprehensive_analysis(prime_k_pairs, output_file='bsd_comprehensive.json'):
     with open(output_file, 'w') as f:
         json.dump(results, f, indent=2, default=str)
     
-    print(f"\n✓ Results saved to {output_file}")
+    print(f"\n[OK] Results saved to {output_file}")
     return results
 
 # ==================== PATTERN DETECTION ====================
@@ -247,16 +247,16 @@ def detect_patterns(results):
         print(f"  Ranks: {set(ranks)}")
         
         if len(set(ranks)) == 1:
-            print(f"  ✓ DETERMINISTIC: rank = {ranks[0]}")
+            print(f"  [OK] DETERMINISTIC: rank = {ranks[0]}")
             
             # Verificar fórmula
             if k > 0 and (k & (k-1)) == 0:  # potência de 2
                 n = k.bit_length() - 1
                 expected = (n + 1) // 2
                 if ranks[0] == expected:
-                    print(f"  ✓✓✓ FORMULA CONFIRMED: rank = ({n}+1)//2 = {expected}")
+                    print(f"  [OK][OK][OK] FORMULA CONFIRMED: rank = ({n}+1)//2 = {expected}")
                 else:
-                    print(f"  ⚠️  FORMULA FAILED: expected {expected}, got {ranks[0]}")
+                    print(f"  [WARNING]  FORMULA FAILED: expected {expected}, got {ranks[0]}")
         
         # Analisar torção
         torsions = [d['torsion'] for d in data]

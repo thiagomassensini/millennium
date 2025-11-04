@@ -56,7 +56,7 @@ test_cases = [
     "1000008609032687,1000008609032689,4",
 ]
 
-print("🔍 VALIDAÇÃO DE PRIMOS GÊMEOS")
+print("[SEARCH] VALIDAÇÃO DE PRIMOS GÊMEOS")
 print("=" * 60)
 print()
 
@@ -80,10 +80,10 @@ for line in test_cases:
     
     if is_valid:
         valid += 1
-        status = "✅"
+        status = "[OK]"
     else:
         invalid += 1
-        status = "❌"
+        status = "[FAIL]"
     
     print(f"{status} p = {p}")
     print(f"   p+2 = {p_plus_2} | Twin: {is_twin}")
@@ -92,15 +92,15 @@ for line in test_cases:
     print(f"   k_real: {k_reported} (calculado: {k_calc}) | Match: {k_matches}")
     
     if not is_valid:
-        print(f"   ⚠️  INVÁLIDO!")
+        print(f"   [WARNING]  INVÁLIDO!")
     print()
 
 print("=" * 60)
-print(f"📊 RESULTADO: {valid} válidos, {invalid} inválidos")
+print(f"[DATA] RESULTADO: {valid} válidos, {invalid} inválidos")
 print(f"   Taxa de sucesso: {100*valid/(valid+invalid):.1f}%")
 
 # Verificar distribuição de k
 print()
-print("📈 VERIFICANDO DISTRIBUIÇÃO TEÓRICA:")
+print("[UP] VERIFICANDO DISTRIBUIÇÃO TEÓRICA:")
 print("   Esperado: ~50% k=1, ~25% k=2, ~12.5% k=3, etc.")
 print("   (proporção 2^(-k))")

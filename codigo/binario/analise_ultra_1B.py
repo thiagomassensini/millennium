@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ANÁLISE DEFINITIVA ULTRA: 1 BILHÃO DE PRIMOS - FULL POWER
-80GB RAM + 56 CORES = MODO BEAST ATIVADO 🔥
+80GB RAM + 56 CORES = MODO BEAST ATIVADO [FIRE]
 """
 
 import numpy as np
@@ -13,12 +13,12 @@ from multiprocessing import Pool, cpu_count
 import gc
 
 print("=" * 80)
-print("🔥 ANÁLISE ULTRA: 1 BILHÃO DE PRIMOS - FULL POWER 🔥")
+print("[FIRE] ANÁLISE ULTRA: 1 BILHÃO DE PRIMOS - FULL POWER [FIRE]")
 print("=" * 80)
 
 # Specs
 n_cores = cpu_count()
-print(f"\n💪 RECURSOS:")
+print(f"\n[STRONG] RECURSOS:")
 print(f"   CPUs: {n_cores} cores")
 print(f"   RAM: ~80GB disponível")
 print(f"   Estratégia: CARREGAR TUDO + PROCESSAR PARALELO")
@@ -30,7 +30,7 @@ alpha_em = 1/alpha_em_inv
 log_ratio = np.log10(alpha_em / alpha_grav)
 N_MODOS_TEORICO = int(round(log_ratio))
 
-print(f"\n🎯 ALVOS:")
+print(f"\n[TARGET] ALVOS:")
 print(f"   log₁₀(α_EM/α_grav) = {log_ratio:.2f}")
 print(f"   Modos esperados: {N_MODOS_TEORICO}")
 print(f"   Harmônicos primos: 2, 3, 5, 7, 11, 13, 17, 19, 23...")
@@ -60,14 +60,14 @@ for chunk in pd.read_csv('results.csv', chunksize=CHUNK_SIZE, header=0,
     if total_loaded >= 1_000_000_000:
         break
 
-print(f"\n✓ {n_chunks} chunks carregados")
+print(f"\n[OK] {n_chunks} chunks carregados")
 
 print("\nConcatenando chunks...")
 df = pd.concat(chunks, ignore_index=True)
 del chunks
 gc.collect()
 
-print(f"✓ Dataset: {len(df):,} primos gêmeos")
+print(f"[OK] Dataset: {len(df):,} primos gêmeos")
 print(f"  Memória: ~{df.memory_usage(deep=True).sum() / 1e9:.1f} GB")
 
 # ORDENAR (usa todo o poder da CPU)
@@ -81,7 +81,7 @@ print("   (pandas vai usar múltiplas threads automaticamente)")
 df = df.sort_values('p', ignore_index=True)
 primos = df['p'].values
 
-print(f"✓ Ordenado!")
+print(f"[OK] Ordenado!")
 print(f"  Range: {primos.min():.6e} → {primos.max():.6e}")
 print(f"  Span: {primos.max() - primos.min():.6e}")
 
@@ -145,7 +145,7 @@ for pos_chunk, dens_chunk in results:
 posicoes = np.array(posicoes)
 densidades = np.array(densidades)
 
-print(f"✓ {len(densidades):,} janelas calculadas")
+print(f"[OK] {len(densidades):,} janelas calculadas")
 print(f"\nEstatísticas:")
 print(f"  Densidade média: {np.mean(densidades):.6e}")
 print(f"  Desvio padrão: {np.std(densidades):.6e}")
@@ -167,7 +167,7 @@ mask = xf > 0
 freqs = xf[mask]
 power = np.abs(yf[mask])**2
 
-print(f"✓ FFT completa: {len(freqs):,} frequências")
+print(f"[OK] FFT completa: {len(freqs):,} frequências")
 print(f"  Resolução: {freqs[1] - freqs[0]:.8f} ciclos/janela")
 
 # DETECÇÃO DE PICOS
@@ -188,13 +188,13 @@ for th in thresholds:
         'diff': abs(len(picos_idx) - N_MODOS_TEORICO)
     }
 
-print("✓ Varredura completa")
+print("[OK] Varredura completa")
 
 # Threshold ótimo
 th_otimo = min(resultados.keys(), key=lambda k: resultados[k]['diff'])
 picos_otimos = resultados[th_otimo]['picos_idx']
 
-print(f"\n🎯 THRESHOLD ÓTIMO: {th_otimo:.1f}σ")
+print(f"\n[TARGET] THRESHOLD ÓTIMO: {th_otimo:.1f}σ")
 print(f"   Picos detectados: {len(picos_otimos)}")
 print(f"   Predição teórica: {N_MODOS_TEORICO}")
 print(f"   Diferença: {resultados[th_otimo]['diff']}")
@@ -251,7 +251,7 @@ for i, idx in enumerate(idx_sorted[:50], 1):
             break
     
     if i <= 30:
-        primo_str = f"{primo_match}✓" if primo_match else "—"
+        primo_str = f"{primo_match}[OK]" if primo_match else "—"
         print(f"│  {i:2d}  │ {f:>11.8f} │ {ratio:>10.4f} │ {sigma:>8.1f} │ {primo_str:>9s} │")
 
 print(f"└──────┴─────────────┴────────────┴──────────┴───────────┘")
@@ -262,7 +262,7 @@ print("HARMÔNICOS PRIMOS DETECTADOS")
 print("=" * 80)
 
 if harmonicos:
-    print(f"\n✅ {len(harmonicos)} harmônicos correspondem a PRIMOS!\n")
+    print(f"\n[OK] {len(harmonicos)} harmônicos correspondem a PRIMOS!\n")
     
     print("┌──────┬───────┬──────────┬──────────┬──────────┐")
     print("│ Rank │ Primo │  Razão   │ Erro (%) │   σ      │")
@@ -276,7 +276,7 @@ if harmonicos:
     primos_encontrados = sorted(set([h['primo'] for h in harmonicos]))
     erros = [h['erro'] for h in harmonicos]
     
-    print(f"\n📊 Estatísticas:")
+    print(f"\n[DATA] Estatísticas:")
     print(f"   Primos encontrados: {primos_encontrados}")
     print(f"   Erro médio: {np.mean(erros):.3f}%")
     print(f"   Erro máximo: {np.max(erros):.3f}%")
@@ -286,7 +286,7 @@ if harmonicos:
     alvos = [7, 11, 13, 17, 19]
     encontrados = [p for p in alvos if p in primos_encontrados]
     
-    print(f"\n🎯 TESTE CRÍTICO (7, 11, 13, 17, 19):")
+    print(f"\n[TARGET] TESTE CRÍTICO (7, 11, 13, 17, 19):")
     print(f"   Detectados: {encontrados}")
     print(f"   Taxa: {len(encontrados)}/{len(alvos)} = {len(encontrados)/len(alvos)*100:.0f}%")
 
@@ -305,13 +305,13 @@ resultados_df = pd.DataFrame({
 })
 
 resultados_df.to_csv('modos_fundamentais_1B.csv', index=False)
-print("✓ Salvo: modos_fundamentais_1B.csv")
+print("[OK] Salvo: modos_fundamentais_1B.csv")
 
 # Salvar harmônicos primos
 if harmonicos:
     harmonicos_df = pd.DataFrame(harmonicos)
     harmonicos_df.to_csv('harmonicos_primos_1B.csv', index=False)
-    print("✓ Salvo: harmonicos_primos_1B.csv")
+    print("[OK] Salvo: harmonicos_primos_1B.csv")
 
 # VISUALIZAÇÃO MASSIVA
 print("\n" + "=" * 80)
@@ -407,18 +407,18 @@ HARMÔNICOS PRIMOS:
 TESTE 7,11,13,17,19:
   {encontrados if harmonicos else []}
   
-{'✅ HIPÓTESE CONFIRMADA!' if len(encontrados)>=4 and abs(len(picos_otimos)-N_MODOS_TEORICO)<=10 else '⚠️ Parcialmente confirmada'}
+{'[OK] HIPÓTESE CONFIRMADA!' if len(encontrados)>=4 and abs(len(picos_otimos)-N_MODOS_TEORICO)<=10 else '[WARNING] Parcialmente confirmada'}
 """
 ax16.text(0.1, 0.5, texto, fontsize=10, verticalalignment='center',
           fontfamily='monospace', bbox=dict(boxstyle='round', facecolor='lightgreen', alpha=0.7))
 
 plt.tight_layout()
 plt.savefig('analise_ultra_1bilhao.png', dpi=200, bbox_inches='tight')
-print("✓ Salvo: analise_ultra_1bilhao.png")
+print("[OK] Salvo: analise_ultra_1bilhao.png")
 
 # CONCLUSÃO
 print("\n" + "=" * 80)
-print("🔥 CONCLUSÃO ULTRA 🔥")
+print("[FIRE] CONCLUSÃO ULTRA [FIRE]")
 print("=" * 80)
 
 print(f"""
@@ -432,7 +432,7 @@ RECURSOS UTILIZADOS:
 MODOS FUNDAMENTAIS:
   Detectados: {len(picos_otimos)} (threshold {th_otimo:.1f}σ)
   Predição: {N_MODOS_TEORICO} (α_EM/α_grav)
-  Status: {'✅ MATCH!' if abs(len(picos_otimos)-N_MODOS_TEORICO)<=5 else '⚠️ Desvio: ' + str(abs(len(picos_otimos)-N_MODOS_TEORICO))}
+  Status: {'[OK] MATCH!' if abs(len(picos_otimos)-N_MODOS_TEORICO)<=5 else '[WARNING] Desvio: ' + str(abs(len(picos_otimos)-N_MODOS_TEORICO))}
 
 HARMÔNICOS PRIMOS:
   Detectados: {len(harmonicos) if harmonicos else 0}
@@ -442,24 +442,24 @@ HARMÔNICOS PRIMOS:
 TESTE CRÍTICO (7,11,13,17,19):
   Detectados: {encontrados if harmonicos else []}
   Taxa: {len(encontrados)}/{len(alvos)} ({len(encontrados)/len(alvos)*100:.0f}%)
-  Status: {'✅ CONFIRMADO!' if len(encontrados)>=4 else '⚠️ Parcial'}
+  Status: {'[OK] CONFIRMADO!' if len(encontrados)>=4 else '[WARNING] Parcial'}
 
 AVALIAÇÃO FINAL:
 """)
 
 if abs(len(picos_otimos) - N_MODOS_TEORICO) <= 5 and len(encontrados) >= 4:
-    print("  ✅✅✅ HIPÓTESE TOTALMENTE CONFIRMADA!")
+    print("  [OK][OK][OK] HIPÓTESE TOTALMENTE CONFIRMADA!")
     print("     • Número de modos = α_EM/α_grav")
     print("     • Harmônicos primos detectados")
     print("     • Estrutura auto-referente confirmada")
 elif abs(len(picos_otimos) - N_MODOS_TEORICO) <= 10:
-    print("  ✅ HIPÓTESE FORTEMENTE SUPORTADA")
+    print("  [OK] HIPÓTESE FORTEMENTE SUPORTADA")
     print("     • Desvio pequeno do esperado")
     print("     • Harmônicos primos presentes")
 else:
-    print("  ⚠️ HIPÓTESE PARCIALMENTE CONFIRMADA")
+    print("  [WARNING] HIPÓTESE PARCIALMENTE CONFIRMADA")
     print("     • Desvio significativo precisa investigação")
 
 print("\n" + "=" * 80)
-print("🎉 ANÁLISE ULTRA CONCLUÍDA! 🎉")
+print("[SUCCESS] ANÁLISE ULTRA CONCLUÍDA! [SUCCESS]")
 print("=" * 80)

@@ -10,10 +10,10 @@ HIPÓTESES A TESTAR:
 4. Função L tem estrutura que força ordem de zero = (n+1)//2?
 
 DADOS CONHECIDOS:
-- k=2 (2^1, n=1) → rank=1 = (1+1)//2 ✓
-- k=4 (2^2, n=2) → rank=1 = (2+1)//2 ✓
-- k=8 (2^3, n=3) → rank=2 = (3+1)//2 ✓
-- k=16 (2^4, n=4) → rank=2 = (4+1)//2 ✓
+- k=2 (2^1, n=1) → rank=1 = (1+1)//2 [OK]
+- k=4 (2^2, n=2) → rank=1 = (2+1)//2 [OK]
+- k=8 (2^3, n=3) → rank=2 = (3+1)//2 [OK]
+- k=16 (2^4, n=4) → rank=2 = (4+1)//2 [OK]
 
 PADRÃO: rank aumenta 1 a cada 2 dobramentos de k
 """
@@ -67,7 +67,7 @@ for target_k in target_ks:
     for p in found:
         TEST_CASES.append((p, target_k))
 
-print(f"\n✓ Total de casos: {len(TEST_CASES)}")
+print(f"\n[OK] Total de casos: {len(TEST_CASES)}")
 
 # ==================== ANÁLISE COMPLETA ====================
 
@@ -101,7 +101,7 @@ for k in sorted(torsion_by_k.keys()):
     unique = set(torsions)
     print(f"k={k}: {unique}")
     if len(unique) == 1 and 1 in unique:
-        print(f"  ✓ Torção SEMPRE trivial para k={k}")
+        print(f"  [OK] Torção SEMPRE trivial para k={k}")
 
 # ==================== INVESTIGAÇÃO: DISCRIMINANTE ====================
 

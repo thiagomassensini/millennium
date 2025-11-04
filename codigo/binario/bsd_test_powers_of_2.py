@@ -86,7 +86,7 @@ def main():
         t1 = time.time()
         
         if len(twins) == 0:
-            print(f"  ❌ No twin primes found with k={target_k}")
+            print(f"  [FAIL] No twin primes found with k={target_k}")
             results.append({
                 'k': target_k,
                 'n': n,
@@ -96,7 +96,7 @@ def main():
             })
             continue
         
-        print(f"  ✓ Found {len(twins)} twin primes in {t1-t0:.1f}s")
+        print(f"  [OK] Found {len(twins)} twin primes in {t1-t0:.1f}s")
         print(f"  Computing ranks...")
         
         ranks = []
@@ -112,7 +112,7 @@ def main():
         
         # Analyze
         if len(ranks) == 0:
-            print(f"  ❌ No ranks computed")
+            print(f"  [FAIL] No ranks computed")
             continue
         
         rank_avg = sum(ranks) / len(ranks)
@@ -130,14 +130,14 @@ def main():
         
         # Check hypothesis
         if rank_std == 0.0:
-            print(f"    ✓✓✓ DETERMINISTIC: All curves have rank={int(rank_avg)}")
+            print(f"    [OK][OK][OK] DETERMINISTIC: All curves have rank={int(rank_avg)}")
             
             if int(rank_avg) == expected_rank:
-                print(f"    🎯 HYPOTHESIS CONFIRMED: rank = {n} - 1 = {expected_rank}")
+                print(f"    [TARGET] HYPOTHESIS CONFIRMED: rank = {n} - 1 = {expected_rank}")
             else:
-                print(f"    ⚠️  HYPOTHESIS FAILED: expected {expected_rank}, got {int(rank_avg)}")
+                print(f"    [WARNING]  HYPOTHESIS FAILED: expected {expected_rank}, got {int(rank_avg)}")
         else:
-            print(f"    ⚠️  NOT deterministic (std={rank_std:.3f})")
+            print(f"    [WARNING]  NOT deterministic (std={rank_std:.3f})")
         
         print(f"  Time: {t2-t1:.1f}s")
         
@@ -178,10 +178,10 @@ def main():
         
         match = ""
         if std < 0.01 and abs(obs - exp) < 0.01:
-            match = "✓✓✓"
+            match = "[OK][OK][OK]"
             hypothesis_confirmed += 1
         elif std < 0.01:
-            match = f"✗ (got {int(obs)})"
+            match = f"[FAIL] (got {int(obs)})"
         else:
             match = f"~ (std={std:.2f})"
         
@@ -192,18 +192,18 @@ def main():
     print()
     
     if hypothesis_confirmed == hypothesis_tested and hypothesis_tested >= 3:
-        print("🎯 HYPOTHESIS CONFIRMED!")
+        print("[TARGET] HYPOTHESIS CONFIRMED!")
         print()
         print("   rank(E_p) = log₂(k_real(p)) - 1")
         print()
         print("   for k = 2^n (powers of 2)")
         print()
     elif hypothesis_confirmed >= hypothesis_tested * 0.8:
-        print("📊 HYPOTHESIS MOSTLY CONFIRMED")
+        print("[DATA] HYPOTHESIS MOSTLY CONFIRMED")
         print("   (some edge cases need investigation)")
         print()
     else:
-        print("❌ HYPOTHESIS NOT CONFIRMED")
+        print("[FAIL] HYPOTHESIS NOT CONFIRMED")
         print("   Pattern more complex than n-1")
         print()
     
@@ -219,7 +219,7 @@ def main():
     with open('bsd_powers_of_2_test.json', 'w') as f:
         json.dump(output, f, indent=2)
     
-    print(f"✓ Results saved to bsd_powers_of_2_test.json")
+    print(f"[OK] Results saved to bsd_powers_of_2_test.json")
     print()
 
 if __name__ == '__main__':

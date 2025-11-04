@@ -46,12 +46,12 @@ beta = coeffs[0]
 log_A = coeffs[1]
 A = 10**log_A
 
-print(f"\n📊 LEI DE POTÊNCIA:")
+print(f"\n[DATA] LEI DE POTÊNCIA:")
 print(f"   N_picos = {A:.6f} × N^{beta:.4f}")
 print(f"   β = {beta:.4f}")
 
 # Interpretação do expoente
-print(f"\n💡 INTERPRETAÇÃO:")
+print(f"\n[IDEA] INTERPRETAÇÃO:")
 if abs(beta - 0.5) < 0.05:
     print("   β ≈ 0.5 → Picos ∝ √N (crescimento sub-linear)")
     print("   Consistente com fenômenos de difusão/random walk")
@@ -60,7 +60,7 @@ elif abs(beta - 1.0) < 0.05:
     print("   Sugestão: Novo pico a cada X primos (constante)")
 elif beta > 1.0:
     print(f"   β > 1.0 → Crescimento super-linear!")
-    print("   ⚠️  Implica aceleração - verificar se é real ou artefato")
+    print("   [WARNING]  Implica aceleração - verificar se é real ou artefato")
 else:
     print(f"   β = {beta:.3f} → Crescimento intermediário")
 
@@ -68,7 +68,7 @@ else:
 N_1B = datasets['1B']['primos']
 picos_1B_projetado = A * (N_1B ** beta)
 
-print(f"\n🎯 PROJEÇÃO PARA 1B PRIMOS:")
+print(f"\n[TARGET] PROJEÇÃO PARA 1B PRIMOS:")
 print(f"   Esperado: {picos_1B_projetado:.1f} picos")
 print(f"   Teórico:  {log_ratio:.0f} picos (α_EM/α_grav)")
 print(f"   Razão:    {picos_1B_projetado/log_ratio:.2f}")
@@ -76,12 +76,12 @@ print(f"   Razão:    {picos_1B_projetado/log_ratio:.2f}")
 # Determinar em que tamanho chegamos a ~43 picos
 if beta > 0:
     N_para_43_picos = (43 / A) ** (1/beta)
-    print(f"\n📈 Para atingir {log_ratio:.0f} picos:")
+    print(f"\n[UP] Para atingir {log_ratio:.0f} picos:")
     print(f"   Precisamos de ~{N_para_43_picos:.2e} primos")
     if N_para_43_picos < N_1B:
-        print(f"   ✅ DENTRO do dataset de 1B!")
+        print(f"   [OK] DENTRO do dataset de 1B!")
     else:
-        print(f"   ❌ FORA do dataset atual")
+        print(f"   [FAIL] FORA do dataset atual")
         print(f"   Precisaríamos minerar até ~{N_para_43_picos/1e15:.1f}e15")
 
 # Análise alternativa: threshold adaptativo
@@ -119,7 +119,7 @@ for dataset_name, data in datasets.items():
             sigma_new = np.sqrt(9 + 2*np.log(ratio))
             print(f"  {dataset_name}: threshold {sigma_new:.2f}σ → 43 picos")
         else:
-            print(f"  {dataset_name}: threshold 3.00σ → 43 picos ✓")
+            print(f"  {dataset_name}: threshold 3.00σ → 43 picos [OK]")
 
 # Visualização
 print("\n" + "=" * 80)
@@ -203,7 +203,7 @@ ax4.grid(True, alpha=0.3)
 
 plt.tight_layout()
 plt.savefig('scaling_analysis_alpha_em.png', dpi=150, bbox_inches='tight')
-print("✓ Salvo: scaling_analysis_alpha_em.png\n")
+print("[OK] Salvo: scaling_analysis_alpha_em.png\n")
 
 # Conclusão
 print("=" * 80)
@@ -212,7 +212,7 @@ print("=" * 80)
 
 if picos_1B_projetado / log_ratio > 2.5:
     print(f"""
-⚠️  PROJEÇÃO MUITO ACIMA DA PREDIÇÃO ({picos_1B_projetado/log_ratio:.1f}×)
+[WARNING]  PROJEÇÃO MUITO ACIMA DA PREDIÇÃO ({picos_1B_projetado/log_ratio:.1f}×)
 
 Interpretações possíveis:
 1. Lei de scaling está errada (apenas 2 pontos)
@@ -227,7 +227,7 @@ TESTE CRÍTICO NECESSÁRIO:
 """)
 elif abs(picos_1B_projetado/log_ratio - 1.0) < 0.2:
     print(f"""
-✅ CONCORDÂNCIA EXCELENTE! ({picos_1B_projetado/log_ratio:.2f}×)
+[OK] CONCORDÂNCIA EXCELENTE! ({picos_1B_projetado/log_ratio:.2f}×)
 
 A projeção para 1B primos está muito próxima de log₁₀(α_EM/α_grav)!
 
@@ -241,7 +241,7 @@ PRÓXIMO PASSO:
 """)
 else:
     print(f"""
-🔍 DESVIO MODERADO ({picos_1B_projetado/log_ratio:.2f}×)
+[SEARCH] DESVIO MODERADO ({picos_1B_projetado/log_ratio:.2f}×)
 
 Diferença: {abs(picos_1B_projetado - log_ratio):.1f} picos
 

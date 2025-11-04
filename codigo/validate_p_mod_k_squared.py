@@ -4,10 +4,10 @@ Validação da Propriedade p mod k²
 ==================================
 
 OBJETIVO CRÍTICO: Validar empiricamente que para twin primes com k_real = k = 2^n,
-a propriedade p ≡ k² - 1 (mod k²) é VERDADEIRA.
+a propriedade p == k² - 1 (mod k²) é VERDADEIRA.
 
 Esta é a BASE matemática da conexão XOR → BSD!
-Se falhar, toda a teoria precisa revisão! 🚨
+Se falhar, toda a teoria precisa revisão! [ALERT]
 
 Dataset: 1,004,800,004 twin primes do results.csv
 Estratégia: Processar em chunks para economizar memória
@@ -71,7 +71,7 @@ def validate_chunk(chunk: List[Tuple[int, int]], verbose: bool = False) -> Dict:
                 })
                 
                 if verbose and len(exceptions) <= 10:
-                    print(f"  ⚠️  EXCEÇÃO: p={p}, k={k}, esperado={expected_residue}, observado={observed_residue}")
+                    print(f"  [WARNING]  EXCEÇÃO: p={p}, k={k}, esperado={expected_residue}, observado={observed_residue}")
     
     return {
         'counts': counts,
@@ -81,7 +81,7 @@ def validate_chunk(chunk: List[Tuple[int, int]], verbose: bool = False) -> Dict:
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Valida propriedade p ≡ k²-1 (mod k²) em twin primes',
+        description='Valida propriedade p == k²-1 (mod k²) em twin primes',
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
     
@@ -100,13 +100,13 @@ def main():
     args = parser.parse_args()
     
     print("=" * 80)
-    print("VALIDAÇÃO: p ≡ k² - 1 (mod k²) para k = 2^n")
+    print("VALIDAÇÃO: p == k² - 1 (mod k²) para k = 2^n")
     print("=" * 80)
-    print(f"\n📂 Arquivo: {args.file}")
-    print(f"📊 Limite: {args.max_lines:,} linhas" if args.max_lines > 0 else "📊 Processando TUDO")
-    print(f"🔧 Chunk size: {args.chunk_size:,}")
+    print(f"\n[FOLDER] Arquivo: {args.file}")
+    print(f"[DATA] Limite: {args.max_lines:,} linhas" if args.max_lines > 0 else "[DATA] Processando TUDO")
+    print(f"[CFG] Chunk size: {args.chunk_size:,}")
     if args.k_values:
-        print(f"🎯 Focando em k = {args.k_values}")
+        print(f"[TARGET] Focando em k = {args.k_values}")
     
     # Acumuladores globais
     global_counts = defaultdict(int)
@@ -118,7 +118,7 @@ def main():
     lines_processed = 0
     start_time = time.time()
     
-    print("\n🚀 Iniciando processamento...")
+    print("\n[START] Iniciando processamento...")
     
     try:
         with open(args.file, 'r') as f:
@@ -160,7 +160,7 @@ def main():
                 
                 except (ValueError, KeyError) as e:
                     if args.verbose:
-                        print(f"  ⚠️  Linha inválida: {e}")
+                        print(f"  [WARNING]  Linha inválida: {e}")
                     continue
             
             # Processa último chunk
@@ -174,10 +174,10 @@ def main():
                 lines_processed += len(chunk)
     
     except FileNotFoundError:
-        print(f"\n❌ ERRO: Arquivo não encontrado: {args.file}")
+        print(f"\n[FAIL] ERRO: Arquivo não encontrado: {args.file}")
         return 1
     except KeyboardInterrupt:
-        print(f"\n\n⚠️  Interrompido pelo usuário após {lines_processed:,} linhas")
+        print(f"\n\n[WARNING]  Interrompido pelo usuário após {lines_processed:,} linhas")
     
     elapsed = time.time() - start_time
     
@@ -187,9 +187,9 @@ def main():
     print("RESULTADOS DA VALIDAÇÃO")
     print("=" * 80)
     
-    print(f"\n⏱️  Tempo: {elapsed:.2f}s ({lines_processed/elapsed:.0f} lines/s)")
-    print(f"📊 Linhas processadas: {lines_processed:,}")
-    print(f"🔢 Valores de k encontrados: {len(global_counts)}")
+    print(f"\n[TIME]  Tempo: {elapsed:.2f}s ({lines_processed/elapsed:.0f} lines/s)")
+    print(f"[DATA] Linhas processadas: {lines_processed:,}")
+    print(f"[NUM] Valores de k encontrados: {len(global_counts)}")
     
     # Distribuição por k
     print("\n" + "-" * 80)
@@ -202,7 +202,7 @@ def main():
     for k in sorted(global_counts.keys()):
         count = global_counts[k]
         pct = 100 * count / total
-        is_pow2 = "✅ SIM" if is_power_of_2(k) else "❌ NÃO"
+        is_pow2 = "[OK] SIM" if is_power_of_2(k) else "[FAIL] NÃO"
         n_residues = len(global_residues.get(k, set()))
         
         print(f"{k:<6} {count:<12,} {pct:<10.2f} {is_pow2:<12} {n_residues:<20}")
@@ -215,11 +215,11 @@ def main():
     powers_of_2 = [k for k in sorted(global_counts.keys()) if is_power_of_2(k)]
     
     if not powers_of_2:
-        print("\n⚠️  Nenhum k = 2^n encontrado no dataset!")
+        print("\n[WARNING]  Nenhum k = 2^n encontrado no dataset!")
     else:
-        print(f"\n✅ Encontrados k = 2^n: {powers_of_2}")
+        print(f"\n[OK] Encontrados k = 2^n: {powers_of_2}")
         print("\n" + "-" * 80)
-        print("VALIDAÇÃO DA PROPRIEDADE p ≡ k² - 1 (mod k²):")
+        print("VALIDAÇÃO DA PROPRIEDADE p == k² - 1 (mod k²):")
         print("-" * 80)
         print(f"{'k':<6} {'n':<6} {'k²':<12} {'Esperado (k²-1)':<18} {'Resíduos observados':<25} {'Status':<10}")
         print("-" * 80)
@@ -233,9 +233,9 @@ def main():
             observed_residues = global_residues.get(k, set())
             
             if len(observed_residues) == 1 and expected in observed_residues:
-                status = "✅ VÁLIDO"
+                status = "[OK] VÁLIDO"
             else:
-                status = "❌ FALHOU"
+                status = "[FAIL] FALHOU"
                 all_valid = False
             
             residues_str = str(sorted(list(observed_residues))[:5])
@@ -246,20 +246,20 @@ def main():
         
         # VEREDITO FINAL
         print("\n" + "=" * 80)
-        print("🎯 VEREDITO FINAL")
+        print("[TARGET] VEREDITO FINAL")
         print("=" * 80)
         
         if all_valid and not global_exceptions:
-            print("\n✅✅✅ PROPRIEDADE CONFIRMADA! ✅✅✅")
+            print("\n[OK][OK][OK] PROPRIEDADE CONFIRMADA! [OK][OK][OK]")
             print(f"\nPara TODOS os {total:,} twin primes com k = 2^n:")
-            print(f"   p ≡ k² - 1 (mod k²)")
+            print(f"   p == k² - 1 (mod k²)")
             print(f"\nZERO exceções encontradas!")
-            print(f"\nA BASE MATEMÁTICA da conexão XOR → BSD está VALIDADA! 🎉")
+            print(f"\nA BASE MATEMÁTICA da conexão XOR → BSD está VALIDADA! [SUCCESS]")
             return 0
         else:
-            print("\n❌❌❌ PROPRIEDADE FALHOU! ❌❌❌")
+            print("\n[FAIL][FAIL][FAIL] PROPRIEDADE FALHOU! [FAIL][FAIL][FAIL]")
             print(f"\nEncontradas {len(global_exceptions):,} exceções!")
-            print(f"\nA teoria PRECISA REVISÃO! 🚨")
+            print(f"\nA teoria PRECISA REVISÃO! [ALERT]")
             
             if global_exceptions and args.verbose:
                 print("\n" + "-" * 80)

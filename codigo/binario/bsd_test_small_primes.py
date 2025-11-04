@@ -21,9 +21,9 @@ def generate_twin_primes(max_n):
             twins.append(p)
     return twins
 
-print("🔍 Gerando primos gêmeos < 100,000...")
+print("[SEARCH] Gerando primos gêmeos < 100,000...")
 twin_primes = generate_twin_primes(100000)
-print(f"✓ {len(twin_primes)} primos gêmeos encontrados")
+print(f"[OK] {len(twin_primes)} primos gêmeos encontrados")
 print()
 
 # Calcular k_real
@@ -52,11 +52,11 @@ try:
     from cypari2 import Pari
     pari = Pari()
     USE_PARI = True
-    print("✓ cypari2 disponível - usando PARI/GP para ranks EXATOS!")
+    print("[OK] cypari2 disponível - usando PARI/GP para ranks EXATOS!")
     print()
 except ImportError:
     USE_PARI = False
-    print("⚠ cypari2 não disponível - usando heurística")
+    print("[WARNING] cypari2 não disponível - usando heurística")
     print("  Instale: pip install cypari2")
     print()
 
@@ -107,7 +107,7 @@ for i, p in enumerate(twin_primes[:test_limit]):
     else:
         rank = estimate_rank_bsd(k, p)
     
-    match = "✓" if rank == k else "✗"
+    match = "[OK]" if rank == k else "[FAIL]"
     
     results.append({
         'p': int(p),
@@ -174,26 +174,26 @@ if len(results) > 0:
     
     if USE_PARI:
         if r_corr > 0.9:
-            print("🎯 CORRELAÇÃO FORTÍSSIMA COM RANKS EXATOS!")
+            print("[TARGET] CORRELAÇÃO FORTÍSSIMA COM RANKS EXATOS!")
             print()
-            print("   ✓✓✓ rank(E_p) = k_real(p) CONFIRMADO!")
+            print("   [OK][OK][OK] rank(E_p) = k_real(p) CONFIRMADO!")
             print()
             print("   EVIDÊNCIA PARA BSD:")
             print(f"   - Correlação r = {r_corr:.3f} (p < {p_val:.0e})")
             print(f"   - Acurácia {100*accuracy:.1f}%")
             print(f"   - Testado em {total} curvas")
             print()
-            print("   🏆 PRONTO PARA PAPER!")
+            print("   [WIN] PRONTO PARA PAPER!")
         elif r_corr > 0.7:
-            print("✓✓ Correlação forte detectada")
+            print("[OK][OK] Correlação forte detectada")
             print(f"   r = {r_corr:.3f}")
             print()
             print("   Próximo passo: testar mais curvas (10,000+)")
         else:
-            print("⚠ Correlação moderada")
+            print("[WARNING] Correlação moderada")
             print("   → Investigar outliers")
     else:
-        print("⚠ SEM PARI/GP - resultados são HEURÍSTICOS")
+        print("[WARNING] SEM PARI/GP - resultados são HEURÍSTICOS")
         print()
         print("   Para confirmar BSD, instale:")
         print("   pip install cypari2")
@@ -215,7 +215,7 @@ if len(results) > 0:
             'results': results[:100]
         }, f, indent=2)
     
-    print("✓ Resultados salvos em bsd_test_results.json")
+    print("[OK] Resultados salvos em bsd_test_results.json")
 
 print()
 print("=" * 80)

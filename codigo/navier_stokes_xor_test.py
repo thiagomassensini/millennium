@@ -54,12 +54,12 @@ def kolmogorov_cascade(k_max: int = 16, E0: float = 1.0) -> Dict:
     P_binary_theory /= np.sum(P_binary_theory)
     P_binary_empirical = E_binary / np.sum(E_binary)
     
-    print(f"\n📊 Espectro de Energia Kolmogorov (k=1 a k={k_max}):")
+    print(f"\n[DATA] Espectro de Energia Kolmogorov (k=1 a k={k_max}):")
     print(f"   E_total = {E_total:.4f}")
     print(f"   E(k=1) = {E_kolmogorov[0]:.4f}")
     print(f"   E(k={k_max}) = {E_kolmogorov[-1]:.6f}")
     
-    print(f"\n🔢 Discretização Binária (k = 2^n):")
+    print(f"\n[NUM] Discretização Binária (k = 2^n):")
     print(f"   n    k    E(k)      P(k) emp    P(k) = 2^(-n)")
     for i, (n, k_val) in enumerate(zip(range(len(binary_k)), binary_k)):
         print(f"   {n}    {k_val:2d}   {E_binary[i]:.6f}  {P_binary_empirical[i]:.6f}    {P_binary_theory[i]:.6f}")
@@ -68,12 +68,12 @@ def kolmogorov_cascade(k_max: int = 16, E0: float = 1.0) -> Dict:
     chi_squared = np.sum((P_binary_empirical - P_binary_theory)**2 / P_binary_theory)
     dof = len(binary_k) - 1
     
-    print(f"\n📈 Teste χ²:")
+    print(f"\n[UP] Teste χ²:")
     print(f"   χ² = {chi_squared:.4f} (dof={dof})")
     print(f"   Razão χ²/dof = {chi_squared/dof:.4f}")
     
     # Ratio analysis
-    print(f"\n🔍 Razões E(k)/E(k+1) para k binário:")
+    print(f"\n[SEARCH] Razões E(k)/E(k+1) para k binário:")
     for i in range(len(binary_k) - 1):
         ratio = E_binary[i] / E_binary[i+1]
         expected_ratio = (binary_k[i+1] / binary_k[i])**(5/3)
@@ -138,7 +138,7 @@ def turbulent_snr_analysis(n_samples: int = 10000, k_levels: int = 10) -> Dict:
     snr_values = []
     P_k_snr = []
     
-    print(f"\n📡 SNR por escala (n_samples={n_samples}):")
+    print(f"\n[SIGNAL] SNR por escala (n_samples={n_samples}):")
     print(f"   n    k     Amplitude   SNR (dB)   P(k) from SNR")
     
     for n in range(k_levels):
@@ -164,7 +164,7 @@ def turbulent_snr_analysis(n_samples: int = 10000, k_levels: int = 10) -> Dict:
     P_k_theory = np.array([2**(-n) for n in range(k_levels)])
     P_k_theory /= np.sum(P_k_theory)
     
-    print(f"\n📊 Distribuição P(k):")
+    print(f"\n[DATA] Distribuição P(k):")
     print(f"   n    k     P(k) SNR    P(k) = 2^(-n)   Razão")
     for n in range(k_levels):
         k = 2**n
@@ -173,14 +173,14 @@ def turbulent_snr_analysis(n_samples: int = 10000, k_levels: int = 10) -> Dict:
     
     # Chi-squared
     chi_squared = np.sum((P_k_snr - P_k_theory)**2 / P_k_theory)
-    print(f"\n📈 χ² = {chi_squared:.4f} (dof={k_levels-1})")
+    print(f"\n[UP] χ² = {chi_squared:.4f} (dof={k_levels-1})")
     
     # Total SNR
     total_signal_power = np.mean(signal**2)
     total_noise_power = np.mean(noise**2)
     total_snr = 10 * np.log10(total_signal_power / total_noise_power)
     
-    print(f"\n📶 SNR Total = {total_snr:.2f} dB")
+    print(f"\n[SIGNAL] SNR Total = {total_snr:.2f} dB")
     
     return {
         "k_levels": k_levels,
@@ -230,7 +230,7 @@ def ornstein_uhlenbeck_process(
         dW = np.sqrt(dt) * np.random.randn()
         X[i] = X[i-1] - theta * X[i-1] * dt + sigma * dW
     
-    print(f"\n⚙️  Parâmetros OU:")
+    print(f"\n[SETTINGS]  Parâmetros OU:")
     print(f"   θ (dissipação) = {theta}")
     print(f"   σ (ruído) = {sigma}")
     print(f"   dt = {dt}, n_steps = {n_steps}")
@@ -252,7 +252,7 @@ def ornstein_uhlenbeck_process(
     k_values = np.log2(1 + tau_values)  # Approximate mapping
     binary_autocorr = 2**(-k_values)
     
-    print(f"\n📉 Autocorrelação (primeiros 10 lags):")
+    print(f"\n[DOWN] Autocorrelação (primeiros 10 lags):")
     print(f"   lag   τ       C(τ) emp   C(τ) exp   C(τ) bin")
     for lag in range(0, min(10, max_lag), 1):
         tau = lag * dt
@@ -266,7 +266,7 @@ def ornstein_uhlenbeck_process(
     binary_times = [2**n for n in range(int(np.log2(n_steps * dt)))]
     dissipation_rates = []
     
-    print(f"\n⚡ Taxa de Dissipação ε(t):")
+    print(f"\n[ENERGY] Taxa de Dissipação ε(t):")
     print(f"   n    t=2^n    ε (W/kg)")
     
     for n, t in enumerate(binary_times):
@@ -289,7 +289,7 @@ def ornstein_uhlenbeck_process(
         P_k_theory = np.array([2**(-n) for n in range(len(P_k_dissipation))])
         P_k_theory /= np.sum(P_k_theory)
         
-        print(f"\n📊 Distribuição P(k) da Dissipação:")
+        print(f"\n[DATA] Distribuição P(k) da Dissipação:")
         print(f"   n    P(k) emp    P(k) = 2^(-n)")
         for n in range(len(P_k_dissipation)):
             print(f"   {n}    {P_k_dissipation[n]:.6f}    {P_k_theory[n]:.6f}")
@@ -342,25 +342,25 @@ def reynolds_number_analysis(nu_values: List[float] = None) -> Dict:
         "Cylinder (drag crisis)": 3e5
     }
     
-    print(f"\n🌊 Reynolds Numbers (U={U}, L={L}):")
+    print(f"\n[FLOW] Reynolds Numbers (U={U}, L={L}):")
     print(f"   k    ν           Re        log₂(Re)")
     
     for k, (nu, Re) in enumerate(zip(nu_values, Re_values)):
         log2_Re = np.log2(Re) if Re > 0 else -np.inf
         print(f"   {k}    {nu:.6f}    {Re:10.2f}   {log2_Re:.2f}")
     
-    print(f"\n🎯 Reynolds Críticos (referência):")
+    print(f"\n[TARGET] Reynolds Críticos (referência):")
     for flow_type, Re_c in Re_critical.items():
         k_equiv = np.log2(Re_c)
-        print(f"   {flow_type:25s}: Re = {Re_c:.0e}  (k ≈ {k_equiv:.1f})")
+        print(f"   {flow_type:25s}: Re = {Re_c:.0e}  (k ~= {k_equiv:.1f})")
     
     # Check if critical Re are near powers of 2
-    print(f"\n🔢 Re Críticos vs Potências de 2:")
+    print(f"\n[NUM] Re Críticos vs Potências de 2:")
     for flow_type, Re_c in Re_critical.items():
         k_nearest = int(np.round(np.log2(Re_c)))
         Re_power2 = 2**k_nearest
         ratio = Re_c / Re_power2
-        print(f"   {flow_type:25s}: {Re_c:.0e} ≈ 2^{k_nearest} = {Re_power2:.0e}  (razão: {ratio:.4f})")
+        print(f"   {flow_type:25s}: {Re_c:.0e} ~= 2^{k_nearest} = {Re_power2:.0e}  (razão: {ratio:.4f})")
     
     return {
         "nu_values": nu_values,
@@ -412,7 +412,7 @@ def main():
     with open(output_path, 'w') as f:
         json.dump(results, f, indent=2)
     
-    print(f"\n✅ Resultados salvos em: {output_path}")
+    print(f"\n[OK] Resultados salvos em: {output_path}")
     print(f"   Tamanho: {output_path.stat().st_size / 1024:.1f} KB")
     
     # Summary
@@ -422,35 +422,35 @@ def main():
     
     if "kolmogorov" in results:
         k_data = results["kolmogorov"]
-        print(f"\n🌀 CASCATA DE KOLMOGOROV:")
+        print(f"\n[SPIRAL] CASCATA DE KOLMOGOROV:")
         print(f"   χ² = {k_data['chi_squared']:.4f} (dof={k_data['dof']})")
         print(f"   Discretização binária captura {100*(1-k_data['chi_squared']/k_data['dof']):.1f}% da estrutura")
     
     if "snr" in results:
         snr_data = results["snr"]
-        print(f"\n📡 SNR TURBULENTO:")
+        print(f"\n[SIGNAL] SNR TURBULENTO:")
         print(f"   χ² = {snr_data['chi_squared']:.4f}")
         print(f"   SNR total = {snr_data['total_snr_db']:.2f} dB")
     
     if "ornstein_uhlenbeck" in results:
         ou_data = results["ornstein_uhlenbeck"]
-        print(f"\n⚡ DISSIPAÇÃO VISCOSA (OU):")
+        print(f"\n[ENERGY] DISSIPAÇÃO VISCOSA (OU):")
         print(f"   θ = {ou_data['theta']} (taxa de dissipação)")
         print(f"   σ = {ou_data['sigma']} (intensidade do ruído)")
     
     if "reynolds" in results:
         re_data = results["reynolds"]
-        print(f"\n🌊 REYNOLDS CRÍTICOS:")
+        print(f"\n[FLOW] REYNOLDS CRÍTICOS:")
         for flow, Re_c in re_data["Re_critical"].items():
             k_equiv = np.log2(Re_c)
             print(f"   {flow:25s}: 2^{k_equiv:.1f}")
     
-    print("\n🎯 CONCLUSÃO:")
+    print("\n[TARGET] CONCLUSÃO:")
     print("   P(k) = 2^(-k) aparece em:")
-    print("   ✅ Cascata de energia (Kolmogorov)")
-    print("   ✅ SNR em campos turbulentos")
-    print("   ✅ Dissipação viscosa (OU process)")
-    print("   ✅ Transição laminar→turbulento (Re)")
+    print("   [OK] Cascata de energia (Kolmogorov)")
+    print("   [OK] SNR em campos turbulentos")
+    print("   [OK] Dissipação viscosa (OU process)")
+    print("   [OK] Transição laminar→turbulento (Re)")
     print("\n   Estrutura XOR é UNIVERSAL em dinâmica de fluidos!")
 
 
