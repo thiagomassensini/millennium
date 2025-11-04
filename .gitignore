@@ -185,6 +185,11 @@ codigo/binario/*.csv
 codigo/binario/*.log
 codigo/binario/files/
 codigo/binario/files.zip
+codigo/binario/.env.miner
+codigo/binario/monitor*.sh
+
+# Archive folder (old/unused files)
+arquivo/
 
 # Temporary files
 *.tmp
