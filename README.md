@@ -1,12 +1,14 @@
 # XOR Millennium Framework: Binary Structure in the Millennium Prize Problems
 
+[![DOI](https://zenodo.org/badge/1089332854.svg)](https://doi.org/10.5281/zenodo.17520242)
+
 ## Overview
 
 This repository contains a comprehensive computational and theoretical framework demonstrating that binary XOR operations reveal fundamental structure underlying all six unsolved Millennium Prize Problems. Through massive validation on over 1 billion twin primes and rigorous statistical analysis, we establish that the distribution P(k) = 2^(-k) emerges from binary carry chain mechanisms and serves as a unifying principle across number theory, computational complexity, quantum field theory, fluid dynamics, and algebraic geometry.
 
 **Author**: Thiago Massensini  
 **Institution**: Independent Researcher  
-**Date**: November 2024  
+**Date**: November 2025  
 **Status**: Preprint - Ready for submission
 
 ## Key Results
@@ -352,11 +354,11 @@ python3 hodge_xor_test.py
 ## Citation
 
 ```bibtex
-@article{massensini2024xor,
+@article{massensini2025xor,
   title={XOR Millennium Framework: Binary Structure in the Millennium Prize Problems},
   author={Massensini, Thiago},
   journal={Preprint},
-  year={2024},
+  year={2025},
   note={Available at: https://github.com/thiagomassensini/rg}
 }
 ```
@@ -378,7 +380,7 @@ This work is released under the MIT License for code and CC-BY-4.0 for papers an
 ## Contact
 
 **Author**: Thiago Massensini  
-**Email**: thiagomassensini@gmail.com  
+**Email**: thiago@massensini.com.br  
 **GitHub**: https://github.com/thiagomassensini  
 **Repository**: https://github.com/thiagomassensini/rg
 
@@ -388,7 +390,7 @@ This research was conducted independently using personal computational resources
 
 ## Version History
 
-- **v1.0** (November 2024): Initial preprint with 1B+ validation results
+- **v1.0** (November 2025): Initial preprint with 1B+ validation results
 - All seven papers revised to remove tentative language
 - Formal carry chain proof added to BSD paper
 - Abstracts strengthened with statistical evidence
