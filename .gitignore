@@ -196,3 +196,23 @@ codigo/binario/files.zip
 *.npz
 *.pickle
 *.pkl
+
+# Submission/administrative docs (not for publication)
+SUBMISSION_README.md
+ZENODO_SUBMISSION.md
+
+# Papers source files (keep only PDFs in repo)
+papers/*.tex
+papers/*.aux
+papers/*.bbl
+papers/*.bcf
+papers/*.blg
+papers/*.fdb_latexmk
+papers/*.fls
+papers/*.out
+papers/*.run.xml
+papers/*.synctex.gz
+papers/*.toc
+papers/*.md
+papers/REVISION_CHECKLIST.md
+papers/proof_rank_formula_twin_primes.md

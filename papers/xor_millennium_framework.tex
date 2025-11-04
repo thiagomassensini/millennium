@@ -33,7 +33,7 @@
 \maketitle
 
 \begin{abstract}
-We present a unified mathematical framework based on the XOR operation and binary structure that connects all six Clay Mathematics Institute Millennium Prize problems through the universal distribution $P(k) = 2^{-k}$. Starting from the empirical discovery that twin primes exhibit this distribution via $k_{\text{real}}(p) = \log_2((p \oplus (p+2)) + 2) - 1$, we establish: (1) \textbf{BSD}: deterministic rank formula $\text{rank}(E_k) = \lfloor (n+1)/2 \rfloor$ for elliptic curves from twin primes with $k=2^n$, verified on 2,678 curves with exact rank computation (4,115 curves total including other k-values), with BSD condition confirmed on 317.9 million cases from 1 billion twin primes; (2) \textbf{Riemann Hypothesis}: zeros of $\zeta(s)$ avoid imaginary parts near $2^k$ with 92.5\% deficit, following $P(k)$ distribution; (3) \textbf{Yang-Mills}: gauge couplings discretize at binary levels ($\alpha_{\text{EM}}^{-1} \approx 2^7+2^3+2^0$ with 99.97\% accuracy), mass gap spectrum $E_k = E_0 \cdot 2^{-k}$; (4) \textbf{Navier-Stokes}: Kolmogorov energy cascade captures 96.5\% of structure with binary discretization ($\chi^2=0.14$), critical Reynolds numbers $\text{Re} \approx 2^k$; (5) \textbf{Hodge Conjecture}: Chow groups $\text{CH}^p(E_k)$ inherit BSD ranks, Calabi-Yau threefold has $h^{2,1}=101=2^6+2^5+2^2+2^0$ (exact binary decomposition); (6) \textbf{P vs NP}: XOR-guided SAT achieves 6.20$\times$ speedup but reveals domain boundary---logical problems deviate from $P(k)=2^{-k}$ (Gaussian distribution), demarcating arithmetic/analytic systems (where XOR succeeds) from pure logic (where it fails). With Shannon entropy $H[P(k)]=2$ bits, this framework suggests the bit is not merely computational but ontological---a fundamental unit of mathematical and physical reality. Total validation: 1 billion twin primes, 1 million empirical tests, zero exceptions.
+I present a unified mathematical framework based on the XOR operation and binary structure that connects all six Clay Mathematics Institute Millennium Prize problems through the universal distribution $P(k) = 2^{-k}$. Starting from the empirical discovery that twin primes exhibit this distribution via $k_{\text{real}}(p) = \log_2((p \oplus (p+2)) + 2) - 1$, I establish: (1) \textbf{BSD}: deterministic rank formula $\text{rank}(E_k) = \lfloor (n+1)/2 \rfloor$ for elliptic curves from twin primes with $k=2^n$, verified on 2,678 curves with exact rank computation (4,115 curves total including other k-values), with BSD condition confirmed on 317.9 million cases from 1 billion twin primes; (2) \textbf{Riemann Hypothesis}: zeros of $\zeta(s)$ avoid imaginary parts near $2^k$ with 92.5\% deficit, following $P(k)$ distribution; (3) \textbf{Yang-Mills}: gauge couplings discretize at binary levels ($\alpha_{\text{EM}}^{-1} \approx 2^7+2^3+2^0$ with 99.97\% accuracy), mass gap spectrum $E_k = E_0 \cdot 2^{-k}$; (4) \textbf{Navier-Stokes}: Kolmogorov energy cascade captures 96.5\% of structure with binary discretization ($\chi^2=0.14$), critical Reynolds numbers $\text{Re} \approx 2^k$; (5) \textbf{Hodge Conjecture}: Chow groups $\text{CH}^p(E_k)$ inherit BSD ranks, Calabi-Yau threefold has $h^{2,1}=101=2^6+2^5+2^2+2^0$ (exact binary decomposition); (6) \textbf{P vs NP}: XOR-guided SAT achieves 6.20$\times$ speedup but reveals domain boundary---logical problems deviate from $P(k)=2^{-k}$ (Gaussian distribution), demarcating arithmetic/analytic systems (where XOR succeeds) from pure logic (where it fails). With Shannon entropy $H[P(k)]=2$ bits, this framework suggests the bit is not merely computational but ontological---a fundamental unit of mathematical and physical reality. Total validation: 1 billion twin primes, 1 million empirical tests, zero exceptions.
 \end{abstract}
 
 \tableofcontents
@@ -41,7 +41,7 @@ We present a unified mathematical framework based on the XOR operation and binar
 
 \section{Introduction: The Universal Distribution}
 
-On November 3, 2025, we completed a systematic investigation revealing that the distribution $P(k) = 2^{-k}$ appears across five of the six Clay Millennium Prize problems, with the sixth (P vs NP) defining the precise boundary where this structure breaks down.
+On November 3, 2025, I completed a systematic investigation revealing that the distribution $P(k) = 2^{-k}$ appears across five of the six Clay Millennium Prize problems, with the sixth (P vs NP) defining the precise boundary where this structure breaks down.
 
 \subsection{The Genesis: Twin Primes and XOR}
 
@@ -549,7 +549,7 @@ p mod k² validation & 1,000,000 & \textbf{Zero exceptions} \\
 
 \section{Conclusion}
 
-We have demonstrated that the XOR operation and binary structure $P(k) = 2^{-k}$ provide a \textbf{unified framework} connecting five of the six Clay Millennium Prize problems:
+I have demonstrated that the XOR operation and binary structure $P(k) = 2^{-k}$ provide a \textbf{unified framework} connecting five of the six Clay Millennium Prize problems:
 
 \begin{center}
 \renewcommand{\arraystretch}{1.5}
@@ -571,7 +571,7 @@ The sixth problem (P vs NP) defines the precise \textbf{boundary} where XOR stru
 
 \subsection{The Bit is Fundamental}
 
-With Shannon entropy $H[P(k)] = 2$ bits (the maximum for binary systems), and ubiquitous appearance across number theory, algebraic geometry, analysis, quantum field theory, and fluid dynamics, we conclude:
+With Shannon entropy $H[P(k)] = 2$ bits (the maximum for binary systems), and ubiquitous appearance across number theory, algebraic geometry, analysis, quantum field theory, and fluid dynamics, I conclude:
 
 \begin{center}
 \fbox{\parbox{0.85\textwidth}{\centering
@@ -600,7 +600,7 @@ The XOR Millennium Framework opens new directions in pure mathematics, theoretic
 
 This work synthesizes computational analyses performed using Python 3, PARI/GP 2.15.4, mpmath, NumPy, SciPy, PySAT, and custom C++ code. Twin prime database (53 GB, 1 billion pairs) generated over 2 weeks of computation. All code and data available at \url{https://github.com/thiagomassensini/rg}.
 
-We thank the mathematical and physical communities for decades of foundational work on the Millennium problems, without which this synthesis would be impossible.
+I thank the mathematical and physical communities for decades of foundational work on the Millennium problems, without which this synthesis would be impossible.
 
 \begin{thebibliography}{99}
 
@@ -640,7 +640,7 @@ Preprint (2025).
 
 \section{Massive Computational Validation}
 
-We performed the largest-scale empirical validation of number-theoretic conjectures to date, testing \textbf{1,004,800,003 twin prime pairs} across multiple validation criteria.
+I performed the largest-scale empirical validation of number-theoretic conjectures to date, testing \textbf{1,004,800,003 twin prime pairs} across multiple validation criteria.
 
 \subsection{Validation Infrastructure}
 

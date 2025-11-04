@@ -34,35 +34,35 @@ Binary Structure in NP-Complete Problems}}
 \maketitle
 
 \begin{abstract}
-We investigate the impact of binary XOR structure on computational complexity of NP-complete problems, motivated by the discovery of the universal distribution $P(k) = 2^{-k}$ in twin primes. We develop XOR-guided heuristics for 3-SAT that achieve average speedups of $6.20\times$ over brute-force search and reduce the asymptotic exponent by 2\%, yielding complexity $O(2^{1.010n})$ vs. $O(2^{1.030n})$. We validate the fundamental property $p \equiv k^2 - 1 \pmod{k^2}$ for twin primes with $k_{\text{real}}(p) = k = 2^n$ using 1 million empirical cases with zero exceptions, confirming the mathematical foundation connecting XOR structure to the Birch--Swinnerton-Dyer conjecture. While these results do not resolve the P vs NP question, they reveal deep connections between number theory, binary structure, and computational complexity, and suggest new directions for algorithm design based on universal probability distributions.
+I investigate the impact of binary XOR structure on computational complexity of NP-complete problems, motivated by the discovery of the universal distribution $P(k) = 2^{-k}$ in twin primes. I develop XOR-guided heuristics for 3-SAT that achieve average speedups of $6.20\times$ over brute-force search and reduce the asymptotic exponent by 2\%, yielding complexity $O(2^{1.010n})$ vs. $O(2^{1.030n})$. I validate the fundamental property $p \equiv k^2 - 1 \pmod{k^2}$ for twin primes with $k_{\text{real}}(p) = k = 2^n$ using 1 million empirical cases with zero exceptions, confirming the mathematical foundation connecting XOR structure to the Birch--Swinnerton-Dyer conjecture. While these results do not resolve the P vs NP question, they reveal deep connections between number theory, binary structure, and computational complexity, and suggest new directions for algorithm design based on universal probability distributions.
 \end{abstract}
 
 \section{Introduction}
 
 The P vs NP problem \cite{Cook1971} asks whether every problem whose solution can be verified quickly (in polynomial time) can also be solved quickly. Despite decades of effort, this remains one of the most important open questions in mathematics and computer science.
 
-In this work, we approach P vs NP from a novel angle: the \textbf{XOR structure} discovered in twin primes. Recent work \cite{ThisWork} has shown that twin primes exhibit a universal binary distribution $P(k_{\text{real}} = k) = 2^{-k}$, where $k_{\text{real}}(p) = \log_2((p \oplus (p+2)) + 2) - 1$. This distribution exactly matches the Goldfeld-Katz-Sarnak prediction for elliptic curve ranks and has led to deterministic rank formulas for specific curve families.
+In this work, I approach P vs NP from a novel angle: the \textbf{XOR structure} discovered in twin primes. Recent work \cite{ThisWork} has shown that twin primes exhibit a universal binary distribution $P(k_{\text{real}} = k) = 2^{-k}$, where $k_{\text{real}}(p) = \log_2((p \oplus (p+2)) + 2) - 1$. This distribution exactly matches the Goldfeld-Katz-Sarnak prediction for elliptic curve ranks and has led to deterministic rank formulas for specific curve families.
 
 \subsection{Main Results}
 
-Our contributions are threefold:
+My contributions are threefold:
 
 \begin{enumerate}
-\item \textbf{Empirical validation}: We prove that for twin primes with $k_{\text{real}}(p) = k = 2^n$, the congruence $p \equiv k^2 - 1 \pmod{k^2}$ holds with zero exceptions in a dataset of 1,000,000 twin primes.
+\item \textbf{Empirical validation}: I prove that for twin primes with $k_{\text{real}}(p) = k = 2^n$, the congruence $p \equiv k^2 - 1 \pmod{k^2}$ holds with zero exceptions in a dataset of 1,000,000 twin primes.
 
-\item \textbf{XOR-guided SAT}: We develop a search heuristic for 3-SAT based on the distribution $P(k) = 2^{-k}$ that achieves:
+\item \textbf{XOR-guided SAT}: I develop a search heuristic for 3-SAT based on the distribution $P(k) = 2^{-k}$ that achieves:
 \begin{itemize}
 \item Average speedup of $6.20\times$ over exhaustive search
 \item Best-case speedup of $24.77\times$ (for $n=16$ variables)
 \item Asymptotic complexity $O(2^{1.010n})$ vs. $O(2^{1.030n})$ for brute force
 \end{itemize}
 
-\item \textbf{XOR primality filter}: We analyze an XOR-based filter for twin prime detection, showing it achieves 100\% precision (no false negatives) but has limited practical speedup in random ranges due to the universal satisfaction of the basic XOR constraint by all odd numbers.
+\item \textbf{XOR primality filter}: I analyze an XOR-based filter for twin prime detection, showing it achieves 100\% precision (no false negatives) but has limited practical speedup in random ranges due to the universal satisfaction of the basic XOR constraint by all odd numbers.
 \end{enumerate}
 
 \subsection{Implications for P vs NP}
 
-Our results show that:
+My results show that:
 \begin{itemize}
 \item XOR structure provides measurable speedups but does \textbf{not} reduce complexity from exponential to polynomial
 \item The distribution $P(k) = 2^{-k}$ appears in twin primes and Riemann zeros, but \textbf{not} perfectly in SAT solutions ($p < 10^{-6}$ deviation)
@@ -106,7 +106,7 @@ This theorem is the foundation of deterministic elliptic curve rank formulas and
 \section{Empirical Validation of the Congruence Property}
 \label{sec:validation}
 
-To validate Theorem~\ref{thm:congruence}, we analyzed 1,000,000 twin primes from a database of 1,004,800,004 pairs mined in the range $[10^{15}, 10^{15} + 10^{13}]$.
+To validate Theorem~\ref{thm:congruence}, I analyzed 1,000,000 twin primes from a database of 1,004,800,004 pairs mined in the range $[10^{15}, 10^{15} + 10^{13}]$.
 
 \subsection{Methodology}
 
@@ -154,7 +154,7 @@ The Boolean satisfiability problem (3-SAT) asks: given a Boolean formula in conj
 
 \subsection{XOR-Guided Heuristic}
 
-Our key insight: Since $P(k) = 2^{-k}$ is universal (validated on 1B+ twin primes), satisfying assignments concentrate at specific Hamming weights $k$ (number of variables set to TRUE) in arithmetic problems but not in pure logical problems.
+My key insight: Since $P(k) = 2^{-k}$ is universal (validated on 1B+ twin primes), satisfying assignments concentrate at specific Hamming weights $k$ (number of variables set to TRUE) in arithmetic problems but not in pure logical problems.
 
 \begin{figure}[h]
 \begin{lstlisting}[language=Python, frame=single, basicstyle=\small\ttfamily]
@@ -171,17 +171,17 @@ return UNSAT
 \caption{XOR-Guided 3-SAT Search Algorithm}
 \end{figure}
 
-\textbf{Intuition}: Since $P(k)$ is maximized at small $k$, solutions are more likely to have few TRUE variables. By searching in order of decreasing $P(k) = 2^{-k}$, we find solutions earlier on average.
+\textbf{Intuition}: Since $P(k)$ is maximized at small $k$, solutions are more likely to have few TRUE variables. By searching in order of decreasing $P(k) = 2^{-k}$, I find solutions earlier on average.
 
 \subsection{Experimental Setup}
 
-We generated random 3-SAT instances at the phase transition ($\text{clauses}/\text{variables} \approx 4.3$) and compared:
+I generated random 3-SAT instances at the phase transition ($\text{clauses}/\text{variables} \approx 4.3$) and compared:
 \begin{itemize}
 \item \textbf{Brute force}: Enumerate all $2^n$ assignments sequentially
 \item \textbf{XOR-guided}: Enumerate by increasing Hamming weight $k$
 \end{itemize}
 
-For each $(n, \text{trials})$ pair, we measured the average number of assignments checked before finding a solution (or exhausting the space).
+For each $(n, \text{trials})$ pair, I measured the average number of assignments checked before finding a solution (or exhausting the space).
 
 \subsection{Results}
 
@@ -223,7 +223,7 @@ $n$ & Brute force & XOR-guided & Speedup & Reduction \\
 
 \subsection{Filter Design}
 
-We developed a filter to identify potential twin primes based on XOR structure:
+I developed a filter to identify potential twin primes based on XOR structure:
 
 \begin{figure}[h]
 \begin{lstlisting}[language=Python, frame=single, basicstyle=\small\ttfamily]
@@ -275,7 +275,7 @@ The filter is only effective when:
 
 \section{Distribution of $P(k)$ in SAT Solutions}
 
-We tested whether satisfying assignments of random 3-SAT instances follow the distribution $P(k) = 2^{-k}$.
+I tested whether satisfying assignments of random 3-SAT instances follow the distribution $P(k) = 2^{-k}$.
 
 \subsection{Methodology}
 
@@ -349,7 +349,7 @@ This explains why:
 
 \section{Connections to Other Millennium Problems}
 
-Our XOR framework connects three Millennium Prize Problems:
+My XOR framework connects three Millennium Prize Problems:
 
 \subsection{Birch--Swinnerton-Dyer}
 
@@ -398,7 +398,7 @@ This is more efficient than Miller-Rabin (NC$^4$) but does not change complexity
 
 \section{Conclusion}
 
-We have shown that XOR binary structure, discovered in twin primes and connected to the Birch--Swinnerton-Dyer conjecture and Riemann Hypothesis, provides measurable but limited benefits for computational complexity:
+I have shown that XOR binary structure, discovered in twin primes and connected to the Birch--Swinnerton-Dyer conjecture and Riemann Hypothesis, provides measurable but limited benefits for computational complexity:
 
 \begin{itemize}
 \item[$\checkmark$] \textbf{Validated} the mathematical foundation: $p \equiv k^2 - 1 \pmod{k^2}$ holds with zero exceptions
@@ -410,7 +410,7 @@ We have shown that XOR binary structure, discovered in twin primes and connected
 
 The distribution $P(k) = 2^{-k}$ connects deep areas of mathematics but is \textbf{not} a universal principle for all NP problems. XOR structure is a powerful tool for specific domains (number theory, algebraic geometry, analysis) but does not resolve fundamental complexity questions.
 
-Our work demonstrates that P vs NP resolution requires understanding \textbf{why} certain problems (primes, elliptic curves) have exploitable binary structure while others (SAT, graph coloring) do not. We have identified the concrete boundary:
+My work demonstrates that P vs NP resolution requires understanding \textbf{why} certain problems (primes, elliptic curves) have exploitable binary structure while others (SAT, graph coloring) do not. I have identified the concrete boundary:
 
 \begin{center}
 \textbf{Arithmetic/Analytic Problems} $\xrightarrow{P(k) = 2^{-k}}$ \textbf{XOR Structure} \\
@@ -459,7 +459,7 @@ SAT 2018.
 
 \section{Massive Complexity Validation}
 
-We validated the $O(\log n)$ filtering complexity using \textbf{1,004,800,003 twin prime pairs} processed in 18.36 minutes on 56 cores.
+I validated the $O(\log n)$ filtering complexity using \textbf{1,004,800,003 twin prime pairs} processed in 18.36 minutes on 56 cores.
 
 \subsection{Test: Computational Complexity at Billion Scale}
 

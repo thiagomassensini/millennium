@@ -29,28 +29,28 @@ XOR Structure from Twin Prime Distribution}}
 \maketitle
 
 \begin{abstract}
-We establish a connection between the distribution of twin primes and the zeros of the Riemann zeta function through binary carry chain structure. Using a dataset of 1,004,800,003 twin primes, we prove that the XOR-based invariant $k_{\text{real}}(p)$ follows the distribution $P(k) = 2^{-k}$ with $\chi^2 = 11.12$ ($p < 0.001$), arising from binary probability $(1/2)^k$ per bit pattern. The non-trivial zeros of $\zeta(s)$ exhibit strong repulsion from powers of 2, with only 7.5\% of expected density near these values, demonstrating systematic deviation from random matrix theory predictions. This binary structure reveals that XOR-based "systemic memory" in carry propagation is a fundamental organizing principle connecting local prime patterns to global analytic properties of $\zeta(s)$, providing concrete computational evidence for the Riemann Hypothesis through the algebraic mechanism underlying twin prime gaps.
+I establish a connection between the distribution of twin primes and the zeros of the Riemann zeta function through binary carry chain structure. Using a dataset of 1,004,800,003 twin primes, I prove that the XOR-based invariant $k_{\text{real}}(p)$ follows the distribution $P(k) = 2^{-k}$ with $\chi^2 = 11.12$ ($p < 0.001$), arising from binary probability $(1/2)^k$ per bit pattern. The non-trivial zeros of $\zeta(s)$ exhibit strong repulsion from powers of 2, with only 7.5\% of expected density near these values, demonstrating systematic deviation from random matrix theory predictions. This binary structure reveals that XOR-based "systemic memory" in carry propagation is a fundamental organizing principle connecting local prime patterns to global analytic properties of $\zeta(s)$, providing concrete computational evidence for the Riemann Hypothesis through the algebraic mechanism underlying twin prime gaps.
 \end{abstract}
 
 \section{Introduction}
 
 The Riemann Hypothesis \cite{Riemann1859}, concerning the location of non-trivial zeros of the zeta function $\zeta(s)$, remains one of the most important open problems in mathematics. While substantial progress has been made understanding the statistical distribution of zeros \cite{Montgomery, Odlyzko}, connections to the arithmetic of primes remain mysterious.
 
-In this paper, we introduce a new perspective based on the XOR (exclusive OR) operation applied to twin prime pairs. We define:
+In this paper, I introduce a new perspective based on the XOR (exclusive OR) operation applied to twin prime pairs. I define:
 
 \begin{definition}[$k_{\text{real}}$ invariant]
-For a twin prime pair $(p, p+2)$, we define:
+For a twin prime pair $(p, p+2)$, I define:
 \[
 k_{\text{real}}(p) := \log_2((p \oplus (p+2)) + 2) - 1
 \]
 where $\oplus$ denotes bitwise XOR, provided $(p \oplus (p+2)) + 2$ is a power of 2.
 \end{definition}
 
-This invariant captures the binary structure of prime gaps and has several remarkable properties that we explore in this work.
+This invariant captures the binary structure of prime gaps and has several remarkable properties that I explore in this work.
 
 \subsection{Main Results}
 
-Our principal findings are:
+My principal findings are:
 
 \begin{theorem}[Twin Prime Distribution]
 \label{thm:twin}
@@ -100,7 +100,7 @@ In binary, $2^{k+1} - 2$ is $(k+1)$ consecutive 1-bits followed by a 0-bit. Sinc
 
 \subsection{Empirical Distribution}
 
-We mined 1,004,800,004 twin primes in the range $[10^{15}, 10^{15} + 10^{13}]$ using optimized C++ code with Miller-Rabin primality testing. The observed distribution:
+I mined 1,004,800,004 twin primes in the range $[10^{15}, 10^{15} + 10^{13}]$ using optimized C++ code with Miller-Rabin primality testing. The observed distribution:
 
 \begin{center}
 \begin{tabular}{c|c|c|c|c}
@@ -124,18 +124,18 @@ The agreement with $P(k) = 2^{-k}$ is extraordinary, with maximum error $< 1\%$.
 
 \subsection{Computational Setup}
 
-We computed the first 1,000 non-trivial zeros of $\zeta(s)$ on the critical line using mpmath with 50-digit precision. The zeros $\rho_n = 1/2 + it_n$ have imaginary parts:
+I computed the first 1,000 non-trivial zeros of $\zeta(s)$ on the critical line using mpmath with 50-digit precision. The zeros $\rho_n = 1/2 + it_n$ have imaginary parts:
 \[
 t_1 = 14.134725, \quad t_2 = 21.022040, \quad \ldots, \quad t_{1000} = 1419.422481
 \]
 
 \subsection{Spectral Analysis}
 
-We performed several analyses to detect binary structure:
+I performed several analyses to detect binary structure:
 
 \subsubsection{Non-uniformity Test}
 
-We computed $\log_2(t_n) \bmod 1$ for all zeros and tested for uniformity. The distribution showed significant deviation:
+I computed $\log_2(t_n) \bmod 1$ for all zeros and tested for uniformity. The distribution showed significant deviation:
 
 \begin{itemize}
 \item Bins $[0, 0.5)$: \textbf{Above expected} (concentrations at $\approx 0.2$-$0.4$)
@@ -146,7 +146,7 @@ Chi-squared test: $\chi^2 = 53.24$, $p = 0.000043$ $\Rightarrow$ \textbf{distrib
 
 \subsubsection{Power-of-2 Repulsion}
 
-We measured the distance from each zero to the nearest power of 2:
+I measured the distance from each zero to the nearest power of 2:
 
 \begin{center}
 \begin{tabular}{c|c|c|c}
@@ -179,7 +179,7 @@ The spectrum shows clear binary structure, consistent with twin prime $P(k) = 2^
 
 \subsection{Pair Correlation}
 
-We computed the Montgomery pair correlation function $R(s)$ and compared with the GUE (Gaussian Unitary Ensemble) prediction from random matrix theory:
+I computed the Montgomery pair correlation function $R(s)$ and compared with the GUE (Gaussian Unitary Ensemble) prediction from random matrix theory:
 
 \[
 R_{\text{GUE}}(s) = 1 - \left(\frac{\sin(\pi s)}{\pi s}\right)^2
@@ -198,11 +198,11 @@ The connection between primes and zeta zeros is well-established through the exp
 \psi(x) = x - \sum_{\rho} \frac{x^\rho}{\rho} - \log(2\pi) - \frac{1}{2}\log(1-x^{-2})
 \]
 
-Our results reveal a \textbf{new layer} of structure: the XOR-based distribution $P(k) = 2^{-k}$ constrains the \textbf{local geometry} of zero spacing through carry chain mechanisms.
+My results reveal a \textbf{new layer} of structure: the XOR-based distribution $P(k) = 2^{-k}$ constrains the \textbf{local geometry} of zero spacing through carry chain mechanisms.
 
 \subsection{Binary Repulsion Mechanism}
 
-We conjecture that the repulsion mechanism operates through:
+I conjecture that the repulsion mechanism operates through:
 
 \begin{enumerate}
 \item \textbf{Arithmetic forcing}: Twin primes with $k_{\text{real}} = k$ satisfy $p \equiv k^2-1 \pmod{k^2}$ for $k = 2^n$
@@ -212,7 +212,7 @@ We conjecture that the repulsion mechanism operates through:
 
 \subsection{Connection to Elliptic Curves}
 
-In companion work \cite{TwinPrimeBSD}, we showed that elliptic curves $E_k: y^2 = x^3 + (k^2-1)x + k$ for $k = 2^n$ have deterministic ranks:
+In companion work \cite{TwinPrimeBSD}, I showed that elliptic curves $E_k: y^2 = x^3 + (k^2-1)x + k$ for $k = 2^n$ have deterministic ranks:
 \[
 \text{rank}(E_k) = \lfloor (n+1)/2 \rfloor
 \]
@@ -224,7 +224,7 @@ Twin Prime XOR $\xrightarrow{P(k)=2^{-k}}$ Elliptic Curve Ranks $\xrightarrow{\t
 
 \section{Implications for the Riemann Hypothesis}
 
-Our findings suggest several new directions:
+My findings suggest several new directions:
 
 \subsection{Binary Structure as a Constraint}
 
@@ -262,9 +262,9 @@ Massive validation (1B+ primes, $\chi^2 = 11.12$) confirms the framework. Natura
 
 \section{Conclusion}
 
-We have established the binary structure linking twin primes and Riemann zeros through XOR carry chains. The distribution $P(k) = 2^{-k}$ validated on 1 billion twin primes induces strong repulsion of zeta zeros from powers of 2, with only 7.5\% of expected density—a 92.5\% deficit.
+I have established the binary structure linking twin primes and Riemann zeros through XOR carry chains. The distribution $P(k) = 2^{-k}$ validated on 1 billion twin primes induces strong repulsion of zeta zeros from powers of 2, with only 7.5\% of expected density—a 92.5\% deficit.
 
-This "systemic memory" encoded in XOR represents a fundamental organizing principle in arithmetic. Our validation demonstrates that:
+This "systemic memory" encoded in XOR represents a fundamental organizing principle in arithmetic. My validation demonstrates that:
 
 \begin{itemize}
 \item The Riemann Hypothesis may be approachable through discrete/binary methods
@@ -322,7 +322,7 @@ Dataset: 1,004,800,004 twin primes in $[10^{15}, 10^{15} + 10^{13}]$
 
 \section{Massive Distribution Validation}
 
-We validated the theoretical distribution $P(k) = 2^{-k}$ using \textbf{1,004,800,003 twin prime pairs}, confirming the connection to Riemann zeta function behavior.
+I validated the theoretical distribution $P(k) = 2^{-k}$ using \textbf{1,004,800,003 twin prime pairs}, confirming the connection to Riemann zeta function behavior.
 
 \subsection{Test: Chi-Squared Goodness-of-Fit}
 

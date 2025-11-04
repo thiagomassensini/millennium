@@ -29,14 +29,14 @@ from Twin Prime Binary Structure}}
 \maketitle
 
 \begin{abstract}
-We establish a deterministic formula for ranks of an infinite family of elliptic curves constructed from twin primes. For primes $p, p+2$ with $k_{\text{real}}(p) = k = 2^n$, we prove that the curve $E_p: y^2 = x^3 + (p \bmod k^2) \cdot x + k$ has rank exactly $\lfloor (n+1)/2 \rfloor$, independent of the choice of $p$. This result follows from binary carry chain structure in the XOR operation on twin primes, which forces the modular congruence $p \equiv k^2-1 \pmod{k^2}$. Massive computational validation on 1,004,800,003 twin prime pairs confirms the distribution $P(k) = 2^{-k}$ with $\chi^2 = 11.12$ ($p < 0.001$), matching the Goldfeld-Katz-Sarnak prediction. The BSD condition is verified on 317,933,385 cases with 100\% agreement. Our methods demonstrate that binary structure provides a concrete computational approach to the Birch and Swinnerton-Dyer conjecture, connecting prime gaps to elliptic curve arithmetic through algorithmic mechanisms.
+I establish a deterministic formula for ranks of an infinite family of elliptic curves constructed from twin primes. For primes $p, p+2$ with $k_{\text{real}}(p) = k = 2^n$, I prove that the curve $E_p: y^2 = x^3 + (p \bmod k^2) \cdot x + k$ has rank exactly $\lfloor (n+1)/2 \rfloor$, independent of the choice of $p$. This result follows from binary carry chain structure in the XOR operation on twin primes, which forces the modular congruence $p \equiv k^2-1 \pmod{k^2}$. Massive computational validation on 1,004,800,003 twin prime pairs confirms the distribution $P(k) = 2^{-k}$ with $\chi^2 = 11.12$ ($p < 0.001$), matching the Goldfeld-Katz-Sarnak prediction. The BSD condition is verified on 317,933,385 cases with 100\% agreement. My methods demonstrate that binary structure provides a concrete computational approach to the Birch and Swinnerton-Dyer conjecture, connecting prime gaps to elliptic curve arithmetic through algorithmic mechanisms.
 \end{abstract}
 
 \section{Introduction}
 
 The Birch and Swinnerton-Dyer (BSD) conjecture \cite{BSD1965} remains one of the most important open problems in number theory. It predicts a deep connection between the arithmetic properties of elliptic curves (specifically, their rank) and analytic properties (the behavior of their L-functions). While substantial progress has been made \cite{Gross-Zagier, Kolyvagin}, a general proof remains elusive.
 
-In this paper, we introduce a novel approach connecting twin primes, binary structure, and elliptic curve ranks. Our main result is:
+In this paper, I introduce a novel approach connecting twin primes, binary structure, and elliptic curve ranks. My main result is:
 
 \begin{theorem}[Main Theorem]
 \label{thm:main}
@@ -72,7 +72,7 @@ This matches exactly the Goldfeld-Katz-Sarnak prediction \cite{GKS} for the dist
 
 \subsection{Empirical Validation}
 
-We mined $1,004,800,004$ twin primes in the range $[10^{15}, 10^{15} + 10^{13}]$ and computed $k_{\text{real}}$ for each. The observed distribution:
+I mined $1,004,800,004$ twin primes in the range $[10^{15}, 10^{15} + 10^{13}]$ and computed $k_{\text{real}}$ for each. The observed distribution:
 \begin{center}
 \begin{tabular}{c|c|c|c}
 $k$ & Count & Observed \% & Theoretical ($2^{-k}$) \\
@@ -88,7 +88,7 @@ The agreement is within $1\%$ for all $k \leq 10$.
 
 \section{XOR Structure and Congruences}
 
-The foundation of our proof rests on understanding how the XOR operation constrains prime residues.
+The foundation of my proof rests on understanding how the XOR operation constrains prime residues.
 
 \begin{lemma}[XOR Constraint]
 \label{lem:xor}
@@ -205,7 +205,7 @@ E_k(\mathbb{Q})_{\text{tors}} = \{O\}
 \end{theorem}
 
 \begin{proof}[Proof (Computational)]
-We computed $E_k(\mathbb{Q})_{\text{tors}}$ using PARI/GP's \texttt{elltors} function for:
+I computed $E_k(\mathbb{Q})_{\text{tors}}$ using PARI/GP's \texttt{elltors} function for:
 \begin{itemize}
 \item $k=2$: 2,064 curves, all with torsion order 1
 \item $k=4$: 498 curves, all with torsion order 1
@@ -227,7 +227,7 @@ implying $\text{Sha}(E_k)[2] = 0$.
 \end{theorem}
 
 \begin{proof}[Proof (Computational)]
-Using PARI/GP's \texttt{ellrank} function (which performs 2-descent), we found:
+Using PARI/GP's \texttt{ellrank} function (which performs 2-descent), I found:
 \begin{itemize}
 \item For all tested curves, the lower and upper bounds on rank coincide
 \item This implies the Tate-Shafarevich group has trivial 2-torsion
@@ -256,7 +256,7 @@ For $k = 2^n$ with $n \geq 1$:
 \end{theorem}
 
 \begin{proof}[Proof (Computational Verification)]
-We verified this formula for:
+I verified this formula for:
 
 \begin{center}
 \begin{tabular}{c|c|c|c|c}
@@ -292,7 +292,7 @@ This was verified using PARI/GP's \texttt{ellanalyticrank} with high precision (
 
 \section{Connection to BSD}
 
-Our results have several implications for the Birch and Swinnerton-Dyer conjecture:
+My results have several implications for the Birch and Swinnerton-Dyer conjecture:
 
 \subsection{Distribution Matching}
 
@@ -305,7 +305,7 @@ For small ranks, this yields approximately $P(r=0) \approx 0.5$, $P(r=1) \approx
 
 \subsection{Deterministic Subfamily}
 
-While most elliptic curves over $\mathbb{Q}$ have probabilistic rank behavior, our family $\{E_k\}$ exhibits:
+While most elliptic curves over $\mathbb{Q}$ have probabilistic rank behavior, this family $\{E_k\}$ exhibits:
 \begin{itemize}
 \item \textbf{Deterministic ranks} for $k = 2^n$
 \item \textbf{Computable in $O(1)$} from $k$ alone
@@ -326,7 +326,7 @@ The transition from deterministic to probabilistic behavior at non-powers-of-2 r
 
 \subsection{Computational Efficiency}
 
-Our approach provides an $O(1)$ algorithm to determine rank:
+My approach provides an $O(1)$ algorithm to determine rank:
 
 \begin{verbatim}
 function ComputeRank(p):
@@ -359,9 +359,9 @@ The massive validation (317M+ cases, 100\% agreement) establishes the framework 
 
 \section{Conclusion}
 
-We have established a deterministic rank formula for an infinite family of elliptic curves arising from twin primes. The key insight—that XOR structure forces arithmetic constraints—opens new avenues for studying BSD and may have broader applications in number theory and cryptography.
+I have established a deterministic rank formula for an infinite family of elliptic curves arising from twin primes. The key insight—that XOR structure forces arithmetic constraints—opens new avenues for studying BSD and may have broader applications in number theory and cryptography.
 
-The perfect agreement between our formula and over 4,000 computed ranks, combined with the match between $k_{\text{real}}$ distribution and GKS predictions, provides strong evidence for deep connections between prime gaps and elliptic curve arithmetic.
+The perfect agreement between my formula and over 4,000 computed ranks, combined with the match between $k_{\text{real}}$ distribution and GKS predictions, provides strong evidence for deep connections between prime gaps and elliptic curve arithmetic.
 
 \section*{Acknowledgments}
 
@@ -408,7 +408,7 @@ J.H. Silverman,
 
 \section{Massive Validation Results}
 
-We performed a comprehensive validation of the BSD conjecture connection using \textbf{1,004,800,003 twin prime pairs}, representing the largest empirical verification of this approach.
+I performed a comprehensive validation of the BSD conjecture connection using \textbf{1,004,800,003 twin prime pairs}, representing the largest empirical verification of this approach.
 
 \subsection{Test: BSD Condition $p \equiv k^2 - 1 \pmod{k^2}$}
 
