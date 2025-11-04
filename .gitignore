@@ -126,6 +126,31 @@ dmypy.json
 *.snm
 *.vrb
 
+# C/C++ compiled files
+*.o
+*.so
+*.a
+*.exe
+miner_csv
+miner_v5_ultra
+ultra_v4
+ultra_validator
+csv_validator
+massive_validator
+
+# Mining checkpoints and logs
+miner_checkpoint.txt
+*.log
+
+# Large CSV datasets (regenerate with miner)
+/tmp/twin_primes.csv
+twin_primes.csv
+
+# Compressed archives
+*.zip
+*.tar.gz
+*.rar
+
 # OS generated files
 .DS_Store
 .DS_Store?
